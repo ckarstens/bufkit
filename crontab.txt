@@ -1,0 +1,14 @@
+CRON_TZ=UTC
+1 * * * * php /local/ckarsten/bufkit/rap/scripts/rap/rap_bufkit.php >& /local/ckarsten/bufkit/rap/scripts/rap/cron_rap_out.txt
+15 7 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref03_out.txt
+15 13 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref09_out.txt
+15 19 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref15_out.txt
+15 1 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref21_out.txt
+30 14 * * * php /local/ckarsten/bufkit/nam/scripts/nam/nam_bufkit.php >& /local/ckarsten/bufkit/nam/scripts/nam/cron_nam_12_out.txt
+30 2 * * * php /local/ckarsten/bufkit/nam/scripts/nam/nam_bufkit.php >& /local/ckarsten/bufkit/nam/scripts/nam/cron_nam_00_out.txt
+30 8 * * * php /local/ckarsten/bufkit/nam/scripts/nam/nam_bufkit.php >& /local/ckarsten/bufkit/nam/scripts/nam/cron_nam_06_out.txt
+30 20 * * * php /local/ckarsten/bufkit/nam/scripts/nam/nam_bufkit.php >& /local/ckarsten/bufkit/nam/scripts/nam/cron_nam_18_out.txt
+0 4 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_00_out.txt
+0 16 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_12_out.txt
+0 10 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_06_out.txt
+0 22 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_18_out.txt
