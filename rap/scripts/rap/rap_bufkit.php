@@ -102,17 +102,19 @@ for($i=2;$i<=$n;$i++){
 }
 
 // final clean-up
-system("mv /local/ckarsten/bufkit/".$model."/metdat/bufkit/*.buf /local/ckarsten/bufkit/".$model."/metdat/bufkit_temp");
-system("rm /local/ckarsten/bufkit/".$model."/metdat/ascii/*");
-system("rm /local/ckarsten/bufkit/".$model."/metdat/bufr/*");
-system("rm /local/ckarsten/bufkit/".$model."/metdat/gempak/*");
-system("rm /local/ckarsten/bufkit/".$model."/scripts/".$model."/data/*.".$del_time."");
-
-// generate cobb data
-// note: make_cobb.php inserts data into ldm
-//system("php /local/ckarsten/bufkit/".$model."/cobb/make_cobb.php iem_date=".$iem_date." hour=".$shour." model=".$model."");
-
-system("rm /local/ckarsten/bufkit/".$model."/metdat/bufkit_temp/*.buf");
-//system("rm /local/ckarsten/bufkit/".$model."/cobb/data/*.dat");
+if($shour != 0 || $shour != 12){
+	system("mv /local/ckarsten/bufkit/".$model."/metdat/bufkit/*.buf /local/ckarsten/bufkit/".$model."/metdat/bufkit_temp");
+	system("rm /local/ckarsten/bufkit/".$model."/metdat/ascii/*");
+	system("rm /local/ckarsten/bufkit/".$model."/metdat/bufr/*");
+	system("rm /local/ckarsten/bufkit/".$model."/metdat/gempak/*");
+	system("rm /local/ckarsten/bufkit/".$model."/scripts/".$model."/data/*");
+	
+	// generate cobb data
+	// note: make_cobb.php inserts data into ldm
+	//system("php /local/ckarsten/bufkit/".$model."/cobb/make_cobb.php iem_date=".$iem_date." hour=".$shour." model=".$model."");
+	
+	system("rm /local/ckarsten/bufkit/".$model."/metdat/bufkit_temp/*.buf");
+	//system("rm /local/ckarsten/bufkit/".$model."/cobb/data/*.dat");
+}
 
 ?>
