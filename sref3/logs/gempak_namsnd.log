@@ -1,0 +1,16 @@
+ SNBUFR    BUFR model sounding file           
+ SNOUTF    Output sounding file               
+ SFOUTF    Output surface file                
+ SNPRMF    Sounding parameter packing file   SNMERG.PACK
+ SFPRMF    Surface parameter packing file    METAR.PACK
+ TIMSTN    Times/additional stations         1/0
+ Parameters requested: SNBUFR,SNOUTF,SFOUTF,SNPRMF,SFPRMF,TIMSTN.
+ GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> SNBUFR   = /local/ckarsten/bufkit/sref3/metdat/bufr/srefmean.725204.2015102109|bvi=725204
+ SNOUTF   = /local/ckarsten/bufkit/sref3/metdat/gempak/2015102109_srefmean_bufr.snd
+ SFOUTF   = /local/ckarsten/bufkit/sref3/metdat/gempak/2015102109_srefmean_bufr.sfc+
+ SNPRMF   = /local/ckarsten/bufkit/sref3/gempak/tables/pack/sn_srefmean.prm
+ SFPRMF   = /local/ckarsten/bufkit/sref3/gempak/tables/pack/sf_srefmean.prm
+ TIMSTN   = 85/201
+ GEMPAK-NAMSND> [NAMSND 1]
+ Parameters requested: SNBUFR,SNOUTF,SFOUTF,SNPRMF,SFPRMF,TIMSTN.
+ GEMPAK-NAMSND> GEMPAK-NAMSND>
