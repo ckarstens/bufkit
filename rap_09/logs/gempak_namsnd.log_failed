@@ -1,0 +1,19 @@
+ SNBUFR    BUFR model sounding file          /local/ckarsten/bufkit/rap/metdat/bufr/rap.710780.2016092515|yyl=710780
+ SNOUTF    Output sounding file              /local/ckarsten/bufkit/rap/metdat/gempak/2016092515_rap_bufr.snd
+ SFOUTF    Output surface file               /local/ckarsten/bufkit/rap/metdat/gempak/2016092515_rap_bufr.sfc+
+ SNPRMF    Sounding parameter packing file   /local/ckarsten/bufkit/rap/gempak/tables/pack/sn_rap.prm
+ SFPRMF    Surface parameter packing file    /local/ckarsten/bufkit/rap/gempak/tables/pack/sf_rap.prm
+ TIMSTN    Times/additional stations         25/1250
+ Parameters requested: SNBUFR,SNOUTF,SFOUTF,SNPRMF,SFPRMF,TIMSTN.
+ GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> GEMPAK-NAMSND> SNBUFR   = /local/ckarsten/bufkit/rap/metdat/bufr/rap.722897.2016092509|sbp=722897
+ SNOUTF   = /local/ckarsten/bufkit/rap/metdat/gempak/2016092509_rap_bufr.snd
+ SFOUTF   = /local/ckarsten/bufkit/rap/metdat/gempak/2016092509_rap_bufr.sfc+
+ SNPRMF   = /local/ckarsten/bufkit/rap/gempak/tables/pack/sn_rap.prm
+ SFPRMF   = /local/ckarsten/bufkit/rap/gempak/tables/pack/sf_rap.prm
+ TIMSTN   = 25/1250
+ GEMPAK-NAMSND> [NAMSND 2] /local/ckarsten/bufkit/rap/metdat/gempak/2016092509_rap_bufr.snd
+ [NAMSND 2] /local/ckarsten/bufkit/rap/metdat/gempak/2016092509_rap_bufr.sfc
+ [NAMSND 2] /local/ckarsten/bufkit/rap/metdat/gempak/2016092509_rap_bufr.sfc_aux
+ [NAMSND 1]
+ Parameters requested: SNBUFR,SNOUTF,SFOUTF,SNPRMF,SFPRMF,TIMSTN.
+ GEMPAK-NAMSND> GEMPAK-NAMSND>
