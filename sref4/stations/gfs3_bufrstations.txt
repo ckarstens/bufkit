@@ -1,3 +1,73 @@
+001001 32.13N   7.88W BEN  BEN GUERIR                     411                                
+001002 39.13N  75.47W DOV  DOVER AFB                        9                                
+002460 59.67N  17.93E SSA  STOCKHOLM/ARLANDA               61                                
+003357 33.00S  57.00W URU  CENTRAL URUGUAY                  0                                
+003644 51.68N   1.78W GVA  FAIRFORD RAF                    87                                
+003649 51.75N   1.58W GVN  BRIZE NORTON, UK                 0                                
+003772 51.29N    .27W EGL  LONDON/HEATHROW, UK             24                                
+008397 37.17N   5.62W EMO  MORON                           88                                
+008594 16.75N  22.95W VAC  AMILCAR CABRAL(SAL)             54                                
+105130 50.87N   7.15E DDK  KOLN/BONN                       91                                
+167460 35.53N  24.15E GSA  SOUDA, CRETE                     0                                
+171280 40.13N  33.00E TAC  ANKARA/ESENBOGA                949                                
+172800 37.75N  40.20E TCC  DIYARKABIR                     667                                
+404380 24.72N  46.72E RIY  RIYADH, SAUDI ARABIA           612                                
+406500 33.22N  44.23E BAD  BAGHDAD, IRAQ                   35                                
+406890 30.57N  47.78E BAS  BASRA, IRAQ                      2                                
+406900 28.00N  49.00E P01  PERSIAN GULF POINT 1             0                                
+406910 27.00N  50.00E P02  PERSIAN GULF POINT 2             0                                
+431500 17.72N  83.30E VIS  VISAKHAPATNAM                   66                                
+476710 35.55N 139.78E RJTT TOKYO INTL    JAPAN              8                                
+471100 37.55N 126.80E RKS  SEOUL/KIMPO INTL     KOREA      26                                
+475800 40.70N 141.37E RJSM MISAWA AFB, JAPAN               36                                
+600300 27.93N  15.38W CLP  LAS PALMAS/GANDO                25                                
+606800 22.82N   5.47E AAT  TAMANRASSET/AGUENNA           1377                                
+617010 13.35N  16.80W BYD  BANJUL/YUNDUM, GAMBIA           26                                
+619670  7.30S  72.42E JDG  DIEGO GARCIA                     2                                
+642100  4.38S  15.45E ZAA  KINSHASA/N'DJILI               309                                
+656600  6.23N  10.37W LRB  ROBERTS INTL/MONROV             18                                
+682880 24.37S  31.05E AHS  HOEDSPRUIT                     519                                
+711280 50.27N 111.18W YSD  SUFFIELD, AB                   770                                
+717140 46.80N  71.40W YQB  QUEBEC, PQ                      73                                
+723070 36.82N  72.10W NTU  OCEANA NAS/SOUCEK                7                                
+723090 34.90N  76.88W NKT  CHERRY POINT MCAS                9                                
+725060 41.65N  70.52W FMH  OTIS ANGB                       40                                
+726220 44.65N  73.47W PBG  PLATTSBURGH                      0                                
+744570 39.82N  84.03W FFO  WRIGHT PATTERSON               245                                
+766790 19.43N  99.08W MEX  MEXICO CITY/JUAREZ, D.F.      2231                                
+768050 16.83N  99.92W ACA  ACAPULCO, GRO.                   3                                
+919440 18.07S 140.95W TTO  HAO, TUAMOTU IS.                 3                                
+941200 12.42S 130.87E DDN  DARWIN, AUSTRALIA               29                                
+945680 27.63S 152.72E BAM  AMBERLEY (AUS-AFB)              31                                
+947670 33.95S 151.18E SSY  SYDNEY/KINGSFORD SMITH           5                                
+912320 15.12N 145.73E PGSN SAIPAN INTERNAIONAL             66                                
+912120 13.35N 144.80E PGUM GUAM INTERNATIONAL              91                                
+914080  7.33N 134.48E PTRO KOROR/PALAU ISLAND              33                                
+914130  9.48N 138.08E PTYA YAP ISLAND                      17                                
+913340  7.47N 151.85E PTKK TRUK INTERNATIOANAL/MOEN IS      2                                
+913480  6.97N 158.22E PTPN PONAPE ISLAND                   46                                
+913560  5.33N 163.03E PTSA KUSAIE/KOSRAE_EAST               4                                
+913660  8.73N 167.73E PKWA KWAJALEIN/BUCHOLZ                8                                
+913760  7.08N 171.38E PKMJ MAJURO/MARSHALL IS               3                                
+912450 19.28N 166.65E PWAK WAKE ISLAND AIRFLD               4                                
+616410 14.73N  17.50W GOOY DAKAR                           24                                
+610520 13.48N   2.17E DRRN NIAMEY                         227                                
+612230 16.72N   3.00W GATB TOMBOUCTOU/TIMBUKTU            264                                
+655780  5.25N   3.93W DIAP ABIDJAN/PORT BOUET               8                                
+789540 13.07N  59.48W TBPB GRANTLEY ADAMS INTERNATIONL     56                                
+000028 33.22N  92.80W ELD  EL DORADO/GOODWIN, AR           87 3-93                           
+000201 90.00N    .00W A#1  THE NORTH POLE      ARCTIC       0                                
+000809 40.74N 116.80W EKO  ELKO, NV                      2088 WSR88D FOUS 3-93               
+000812 35.13N 111.55W FLG  FLAGSTAFF, AZ                 2219 WSR88D FOUS 3-93               
+001006 41.89N  72.71W P#1  BMFC3 BLOOMFIELD     CT         56 PROF 3-93                      
+008160 41.67N   1.02W ZZA  ZARAGOZA, SPAIN                257 NASA-JSC 3-93                  
+404370 24.88N  46.77E ERK  RIYADH, SAUDI ARABIA           611 UA                             
+405820 29.22N  47.98E KUW  KUWAIT AIRPORT, KUWAIT          56 UA                             
+702670 64.00N 145.73W BIG  BIG DELTA, AK                  391                                
+725530 41.37N  96.02W OMA  OMAHA, NE                      400 NA110 FOUS                     
+746040 34.77N 120.53W P#K  VBGC1 VANDENBERG     CA        149 PROF 3-93                      
+762250 28.70N 106.07W CUU  CHIHUAHUA, CHIH.              1429 UA NA110                       
+765480 22.22N  97.85W TAM  TAMPICO, TAMPS.                 24 3-93                           
 000001 69.58N 140.18W YAJ  11 KOMAKUK, YT                  19 MAGS 9-95                      
 000002 69.90N 128.97W WRP  11 NICHOLSON, NT                15 MAGS 9-95                      
 000003 69.58N 120.75W WXK  11 CLINTON POINT, NT            27 MAGS 9-95                      
@@ -17,7 +87,6 @@
 000019 43.90N 110.00W GTP  12 NR. GRAND TETON NTL PK, WY 2704 GCIP 9-95                      
 000020 44.80N  96.70W WTT  12 NR. WATERTOWN, SD           557 GCIP 9-95                      
 000021 43.50N  95.60W CHE  12 NR. CHEROKEE, IA            490 GCIP 9-95                      
-000028 33.22N  92.80W ELD  EL DORADO/GOODWIN, AR           87 3-93                           
 000037 42.00N  95.00W CRL  12 NR. CARROLL, IA             441 GCIP 9-95                      
 000050 40.90N  92.80W AIA  12 NR. ALBIA, IA               297 GCIP 9-95                      
 000052 34.10N  86.10W ABL  12 NR. ALBERTVILLE, AL         304 GCIP 9-95                      
@@ -84,7 +153,6 @@
 000198 42.97N  88.55W KMKX 10 MILWAUKEE NWS           WI  285 NWS KMKX 3-02                  
 000199 44.94N  72.51W JAYV 11 JAY PEAK                VT  572 NWS KBTV 3-02                  
 000200 37.27N  82.10W GRUN 11 GRUNDY                  VA  320 NWS KRLX 3-02                  
-000201 90.00N    .00W A#1  THE NORTH POLE      ARCTIC       0                                
 000202 74.30N 156.60W A#2  20 NORTH OF BARROW, AK ARCTIC    0 3-93                           
 000203 75.00N 140.00W A#3  20 N OF BARTAR ISL, AK ARCTIC    0 3-93                           
 000204 60.60N 173.30W A#4  20 NEAR ST MATTHEW ISL BERING    0 3-93                           
@@ -185,10 +253,8 @@
 000805 38.83N  75.43W DOV  10 DOVER AFB, DE                50 WSR88D FOUS 3-93               
 000807 32.54N  99.25W DYS  10 DYESS AFB, TX               480 WSR88D 3-93                    
 000808 38.81N  94.26W EAX  12 KANSAS C/PLEASANT HILL, MO  333 WSR88D 3-93                    
-000809 40.74N 116.80W EKO  ELKO, NV                      2088 WSR88D FOUS 3-93               
 000810 36.74N  98.13W END  10 VANCE AFB, OK               385 WSR88D 3-93                    
 000811 34.36N  98.98W FDR  10 FREDERICK, OK               401 WSR88D 3-93                    
-000812 35.13N 111.55W FLG  FLAGSTAFF, AZ                 2219 WSR88D FOUS 3-93               
 000813 40.72N  85.93W GVS  12 GRISSOM AFB, IN             278 WSR88D 3-93                    
 000814 30.72N  97.38W HOO  10 CENTRAL TEXAS, TX           182 WSR88D 3-93                    
 000815 40.32N  98.44W HSI  10 GRAND ISLAND/HASTINGS, NE   626 WSR88D 3-93                    
@@ -278,29 +344,6 @@
 000958 34.60N 122.30W OPPB 20 PACIFIC OCEAN                 0 OPC 11-03                      
 000959 30.90N 121.50W OPPC 20 PACIFIC OCEAN                 0 OPC 11-03                      
 000960 29.60N 117.00W OPPD 20 PACIFIC OCEAN                 0 OPC 11-03                      
-001001 32.13N   7.88W BEN  BEN GUERIR                     411                                
-001002 39.13N  75.47W 001002  DOVER AFB                        9                                
-001006 41.89N  72.71W P#1  BMFC3 BLOOMFIELD     CT         56 PROF 3-93                      
-001384 60.2N 11.1E 001384
-002460 59.67N  17.93E SSA  STOCKHOLM/ARLANDA               61                                
-002465 59.35N 17.95E 002465
-002974 60.32N 24.97E 002974
-003005 60.13N 1.18W 003005
-003357 33.00S  57.00W URU  CENTRAL URUGUAY                  0                                
-003644 51.68N   1.78W GVA  FAIRFORD RAF                    87                                
-003649 51.75N   1.58W GVN  BRIZE NORTON, UK                 0                                
-003772 51.29N    .27W EGL  LONDON/HEATHROW, UK             24                                
-003957 52.25N 6.33W 003957
-004018 63.97N 22.6W 004018
-006181 55.77N 12.53E 006181
-006200 52.03N 4.35E 006200
-006451 50.9N 4.47E 006451
-006610 46.82N 6.95E 006610
-007149 48.73N 2.4E 007149
-008001 43.37N 8.42W 008001
-008160 41.67N   1.02W ZZA  ZARAGOZA, SPAIN                257 NASA-JSC 3-93                  
-008397 37.17N   5.62W EMO  MORON                           88                                
-008594 16.75N  22.95W VAC  AMILCAR CABRAL(SAL)             54                                
 021982 70.97N 178.53W U#2  10 OSTROV VRANGELYA, RUSSIA      3 UA ALA23 3-93                  
 025173 68.92N 179.48W UHMI 10 MYS SCHMIDT                   7 UA 2-95                        
 025399 66.17N 169.83W U#C  10 MYS WELLEN                    7 UA 2-95                        
@@ -323,7 +366,7 @@
 044009 38.50N  74.70W B#Q  20 BUOY  E FENWICK IL     ATL    0 2-01                           
 044011 41.10N  66.60W B#B  20 BUOY  GEORGES BANK     ATL    0 3-93                           
 044014 36.60N  74.80W B#S  20 BUOY  E MACKAY IL      ATL    0 2-01                           
-044025 40.30N  73.20W 044025  20 BUOY                   ATL    0 T. Salem 2-99                  
+044025 40.30N  73.20W B#Q  20 BUOY                   ATL    0 T. Salem 2-99                  
 044027 44.30N  67.30W JPB  20 JONESPORT BUOY G MAINE ATL    0 Usr RQST 12-03                 
 045001 48.06N  87.78W LS1  20 BUOY  MID LAKE SUPERIOR     183 6-02                           
 045002 45.33N  86.42W LM1  20 BUOY  NORTHERN LAKE MICH    177 6-02                           
@@ -346,8 +389,8 @@
 046027 41.80N 124.40W B#I  20 BUOY  ST GEORGES       PAC    0 3-93                           
 046029 46.20N 124.20W B#J  20 BUOY  COL RIVER BAR    PAC    0 3-93                           
 046030 40.40N 124.50W B#K  20 BUOY  BLUNTS REEF      PAC    0 3-93                           
-046035 57.00N 177.70W B#L  20 BUOY  BERING SEA       PAC    0 3-93                           
 046047 32.40N 119.50W B#U  20 BUOY  W SAN DIEGO      PAC    0 OPC 11-03                      
+046035 57.00N 177.70W B#L  20 BUOY  BERING SEA       PAC    0 3-93                           
 051001 23.40N 162.30W B#M  20 BUOY  NW KAUAI         PAC    0 FOUS 4-93                      
 051002 17.20N 157.80W B#N  20 BUOY  S OAHU           PAC    0 4-93                           
 051003 19.30N 160.80W B#O  20 BUOY  S KAUAI          PAC    0 4-93                           
@@ -362,7 +405,6 @@
 072524 41.50N  81.60W CLE  12 CLEVELAND               OH  213 FOUS                           
 072578 43.11N 112.68W PIH  10 POCATELLO/IDAHO FALLS   ID 1382 WSR88D FOUS 3-93               
 072783 47.47N 115.80W S06  10 MULLAN                  ID 1011 WRGN 8-97                      
-082220 40.42N 4.25W 082220
 090001 36.50N 100.80W G#1  12 PERRYTON                TX  893 GUFMEX 12-93                   
 090002 30.30N 101.70W G#2  12 SHEFFIELD               TX  726 GUFMEX 12-93                   
 090003 27.70N 102.50W G#3  12 MUZQUIZ, COAH           MX 1247 GUFMEX 12-93                   
@@ -384,82 +426,8 @@
 099006 38.88N  78.52W WOO  10 WOODSTOCK               VA  251 T. Salem 2-99                  
 099007 39.62N  78.76W CBE  10 CUMBERLAND              MD  183 T. Salem 2-99                  
 099008 39.61N  77.01W W54  10 WESTMINSTER             MD  244 T. Salem 2-99                  
-103840 52.47N 13.4E 103840
-105130 50.87N   7.15E DDK  KOLN/BONN                       91                                
-106370 50.05N 8.58E 106370
-121500 54.38N 18.47E 121500
-128430 47.43N 19.18E 128430
-132750 44.78N 20.53E 132750
-167460 35.53N  24.15E GSA  SOUDA, CRETE                     0                                
-170620 40.97N 29.08E 170620
-171280 40.13N  33.00E TAC  ANKARA/ESENBOGA                949                                
-172800 37.75N  40.20E TCC  DIYARKABIR                     667                                
-176060 35.15N 33.28E 176060
 255940 64.43N 173.23W UHMD 10 PROVIDENJA_BAY          HA    3 UA ALA23 3-93                  
-260630 59.58N  30.18E 260630
-276120 55.75N 37.57E 276120
-296340 55.03N 82.9E 296340
-319600 43.12N 131.9E 319600
-375490 41.68N 44.95E 375490
-383531 43.07N  74.47E UAFM MANUS         (USAF request)   637 Lenhart 8-06
-384570 41.27N 69.27E 384570
-402700 31.98N 35.98E 402700
-402900 31.87N 35.22E 402900
-404370 24.88N  46.77E ERK  RIYADH, SAUDI ARABIA           611 UA                             
-404380 24.72N  46.72E RIY  RIYADH, SAUDI ARABIA           612                                
-405820 29.22N  47.98E KUW  KUWAIT AIRPORT, KUWAIT          56 UA                             
-406080 36.32N  43.15E ORBM MOSUL         (USAF request)   223 Lenhart 8-06
-406500 33.22N  44.23E BAD  BAGHDAD, IRAQ                   35                                
-406890 30.57N  47.78E BAS  BASRA, IRAQ                      2                                
-406900 28.00N  49.00E P01  PERSIAN GULF POINT 1             0                                
-406910 27.00N  50.00E P02  PERSIAN GULF POINT 2             0                                
-407540 35.68N 51.32E 407540
-408290 31.05N  61.47E OIZB ZABOL         (USAF request)   489 Lenhart 8-06
-409540 34.42N  70.47E OAJL JALALABAD     (USAF request)   580 Lenhart 8-06
-409900 31.31N  65.85E OAKN KANDAHAR AIRPT(USAF request)  1017 Lenhart 8-06
-411700 25.25N  51.57E OTBD DOHA INTL     (USAF request)    10 Lenhart 8-06
-412170 24.42N  54.65E OMAA ABU DHABI INTL(USAF request)    27 Lenhart 8-06
 420200 76.53N  68.75W BGTL 10 THULE_AB                --   59 UA 3-93                        
-421820 28.58N 77.2E 421820
-431500 17.72N  83.30E VIS  VISAKHAPATNAM                   66                                
-443850 43.2N 107.17E 443850
-444540 27.7N 85.37E 444540
-450040 22.32N 114.17E 450040
-466920 25.03N 121.52E 466920
-469020 10.72N 115.83E 469020
-471100 37.55N 126.80E RKS  SEOUL/KIMPO INTL     KOREA      26                                
-475800 40.70N 141.37E RJSM MISAWA AFB, JAPAN               36                                
-476710 35.55N 139.78E RJTT TOKYO INTL    JAPAN              8                                
-477720 34.68N 135.53E 477720
-486870 1.38N 103.72E 486870
-488200 21.02N 105.8E 488200
-489000 10.82N 106.67E 489000
-503530 51.72N 126.65E 503530
-545110 39.8N 116.47E 545110
-562940 30.67N 104.02E 562940
-570360 34.3N 108.93E 570360
-583670 31.17N 121.43E 583670
-600300 27.93N  15.38W CLP  LAS PALMAS/GANDO                25                                
-601550 33.57N 7.67W 601550
-602300 31.62N 8.03W 602300
-606800 22.82N   5.47E AAT  TAMANRASSET/AGUENNA           1377                                
-610520 13.48N   2.17E DRRN NIAMEY                         227                                
-612230 16.72N   3.00W GATB TOMBOUCTOU/TIMBUKTU            264                                
-616410 14.73N  17.50W GOOY DAKAR                           24                                
-617010 13.35N  16.80W BYD  BANJUL/YUNDUM, GAMBIA           26                                
-619670  7.30S  72.42E JDG  DIEGO GARCIA                     2                                
-622710 24.22N 23.3E 622710
-623060 31.33N 27.22E 623060
-637390 1.28S 36.83E 637390
-637910 3.42S 37.07E 637910
-638180 4.92S 38.23E 638180
-642100  4.38S  15.45E ZAA  KINSHASA/N'DJILI               309                                
-652010 6.58N 3.33E 652010
-655480 7.38N 7.53W 655480
-655780  5.25N   3.93W DIAP ABIDJAN/PORT BOUET               8                                
-656600  6.23N  10.37W LRB  ROBERTS INTL/MONROV             18                                
-682880 24.37S  31.05E AHS  HOEDSPRUIT                     519                                
-688160 33.97S 18.6E 688160
 700260 71.30N 156.78W PABR 12 BARROW/POST-ROGERS      AK    4 GCIP 9-95 TAF 2-99             
 700860 70.13N 143.63W PABA 10 BARTER ISLAND           AK   16 ALA23 FOUS                     
 701040 68.88N 166.13W PALU 10 CAPE_LISBURNE(AWOS)     AK    3 FOUS                           
@@ -481,7 +449,6 @@
 702610 64.82N 147.87W PAFA 12 FAIRBANKS_INTL_ARPT     AK  138 GCIP 9-95 TAF 2-99             
 702650 64.67N 147.10W PAEI 10 EIELSON_AFB_______&     AK  167 METAR/TAF 2-99                 
 702660 63.97N 145.70W PABI 10 FT.GREELY/BIG DELTA     AK  398 UA TAF 2-99                    
-702670 64.00N 145.73W BIG  BIG DELTA, AK                  391                                
 702710 62.15N 145.45W PAGK 10 GULKANA_ARPT_(AUT)      AK  481 == TAF 2-99                    
 702720 61.25N 149.80W PAED 10 ELMENDORF_AFB_____&     AK   65 METAR/TAF 2-99                 
 702730 61.17N 150.02W PANC 12 ANCHORAGE_INTL_ARPT_(AS AK   40 GCIP 9-95 TAF 2-99             
@@ -526,7 +493,6 @@
 711190 53.55N 114.10W CWSE 12 EDMONTON/STONY_PLAI     AB  766 UA NA110 FOUS(YEG)             
 711230 53.30N 113.58W CYEG 10 EDMONTON_INTL_ARPT      AB  723 METAR/TAF 2-99                 
 711250 54.13N 108.52W CYLJ 10 MEADOW_LAKE_AIRPORT     SA  480 BOREAS 5-94                    
-711280 50.27N 111.18W YSD  SUFFIELD, AB                   770                                
 711300 53.33N 104.00W CYBU 10 NIPAWIN_AIRPORT         SA  374 BOREAS 5-94                    
 711510 46.90N  71.50W CWQG 10 VALCARTIER              QB  168 UA FOUS(YQB) 3-93              
 711970 47.57N  59.17W CWZB 10 PORT-AUX-BASQUES        NF   40 UA 2-95                        
@@ -552,7 +518,6 @@
 716330 44.75N  81.10W CYVV 12 WIARTON AIRPORT         ON  222 ER 11-00                       
 717010 45.83N  66.43W CYCX 12 GAGETOWN__(CAN-MIL)     NB   51 UA                             
 717070 46.17N  60.05W CYQY 10 SYDNEY_AIRPORT          NS   62 METAR/TAF 2-99                 
-717140 46.80N  71.40W YQB  QUEBEC, PQ                      73                                
 717220 46.38N  75.97W CWMW 12 MANIWAKI                QB  170 UA NA110 FOUS(YMW)             
 717250 48.05N  77.78W CYVO 10 VAL D'OR                PQ  337 3-93                           
 717310 46.37N  79.42W CYYB 10 NORTH BAY               ON  371 FOUS 3-93                      
@@ -570,11 +535,11 @@
 718220 49.77N  74.53W CYMT 10 CHIBOUGAMAU-CHAPAIS     QB  387 3-93                           
 718230 53.75N  73.67W CYAH 10 LA_GRANDE_IV_ARPT       QB  306 UA NA110 3-93                  
 718340 49.78N  86.93W CYGQ 12 GERALDTON AIRPORT       ON  349 ER 11-00                       
-718360 51.27N  80.65W CWZC 12 MOOSONEE_(SAWR)___&     ON   10 UA NA110                       
 718365 51.28N  80.60W CYMO 12 MOOSONEE AIRPORT        ON   29 ER 11-00                       
-718454 51.45N  90.20W CYPL 10 PICKLE_LAKE(MAN)        ON  386 UA NA110 3-93                  
 718480 53.83N  89.87W CYTL 12 BIG TROUT LAKE          ON  210 ER 11-00                       
 718500 49.78N  94.37W CYQK 12 KENORA AIRPORT          ON  411 ER 11-00                       
+718360 51.27N  80.65W CWZC 12 MOOSONEE_(SAWR)___&     ON   10 UA NA110                       
+718454 51.45N  90.20W CYPL 10 PICKLE_LAKE(MAN)        ON  386 UA NA110 3-93                  
 718520 49.90N  97.23W CYWG 10 WINNIPEG_INTL_ARPT      MN  239 FOUS 3-93                      
 718530 49.78N  99.65W CWLO 10 CAMP SHILO              MB  373 UA                             
 718575 54.68N 101.68W CYFO 10 FLIN_FLON_AIRPORT       MN  304 BOREAS 5-94                    
@@ -740,10 +705,8 @@
 723050 34.78N  76.87W KMHX 12 NEWPORT                 NC   11 UA NA110 WSR88D 2-95           
 723060 35.87N  78.78W KRDU 10 RALEIGH-DURHAM          NC  134 FOUS TAF 2-99                  
 723068 35.84N  77.90W KRWI 10 ROCKY_MOUNT-WILSON      NC   48 TAF 2-99                       
-723070 36.82N  72.10W NTU  OCEANA NAS/SOUCEK                7                                
 723080 36.90N  76.19W KORF 10 NORFOLK_INTL_ARPT       VA    9 FOUS TAF 2-99                  
 723086 37.13N  76.50W KPHF 10 NEWPORT_NEWS            VA   13 TAF 2-99                       
-723090 34.90N  76.88W NKT  CHERRY POINT MCAS                9                                
 723095 35.07N  77.05W KEWN 10 NEW_BERN/CRAVEN_CO      NC    6 TAF 2-99                       
 723100 33.95N  81.12W KCAE 10 COLUMBIA_METRO          SC   69 FOUS TAF 2-99                  
 723106 34.18N  79.72W KFLO 10 FLORENCE_REGIONAL       SC   45 TAF 2-99                       
@@ -825,6 +788,7 @@
 723930 34.75N 120.57W VBG  12 VANDENBERG AFB          CA  100 UA NA110 FOUS(PROF)            
 723940 34.90N 120.45W KSMX 10 SANTA_MARIA_PUBLIC      CA   73 TAF 2-99                       
 723965 35.66N 120.63W KPRB 10 PASO_ROBLES_MUNI        CA  255 TAF 2-99                       
+724095 40.28N  74.82W KTTN 10 TRENTON/MERCER CO.      NJ   65 Usr Rqst 3-00                  
 724010 37.50N  77.33W KRIC 10 RICHMOND/BYRD_FIELD     VA   54 == TAF 2-99                    
 724016 38.13N  78.44W KCHO 10 CHARLOTTESVILLE         VA  195 3-93 TAF 2-99                  
 724017 37.35N  78.43W KFVX 10 FARMVILLE               VA  125 Usr Rqst 3-00                  
@@ -841,7 +805,6 @@
 724080 39.88N  75.25W KPHL 10 PHILADELPHIA_INTL       PA    9 FOUS TAF 2-99                  
 724085 40.08N  75.01W KPNE 10 PHILADELPHIA_NE         PA   37 TAF 2-99                       
 724089 39.68N  75.60W KILG 10 WILMINGTON_AIRPORT      DE   24 TAF 2-99                       
-724095 40.28N  74.82W KTTN 10 TRENTON/MERCER CO.      NJ   65 Usr Rqst 3-00                  
 724097 40.80N  74.42W KMMU 10 MORRISTOWN_MUNI         NJ   57 METAR/TAF 2-99                 
 724100 37.33N  79.19W KLYH 10 LYNCHBURG/P._GLENN      VA  286 TAF 2-99                       
 724106 36.57N  79.33W KDAN 10 DANVILLE_REGIONAL       VA  174 TAF 2-99                       
@@ -949,7 +912,6 @@
 725045 41.27N  72.87W KHVN 10 NEW_HAVEN/TWEED         CT    4 METAR/TAF 2-99                 
 725046 41.33N  72.05W KGON 10 GROTON/NEW_LONDON       CT    3 METAR/TAF 2-99                 
 725058 41.17N  71.58W BID  00 BLOCK_ISLAND_(AWOS)     RI   33 T. Salem 2-99                  
-725060 41.65N  70.52W FMH  OTIS ANGB                       40                                
 725063 41.25N  70.07W KACK 20 NANTUCKET_MEMORIAL&     MA   15 TAF 2-99                       
 725064 41.92N  70.73W KPYM 10 PLYMOUTH                MA   45 NEPS 6-02                      
 725065 41.68N  70.97W KEWB 10 NEW_BEDFORD_MUNI        MA   24 METAR/TAF 2-99                 
@@ -1028,7 +990,6 @@
 725500 41.30N  95.90W KOMA 10 OMAHA/EPPLEY_FIELD&     NE  299 TAF 2-99                       
 725510 40.84N  96.75W KLNK 12 LINCOLN_MUNICIPAL       NE  362 GCIP 9-95 TAF 2-99             
 725520 40.97N  98.32W KGRI 10 GRAND_ISLAND(AWOS)      NE  566 TAF 2-99                       
-725530 41.37N  96.02W OMA  OMAHA, NE                      400 NA110 FOUS                     
 725560 41.98N  97.43W KOFK 10 NORFOLK/STEFAN_FLD      NE  473 TAF 2-99                       
 725570 42.40N  96.38W KSUX 12 SIOUX_CITY_MUNI         IA  336 == TAF 2-99                    
 725580 41.32N  96.37W OAX  12 OMAHA/VALLEY            NE  350 NEW UPA                        
@@ -1093,7 +1054,6 @@
 726185 44.32N  69.80W KAUG 10 AUGUSTA_STATE_ARPT      ME  107 TAF 2-99                       
 726190 45.47N  69.58W KGNR 10 GREENVILLE_(AMOS)_&     ME  316 MOS/Jensenius 2-99             
 726196 45.65N  68.68W KMLT 10 MILLINOCKET_MUNI        ME  124 MOS/Jensenius 2-99             
-726220 44.65N  73.47W PBG  PLATTSBURGH                      0                                
 726223 44.93N  74.85W KMSS 10 MASSENA/RICHARDS__&     NY   65 ERHQ 8-97 TAF 2-99             
 726227 44.00N  76.01W KART 10 WATERTOWN_INTL_ARPT     NY   99 TAF 2-99                       
 726228 44.38N  74.19W KSLK 10 SARANAC_LAKE/ADIRON     NY  507 ERHQ 8-97 TAF 2-99             
@@ -1215,9 +1175,9 @@
 727845 46.27N 119.12W KPSC 10 PASCO/TRI-CITIES        WA  124 TAF 2-99                       
 727846 46.10N 118.28W KALW 10 WALLA_WALLA_RGNL        WA  367 TAF 2-99                       
 727850 47.63N 117.53W KGEG 12 SPOKANE_INTL_ARPT       WA  721 UA NA110 FOUS TAF 2-99         
-727856 47.68N 117.32W KSFF 10 SPOKANE/FELTS_FIELD     WA  595 TAF 2-99                       
 727857 46.75N 117.12W KPUW 12 PULLMAN/MOSCOW_RGNL     WA  778 NWS KOTX                       
 727860 47.70N 117.60W KOTX 12 SPOKANE                 WA  728 UA 3-02                        
+727856 47.68N 117.32W KSFF 10 SPOKANE/FELTS_FIELD     WA  595 TAF 2-99                       
 727870 48.55N 117.89W CQV  10 COLVILLE                WA  572 WRGN 8-97                      
 727885 48.12N 123.50W KCLM 10 PORT_ANGELES_INTL       WA   88 METAR/TAF 2-99                 
 727890 48.46N 119.52W 4OM  10 OMAK                    WA  396 WRGN 8-97                      
@@ -1246,7 +1206,6 @@
 744450 42.21N  97.79W P#9  12 NLGN1 NELIGH            NE  524 PROF                           
 744490 41.90N  93.70W P#A  12 SLAI4 SLATER            IA  315 PROF                           
 744550 41.61N  90.57W DVN  10 QUAD_CITIES/QUAD_CITIES IA  229 UA 7-97                        
-744570 39.82N  84.03W FFO  WRIGHT PATTERSON               245                                
 744660 40.81N  87.05W P#B  12 WLCI3 WOLCOTT           IN  212 PROF-X                         
 744680 38.83N  85.42W KMDN 10 JEFFERSON_PRVG_GRND     IN  266 DiStefano 2-99                 
 744860 40.65N  73.78W KJFK 10 NEW_YORK/JF_KENNEDY     NY    7 TAF 2-99                       
@@ -1266,7 +1225,6 @@
 745510 39.58N  94.19W P#I  12 LTHM7 LATHROP           MO  297 PROF                           
 745560 39.66N  90.48W P#J  12 WNCI2 WINCHESTER        IL  170 PROF                           
 745600 40.15N  89.33W ILX  12 LINCOLN                 IL  176 GCIP 9-95                      
-746040 34.77N 120.53W P#K  VBGC1 VANDENBERG     CA        149 PROF 3-93                      
 746120 35.68N 117.68W NID  10 CHINA_LAKE_(NAF)__&     CA  696  FORMER UA 3-93                
 746290 32.41N 106.35W P#L  12 WSMN5 WHITE SANDS MR    NM 1224 PROF                           
 746300 36.84N 107.91W P#M  12 AZCN5 AZTEC             NM 1902 PROF                           
@@ -1299,7 +1257,6 @@
 760753 31.63N 106.43W MMCS 10 CIUDAD_JUAREZ_INTL&     MX 1171 METAR/TAF 2-99                 
 761510 28.88N 118.30W ILS   0 ISLA GUADALUPE, B.C.          6 ==                             
 761600 29.07N 110.97W MMHO 10 HERMOSILLO_INTL___&     MX  211 METAR/TAF 2-99                 
-762250 28.70N 106.07W CUU  CHIHUAHUA, CHIH.              1429 UA NA110                       
 762253 28.70N 105.97W MMCU 12 CHIHUAHUA_INTL_ARPT     MX 1360 UA NA110 METAR 2-99            
 762530 27.32N 112.30W MMCN 10 SANTA_ROSALIA_____&     MX   75 METAR/TAF 2-99                 
 762555 27.97N 110.93W MMGM 10 GUAYMAS_INTL_ARPT       MX   27 METAR/TAF 2-99                 
@@ -1321,7 +1278,6 @@
 764915 23.72N  98.97W MMCV 10 CIUDAD_VICTORIA_APT     MX  238 METAR/TAF 2-99                 
 765255 22.90N 102.68W MMZC 10 ZACATECAS_ARPT          MX 2140 METAR/TAF 2-99                 
 765390 22.15N 100.98W MMSP 10 SAN_LUIS_POTOSI         MX 1903 METAR/TAF 2-99                 
-765480 22.22N  97.85W TAM  TAMPICO, TAMPS.                 24 3-93                           
 765493 22.28N  97.87W MMTM 12 TAMPICO/GEN_FJ_MINA     MX   24 3-93 METAR 2-99                
 765710 21.88N 102.30W MMAS 10 AGUASCALIENTES          MX 1885 METAR/TAF 2-99                 
 765906 21.03N  86.87W MMUN 10 CANCUN_INTL_AIRPORT     MX    5 METAR/TAF 2-99                 
@@ -1332,13 +1288,11 @@
 766534 19.15N 104.57W MMZO 10 MANZANILLO_INTL___&     MX    8 METAR/TAF 2-99                 
 766655 19.85N 101.03W MMMM 10 MORELIA_NEW             MX 1833 METAR/TAF 2-99                 
 766753 19.35N  99.57W MMTO 10 TOLUCA/JOSE_MARIA_&     MX 2576 METAR/TAF 2-99                 
-766790 19.43N  99.08W MEX  MEXICO CITY/JUAREZ, D.F.      2231                                
 766793 19.43N  99.10W MMMX 12 MEXICO_CITY/LICENCI     -- 2238 UA                             
 766913 19.15N  96.18W MMVR 10 GEN._HERIBERTO_JARA     MX   29 METAR/TAF 2-99                 
 767383 18.10N  94.58W MMMT 10 MINATITLAN              MX   40 METAR/TAF 2-99                 
 767493 18.65N  91.80W MMCE 10 CIUDAD_DEL_CARMEN_&     MX    2 METAR/TAF 2-99                 
 767584 17.60N 101.47W MMZH 10 IXTAPA-ZIHUATANEJO      MX    6 METAR/TAF 2-99                 
-768050 16.83N  99.92W ACA  ACAPULCO, GRO.                   3                                
 768056 16.77N  99.75W MMAA 10 ACAPULCO/G._ALVAREZ     MX    5 METAR/TAF 2-99                 
 768485 15.78N  96.27W MMBT 10 BAHIAS_DE_HUATULCO&     MX  143 METAR/TAF 2-99                 
 769043 14.78N  92.38W MMTP 10 TAPACHULA_________&     MX   29 METAR/TAF 2-99                 
@@ -1426,7 +1380,6 @@
 789050 15.53N  61.30W TDPD 00 MELVILLE_HALL_ARPT      DO   14 METAR/TAF 2-99                 
 789060 15.53N  61.40W TDCF 00 CANEFIELD_AIRPORT       DO    5 METAR/TAF 2-99                 
 789070 15.30N  61.40W TDPR 10 ROSEAU                  DO   72 METAR/TAF 2-99                 
-789540 13.07N  59.48W TBPB GRANTLEY ADAMS INTERNATIONL     56                                
 789820 12.50N  70.01W TNCA 10 REINA_BEATRIX_INTL      NU   33 METAR/TAF 2-99                 
 789880 12.20N  68.97W TNCC 10 HATO_ARPT_(CIV/MIL)     NU   67 METAR/TAF 2-99                 
 789900 12.15N  68.28W TNCB 00 FLAMINGO_AIRPORT        NU    7 METAR/TAF 2-99                 
@@ -1441,107 +1394,27 @@
 802220  4.70N  74.13W SKBO 10 BOGOTA/ELDORADO         -- 2548 METAR/TAF 2-99                 
 804070 10.57N  71.73W SVMC 10 MARACAIBO/LA_CHINTA     --   65 METAR/TAF 2-99                 
 804150 10.60N  66.98W SVMI 10 CARACAS/S._BOLIVAR      --   48 METAR/TAF 2-99                 
-820220 2.83S 60.7W 820220
-821910 1.43S 48.48W 821910
-823320 3.15S 59.98W 823320
-823980 3.78S 38.53W 823980
-825620 5.53S 49.15W 825620
-825790 5.05S 42.82W 825790
-825990 5.92S 35.25W 825990
-827530 7.88S 40.08W 827530
-828240 8.7S 63.9W 828240
-828610 8.27S 49.28W 828610
-829750 9.07S 44.37W 829750
-830630 10.7S 48.4W 830630
-832290 13S 38.52W 832290
-833620 15.65S 56.1W 833620
-837220 22.32S 49.07W 837220
-837430 22.9S 43.17W 837430
-837800 23.62S 46.65W 837800
-839670 30.08S 51.18W 839670
-840080 0.9S 89.62W 840080
-840710 0.13S 78.48W 840710
-845010 8.08S 79.12W 845010
-846280 12.02S 77.03W 846280
-851540 14.75S 64.8W 851540
-852010 16.5S 68.17W 852010
-856290 34.97S 71.22W 856290
-862180 25.16S 57.38W 862180
-871550 27.45S 59.05W 871550
-874800 32.92S 60.78W 874800
-875760 34.82S 58.53W 875760
-878600 45.78S 67.45W 878600
 911650 21.98N 159.35W PHLI 00 LIHUE/KAUAI_ISLAND_(ASO HI   45 UA FOUS 3-93 TAF 2-99          
 911780 21.32N 158.07W PHNA 00 BARBERS_PT_NAS/OAHU     HI   15 METAR/TAF 2-99                 
 911820 21.35N 157.93W PHNL 00 HONOLULU INTL/OAHU      HI    5 FOUS TAF 2-99                  
 911860 21.15N 157.10W PHMK 10 MOLOKAI (AMOS)          HI  137 METAR/TAF 2-99                 
 911900 20.90N 156.43W PHOG 00 KAHULUI_ARPT/MAUI_(ASOS HI   20 FOUS 4-93 TAF 2-99             
-912120 13.35N 144.80E PGUM GUAM INTERNATIONAL              91                                
-912320 15.12N 145.73E PGSN SAIPAN INTERNAIONAL             66                                
-912450 19.28N 166.65E PWAK WAKE ISLAND AIRFLD               4                                
 912850 19.72N 155.07W PHTO 10 HILO/LYMAN_FIELD_(ASOS) HI   11 UA FOUS 4-93 TAF 2-99          
-913340  7.47N 151.85E PTKK TRUK INTERNATIOANAL/MOEN IS      2                                
-913480  6.97N 158.22E PTPN PONAPE ISLAND                   46                                
-913560  5.33N 163.03E PTSA KUSAIE/KOSRAE_EAST               4                                
-913660  8.73N 167.73E PKWA KWAJALEIN/BUCHOLZ                8                                
-913760  7.08N 171.38E PKMJ MAJURO/MARSHALL IS               3                                
-914080  7.33N 134.48E PTRO KOROR/PALAU ISLAND              33                                
-914130  9.48N 138.08E PTYA YAP ISLAND                      17                                
-915001 14.2N 145.2E 915001
-915002 15N 145.6E 915002
-915003 18.8N 145.7E 915003
-915004 8.1N 134.7E 915004
-915005 5.3N 132.2E 915005
-915006 8.3N 137.5E 915006
-915007 10N 139.8E 915007
-915008 9.8N 140.5E 915008
-915009 7.4N 134.9E 915009
-915010 8.6N 144.6E 915010
-915011 7.4N 147.1E 915011
-915012 7.4N 149.2E 915012
-915013 8.6N 149.7E 915013
-915014 8.6N 151.9E 915014
-915015 6.9N 152.7E 915015
-915016 5.5N 153.8E 915016
-915017 3.8N 155E 915017
-915018 5.8N 157.3E 915018
-915019 7N 157.9E 915019
-915020 6.8N 159.8E 915020
-915021 6.2N 160.7E 915021
-915022 11.8N 162.5E 915022
-915023 8.9N 165.7E 915023
-915024 7.3N 168.8E 915024
-915025 5.9N 169.6E 915025
-915026 11.2N 169.8E 915026
-915027 9.5N 170.2E 915027
-915028 6.1N 171.8E 915028
-919440 18.07S 140.95W TTO  HAO, TUAMOTU IS.                 3                                
-931190 37.02S 174.8E 931190
-941200 12.42S 130.87E DDN  DARWIN, AUSTRALIA               29                                
-945680 27.63S 152.72E BAM  AMBERLEY (AUS-AFB)              31                                
-946100 31.92S 115.97E 946100
-947670 33.95S 151.18E SSY  SYDNEY/KINGSFORD SMITH           5                                
-948660 37.67S 144.83E 948660
-949260 35.4S 148.98E 949260
-949750 42.83S 147.5E 949750
-967430 6.15S 106.85E 967430
 980091 31.42N  87.05W KGZH 10 EVERGREEN_(ASOS)        AL   79 MOS/Weiss 2-99                 
-988360 6.9N 122.07E 988360
 994040 33.49N  77.59W FPS7 10 FRYING PAN SHOALS       NC    0 EASTERN REG 3-02               
-999020 29.37N 114.47W 999020
-999030 40.33N 113.5W 999030
-999040 35.17N 79.5W 999040
-999050 48.83N 101.67W 999050
-999060 44.22N 0.67W 999060
-999070 28S 21.5E 999070
-999080 40.5S 68W 999080
-999090 27.33S 59.5W 999090
-999100 28.23S 134.98E 999100
+999901 19.73N 156.05W PHKO 00 KEAHOLE POINT/KONA      HI   13 METAR/TAF 2-99                 
+999902 59.23N 135.43W PAHN 00 HAINES BOAT HARBOR      AK   10 TAF 2-99                       
+999903 61.13N 146.25W PAVD 10 VALDEZ (INLAND POINT)   AK   37 METAR/TAF 2-99                 
+999904 20.78N 156.95W PHNY 10 LANAI CITY AIRPORT      HI  399 METAR/TAF 2-99                 
+999905 21.02N 156.63W PHJH 10 LAHAINA/WEST MAUI       HI   40 METAR/TAF 2-99                 
+999909 17.85N  66.52W PSE  00 PONCE,PUERTO RICO             0 TAF PR 2-99                    
+999911 18.17N  67.15W MAZ  00 MAYAGUEZ,PUERTO RICO          0 TAF PR 2-99                    
+999912 35.25N  93.09W RUE  10 RUSSELLVILLE_MCPL       AR  120 Weiss 2-99                     
 999110 38.70N  27.10W LPLA LAJES,AZORES  (4NASA)           52
-999120 61.20N 149.80W 999120 ELMENDORF, ALASKA (4NASA)       65
+999120 61.20N 149.80W PAED ELMENDORF, ALASKA (4NASA)       65
 999130  7.90S  14.40W FHAW ASCENSION IS/ST HELENA (4NASA)  86
 999140 35.70N 139.30E RJTY YOKOTA AB, JAPAN  (4NASA)      139
-999150 48.90N  54.50W 999150 GANDER, CANADA   (4NASA)       151
+999150 48.90N  54.50W CYQX GANDER, CANADA   (4NASA)       151
 999160 43.50N   4.90E LFMI LE TUBE, FRANCE   (4NASA)       23
 999170 52.70N   8.90W EINN SHANNON, IRELAND  (4NASA)       14
 999180 14.50S 132.30E YPTN TINDAL, AUSTRALIA  (4NASA)     108
@@ -1556,22 +1429,21 @@
 999270  8.10S  34.90W SBRF GUARARAPES, BRAZIL (4NASA)      18
 999280 23.40S  46.50W SBGR GUARULHOS, BRAZIL  (4NASA)     751
 999290  7.20N  79.90E VCBI COLOMBO, SRI LANKA  (4NASA)      8
-999300 10.60N  67.00W 999300 SIMON BOLIVAR, VEN(4NASA)       43
+999300 10.60N  67.00W SVMI SIMON BOLIVAR, VEN(4NASA)       43
 999310  4.80N  52.40W SOCA ROCHAMBEAU, FR GUIANA (4NASA)  105
 999320 19.10N  72.80E VABB BOMBAY, INDIA   (4NASA)          8
 999330 18.80S  47.50E FMMI IVATO, MADAGASCAR (4NASA)     1280
 999340 32.20N 110.90W KDMA DAVIS-MOUNTAIN, CA (4NASA)     824
 999350 44.10N 103.10W KRCA ELLSWORTH, SD (4NASA)         1000
-999360 64.60N 147.00W 999360 EIELSON, ALASKA (4NASA)        167
+999360 64.60N 147.00W PAEI EIELSON, ALASKA (4NASA)        167
 999370 34.80N 120.60W KVBG VANDENBERG, CA (4NASA)         112
-999380 34.60N 118.10W 999380 PALMDALE, CA  (4NASA)          775
+999380 34.60N 118.10W KPMD PALMDALE, CA  (4NASA)          775
 999390 36.22N  81.68W KTNB BOONE,                     NC 1011 Keighton 1-06
+409540 34.42N  70.47E OAJL JALALABAD     (USAF request)   580 Lenhart 8-06
+406080 36.32N  43.15E ORBM MOSUL         (USAF request)   223 Lenhart 8-06
+411700 25.25N  51.57E OTBD DOHA INTL     (USAF request)    10 Lenhart 8-06
+412170 24.42N  54.65E OMAA ABU DHABI INTL(USAF request)    27 Lenhart 8-06
+409900 31.31N  65.85E OAKN KANDAHAR AIRPT(USAF request)  1017 Lenhart 8-06
 999400 34.95N  69.27E OAIX BAGRAM        (USAF request)  1491 Lenhart 8-06
-999901 19.73N 156.05W PHKO 00 KEAHOLE POINT/KONA      HI   13 METAR/TAF 2-99                 
-999902 59.23N 135.43W PAHN 00 HAINES BOAT HARBOR      AK   10 TAF 2-99                       
-999903 61.13N 146.25W PAVD 10 VALDEZ (INLAND POINT)   AK   37 METAR/TAF 2-99                 
-999904 20.78N 156.95W PHNY 10 LANAI CITY AIRPORT      HI  399 METAR/TAF 2-99                 
-999905 21.02N 156.63W PHJH 10 LAHAINA/WEST MAUI       HI   40 METAR/TAF 2-99                 
-999909 17.85N  66.52W PSE  00 PONCE,PUERTO RICO             0 TAF PR 2-99                    
-999911 18.17N  67.15W MAZ  00 MAYAGUEZ,PUERTO RICO          0 TAF PR 2-99                    
-999912 35.25N  93.09W RUE  10 RUSSELLVILLE_MCPL       AR  120 Weiss 2-99                     
+408290 31.05N  61.47E OIZB ZABOL         (USAF request)   489 Lenhart 8-06
+383531 43.07N  74.47E UAFM MANUS         (USAF request)   637 Lenhart 8-06

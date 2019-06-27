@@ -43,6 +43,7 @@ sub defopts {
                 '--prepend'     => { arg => ''            , desc => 'Include the YYYYMMDDCC in the bufkit file naming convention'},
                 '--forced'      => { arg => ''            , desc => 'Force downloading of all bufr files'},
                 '--forcep'      => { arg => ''            , desc => 'Force processing of all bufr files'},
+                '--monolithic'  => { arg => ''            , desc => 'Download the monolithic class1 BUFR file rather than individual station files'},
                 '--[no]verbose' => { arg => ''            , desc => '[Do not] Let me know what is going on. Overrides bufrgruven.conf file setting'},
                 '--[no]zipit'   => { arg => ''            , desc => '[Do not] Compress the BUFKIT files to create "*.buz" data.'},
                 '--stnlist'     => { arg => 'model [str]' , desc => 'List out bufr stations for the model data set'},
@@ -398,6 +399,28 @@ sub guide {
             "by $exe.  Normally, all files are located under \"bufrgruven/metdat\"; however, the --metdat option will ".
             "override this location in favor of the specified directory.\n\nYou do not need to include \"metdat\" as part ".
             "of the specified <path>/directory. BUFRgruven will use whatever name you request.";
+    &Utils::modprint(0,14,94,1,2,$mesg);
+
+
+    &Utils::modprint(0,10,114,1,1,"Flag:  --monolithic\n\n    Download the monolithic class1 BUFR file instead of individual station files");
+    &Utils::modprint(0,12,94,1,1,"Description:");
+    $mesg = "Passing --monolithic instructs BUFRgruven to download the monolithic class1 BUFR file rather than the ".
+            "individual BUFR files for the stations requested.  The class1 file contains the ENTIRE set of BUFR stations ".
+            "in a single BUFR file. It is not a tared and compressed collection of individual BUFR files. Consequently, ".
+            "all the stations must be processed into GEMPAK format before the individual BUFKIT station files can be ".
+            "created, which takes more time than simply requesting the single station files.\n\n".
+
+            "If you are looking to access the monolithic BUFR file for a specific data set then make sure that you ".
+            "have the source, location and naming convention defined in the _bufrinfo.conf file for that data set.\n\n".
+
+            "Use of the --monolithic flag should be limited to interactive command-line processing only. Adding the ".
+            "--monolithic flag to your automated processing is not recommended since BUFRgruven will recreate ".
+            "the BUFKIT file for each station in your \"--stations\" list each time the program is run.  This is ".
+            "because BUFRgruven does not know whether an individual BUFKIT file was previously created until well ".
+            "after the processing begins and by then it's too late to bail out.\n\n".
+
+            "If you do pass the --monolithic flag then the local filename (LOCFIL) will be discarded and a file name ".
+            "convention of YYYYMMDDCC.MOD.tCCz.class1.bufr will be used.";
     &Utils::modprint(0,14,94,1,2,$mesg);
 
 

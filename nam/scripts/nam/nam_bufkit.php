@@ -26,13 +26,13 @@ $shour = date("H",$st);
 $iem_date = date("YmdHi",$st);
 $model = "nam";
 $model2 = "nam";
-$filename = "".$model.".t".$shour."z.bufrsnd.tar.gz";
-$filename2 = "".$model.".t".$shour."z.bufrsnd.tar";
+$filename = "".$model.".t".$shour."z.tm00.bufrsnd.tar.gz";
+$filename2 = "".$model.".t".$shour."z.tm00.bufrsnd.tar";
 $cur_dir = "/local/ckarsten/bufkit/".$model."/scripts/".$model."/";
 $data_dir = "/local/ckarsten/bufkit/".$model."/scripts/".$model."/data/";
 $fname = "".$data_dir."".$filename."";
 $fname2 = "".$data_dir."".$filename2."";
-$url = "http://nomads.ncep.noaa.gov/pub/data/nccf/com/".$model."/prod/".$model.".".$stime."/".$filename."";
+$url = "https://nomads.ncep.noaa.gov/pub/data/nccf/com/".$model."/prod/".$model.".".$stime."/".$filename."";
 //$url = "ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/";
 
 if($shour == "06" || $shour == "18"){

@@ -32,11 +32,11 @@ $data_dir = "/local/ckarsten/bufkit/".$model2."/scripts/".$model."/data/";
 // try to download tar ball containing bufr data to process
 // attemps every miniute for one hour
 $k = 180;
-$models = array('nmm_ctl','nmm_n1','nmm_p1','nmm_n2','nmm_p2','em_ctl','em_n1','em_p1','em_n2','em_p2','eta_ctl1','eta_n1','eta_p1','eta_ctl2','eta_n2','eta_p2','rsm_ctl1','rsm_n1','rsm_p1','rsm_n2','rsm_p2');
+$models = array('nmm_ctl','nmm_n1','nmm_n2','nmm_n3','nmm_p1','nmm_p2','nmm_p3','em_ctl','em_n1','em_p1','em_n2','em_p2','em_n3','em_p3','nmb_ctl','nmb_n1','nmb_p1','nmb_n2','nmb_p2','nmb_n3','nmb_p3','srefmean');
 
 for($i=0;$i<=$k;$i++){
 	$found = 0;
-	for($j=0;$j<=20;$j++){
+	for($j=0;$j<=21;$j++){
 	        $filename = "".$models[$j].".t".$shour."z.bufrsnd.tar.gz";
 	        $filename2 = "".$models[$j].".t".$shour."z.bufrsnd.tar";
 	        $fname = "".$data_dir."".$filename."";
@@ -56,9 +56,9 @@ for($i=0;$i<=$k;$i++){
 			break;
 	        }
 	}
-	if($found == 21){
+	if($found == 22){
 		echo "All 21 models downloaded, unleashing the beast!\n";
-		for($j=0;$j<=20;$j++){
+		for($j=0;$j<=21;$j++){
 	                $filename2 = "".$models[$j].".t".$shour."z.bufrsnd.tar";
 	                $fname2 = "".$data_dir."".$filename2."";
 			echo "Un-tarring ".$filename2."\n";
@@ -84,7 +84,7 @@ fclose($fh);
 */
 
 for($i=2;$i<=4;$i++){
-	$cmd = "php /local/ckarsten/bufkit/sref".$i."/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref".$i."/scripts/sref/cron_sref_".$shour."_".$i.".txt&";
+	$cmd = "php /local/ckarsten/bufkit/sref".$i."/scripts/sref/sref_bufkit.php now=\"".$now."\" >& /local/ckarsten/bufkit/sref".$i."/scripts/sref/cron_sref_".$shour."_".$i.".txt&";
 	echo "".$cmd."\n";
 	system($cmd);
 }
@@ -146,6 +146,8 @@ system("rm /local/ckarsten/bufkit/".$model2."/metdat/gempak/*");
 system("rm /local/ckarsten/bufkit/".$model2."/metdat/bufkit_temp/*.buz");
 system("rm /local/ckarsten/bufkit/".$model2."/cobb/data/*.dat");
 sleep(1800);
-system("rm /local/ckarsten/bufkit/".$model2."/scripts/".$model."/data/*");
+system("mv /local/ckarsten/bufkit/".$model2."/scripts/".$model."/data /local/ckarsten/bufkit/".$model2."/scripts/".$model."/data2");
+system("mkdir /local/ckarsten/bufkit/".$model2."/scripts/".$model."/data");
+system("rm -rf /local/ckarsten/bufkit/".$model2."/scripts/".$model."/data2");
 
 ?>

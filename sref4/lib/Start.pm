@@ -73,12 +73,15 @@ sub initialize {
     # Have a little fun. Additional entries may be included in the lists below.
     #
     @{$bgruven{INFO}{rn}} = qw ( I. II. III. IV. V. VI. VII. VIII. IX. X. XI. XII. XIII. XIV. XV. XVI. );
-    @{$bgruven{INFO}{fm}} = ("Arrrg", "Ugh", "Bummer", "C'est la vie", "Shoot", "Oh Well", "Darn it", "Drats", "#%&@",
-                             "#@)*^", "\$%(^*@", "I'll be back", "Que Sera Sera", "Ay Carumba", "D\'oh", "No BUFR for you" );
-    @{$bgruven{INFO}{sm}} = ("Yatzee", "Bingo", "Success", "Dyn-o-mite", "I'll be back", "Shazam", "TaDa", "Excellent",
-                             "Please come again", "Heh Heh", "Holy BUFR Batman", "Schwing", "That's hot", "Oh Yeah",
-                             "Who's your daddy", "It's Bgruv'n time!");
+    @{$bgruven{INFO}{fm}} = ("Arrrg", "Good Grief", "Ugh", "Bummer", "C'est la vie", "Shoot", "Oh Well", "Darn it", "Drats", "#%&@",
+                             "#@)*^", "\$%(^*@", "I'll be back", "Que Sera Sera", "Ay Carumba", "D\'oh", "No BUFR for you",
+                             "Missed it by THAT much", "Fuh-get about it!", "We blew it!" );
 
+    @{$bgruven{INFO}{sm}} = ("Yatzee!", "Bingo!", "Hello, BUFR!", "Dyn-o-mite!", "Hasta la vista, BUFR!", "TaDa!", "Excellent!", "You Bgruven!",
+                             "Please Bgruven again!", "As you wish!", "Holy BUFR Batman!", "Schwing!", "That's hot!", "Oh Yeah!",
+                             "Who's your daddy!", "It's Bgruv'n time!", "Heeeeeeeere's BUFR!", "Live Long and BUFR!", 
+                             'Who loves ya, baby!', "Da BUFR! Da BUFR!", "Cinderella story!", "Nailed it!", "These go to 11!",
+                             'Show me the BUFR!', "It\'s a BUFR!", "Victory is ours!");
 
 
     #  Check to make sure there are no uppercase letters in the path as that will cause GEMPAK
@@ -216,6 +219,7 @@ use Getopt::Long qw(:config pass_through);
                  "nobufkit"       => \$option{NOBUFKIT},
                  "noascii"        => \$option{NOASCII},
 
+                 "monolithic"     => \$option{MONO},
                  "prepend"        => \$option{PREPEND},
                  "zipit!"         => \$option{ZIPIT},
 
@@ -392,7 +396,6 @@ use Time;
 use Data::Dumper; $Data::Dumper::Sortkeys = 1;
 
 
-
     #  Make sure the hash is initialized
     #
     my %proc=(); %{$proc{$_}}=() for ('DATA', 'DATE', 'SOURCES', 'STATIONS');
@@ -408,6 +411,11 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
     #  Make sure LOCFIL was defined
     #
     unless ($Bgruven{BINFO}->{DSET}{locfil}) {my $f = $Bgruven{BINFO}->{DSET}{fname} ; $mesg = "It appears that \"LOCFIL\" is not defined in $f"; return;}
+
+   
+    #  Was the --monolithic flag passed?  If so then reset locfil to YYYYMMDDCC.MOD.tCCz.class1.bufr
+    #
+    $Bgruven{BINFO}->{DSET}{locfil} = 'YYYYMMDDCC.MOD.tCCz.class1.bufr' if $Bgruven{GRUVEN}->{OPTS}{mono};
 
 
     #  Initialize the station table for the requested data set.
@@ -503,8 +511,6 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
     #  Note that we also take into account the DELAY setting from the gribinfo file for
     #  a data set here.
     #
-
-
     #  The final pdate list should contain the available date/times from a 24hr period
     #
     while (scalar @bdates < scalar @{$Bgruven{BINFO}->{DSET}{cycles}}) { # We only want a 24-hour window of times
@@ -537,14 +543,23 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
     my @phs = ("$proc{DATE}{yyyymmdd}", "$proc{DATE}{acycle}", "$Bgruven{BINFO}->{DSET}{dset}", @{$Bgruven{BINFO}->{DSET}{model}} > 1 ? 'MOD' : "$Bgruven{BINFO}->{DSET}{model}[0]");
 
 
-    #  The sources for the BUFR files as defined in _bufrinfo.conf are available in the ASOURCES record
-    #  that is part of BREC.  Subset these sources based on command line flags passed.
+    #  WHAT IS HAPPENING HERE?
+    #
+    #  The methods contained in the @{$Bgruven{GRUVEN}->{OPTS}{methods}} list control which methods of
+    #  acquisition are to be used to download the BUFR files.  If no method is explicitly specified on
+    #  the command line then the list defaults the configuration settings defined on the options
+    #  subroutine, probably ftp and http. 
+    #
+    #  If a user does specify a method on the command line then that method is used to populate
+    #  the @{$Bgruven{GRUVEN}->{OPTS}{methods}} list. Additionally, the options/arguments are
+    #  defined by $Bgruven{GRUVEN}->{OPTS}{lc $meth}.
     #
     my %rsources=();
     foreach my $meth (@{$Bgruven{GRUVEN}->{OPTS}{methods}}) {
 
         my $m = lc $meth; $m = "--$m"; $meth = uc $meth;  #  Both meth and host are UC in the SOURCES hash
-        if ($Bgruven{GRUVEN}->{OPTS}{lc $meth}) {  #  User has specified source on command line
+    
+        if ($Bgruven{GRUVEN}->{OPTS}{lc $meth}) {  #  User passed command line flag for the method of acquisition AND included arguments (not just --http)
 
             $Bgruven{GRUVEN}->{OPTS}{lc $meth} =~ s/:+/:/g;  #  reduce number of ":"s to one
 
@@ -562,8 +577,7 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
             }
             $rsources{$meth}{$host} = $path;
         } else { #  Use all the available sources
-#          unless (keys %{$Bgruven{BINFO}->{SOURCES}{$meth}}) {&Utils::modprint(0,4,104,1,1,"Hmmm, there are no \"$meth\" sources for BUFR files listed in $Bgruven{BINFO}->{DSET}{fname}"); next;}
-           %{$rsources{$meth}} = %{$Bgruven{BINFO}->{SOURCES}{$meth}};
+           %{$rsources{$meth}} = %{$Bgruven{BINFO}->{SOURCES}{$meth}} if keys %{$Bgruven{BINFO}->{SOURCES}{$meth}};
         }
     }
 
@@ -617,6 +631,7 @@ sub read_bconf {
     my $dset = shift;
 
     my @members=();  #  for the MEMBER-KEYS enties
+    my %methods=();  #  Added to help separate monolithic from single station file naming conventions
 
     #  We must initialize/define the record
     #
@@ -629,7 +644,6 @@ sub read_bconf {
 
     @{$biconf{DSET}{cycles}}=();
     %{$biconf{DSET}{members}}=();
-
 
 
     my $fname = "${dset}_bufrinfo.conf"; $biconf{DSET}{fname} = $fname;
@@ -666,7 +680,7 @@ sub read_bconf {
             s/,+|;+| +//g;
             @list = split (/:/,$_,2);
             if ($list[0] and $list[1]) {
-                $biconf{SOURCES}{FTP}{$list[0]} = $list[1];
+                push @{$methods{FTP}{$list[0]}} => $list[1];
             } else {
                 my $info = $list[0] ? $list[0] : $list[1];
                 &Utils::modprint(6,7,104,1,1,sprintf("Mis-configured SERVER-FTP entry (Line with %s)",$list[0] ? $list[0] : $list[1]));
@@ -678,7 +692,7 @@ sub read_bconf {
             s/,+|;+| +//g;
             @list = split (/:/,$_,2);
             if ($list[0] and $list[1]) {
-                $biconf{SOURCES}{HTTP}{$list[0]} = $list[1];
+                push @{$methods{HTTP}{$list[0]}} => $list[1];
             } else {
                 my $info = $list[0] ? $list[0] : $list[1];
                 &Utils::modprint(6,7,104,1,1,sprintf("Mis-configured SERVER-HTTP entry (Line with %s)",$list[0] ? $list[0] : $list[1]));
@@ -698,7 +712,7 @@ sub read_bconf {
                     $list[0] = 'LOCAL';
                 }
             }
-            $biconf{SOURCES}{NFS}{$list[0]} = $list[1];
+            push @{$methods{NFS}{$list[0]}} => $list[1];
             next;
         }
 
@@ -710,7 +724,21 @@ sub read_bconf {
 
     } close INFILE;
 
-    $biconf{DSET}{fname}    = $fname;
+
+    #  I don't like putting this block here as I was hoping to avoid the use of
+    #  command-line flags in this routine but it saves time when adding the 
+    #  --monolithic option to the code.
+    #
+    foreach my $meth (keys %methods) {
+        my @list=();
+        foreach my $src (keys %{$methods{$meth}}) {
+            @list = $Bgruven{GRUVEN}->{OPTS}{mono} ? grep (/class1|tm00|\.tar/i => @{$methods{$meth}{$src}}) : grep (! /class1|tm00|\.tar/i => @{$methods{$meth}{$src}});
+            next unless @list;
+            $biconf{SOURCES}{$meth}{$src} = $list[0];
+        }
+    }
+
+    $biconf{DSET}{fname}     = $fname;
     @{$biconf{DSET}{cycles}} = &Utils::rmdups(@{$biconf{DSET}{cycles}});
 
     #  Process the MEMBER-KEYS field and clean up the strings

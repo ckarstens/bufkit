@@ -32,7 +32,7 @@ $cur_dir = "/local/ckarsten/bufkit/".$model."/scripts/".$model."/";
 $data_dir = "/local/ckarsten/bufkit/".$model."/scripts/".$model."/data/";
 $fname = "".$data_dir."".$filename."";
 $fname2 = "".$data_dir."".$filename2."";
-$url = "http://nomads.ncep.noaa.gov/pub/data/nccf/com/".$model."/prod/".$model.".".$stime."".$shour."/".$filename."";
+$url = "https://nomads.ncep.noaa.gov/pub/data/nccf/com/".$model."/prod/".$model.".".$stime."/".$shour."/".$filename."";
 //$url = "ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/";
 
 if($shour == "06" || $shour == "18"){
@@ -41,7 +41,6 @@ if($shour == "06" || $shour == "18"){
 else{
 	$model1 = "gfs";
 }
-
 
 // try to download tar ball containing bufr data to process
 // attemps every miniute for one hour
@@ -80,6 +79,13 @@ foreach($data as $line){
 	$sites[] = $d[3];
 }
 
+// rename gfs files, oy
+foreach($files as $f){
+	$e = explode(".",$f);
+	system("mv ".$data_dir.$f." ".$data_dir."bufr3.".$e[1].".".$e[2]);
+}
+
+$files = scandir($data_dir);
 
 // generate bufkit data
 // insert into ldm archives
@@ -92,6 +98,7 @@ for($i=2;$i<=$n;$i++){
 	system("perl /local/ckarsten/bufkit/".$model."/bufr_gruven.pl --nfs --dset ".$model2." --date ".$stime." --cycle ".$shour." --noascii --stations ".$site." --nozipit");
 	$filename = "/local/ckarsten/bufkit/".$model."/metdat/bufkit/gfs3_".strtolower($sites[$index]).".buf";
 	if(file_exists($filename)){
+		//system("python /local/ckarsten/bufkit/gfs/scripts/gfs/qpf_fixer.py ".$filename);
 		$cmd = "/local/ldm/bin/pqinsert -p 'bufkit ac ".$iem_date." bufkit/".$model1."/".$model2."_".strtolower($sites[$index]).".buf bufkit/".$shour."/".$model."/".$model2."_".strtolower($sites[$index]).".buf bogus' ".$filename."";
 		echo "".$cmd."\n";
 		system($cmd);

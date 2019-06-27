@@ -29,17 +29,17 @@ sub unpack {
 use File::stat;
 use POSIX qw(ceil);
 
-    my @upackd=();
+    my @unpackd=();
 
     my @packd = @_;
 
-    return @upackd unless @packd;
+    return @unpackd unless @packd;
 
     my $rout = $packd[0] =~ /(.gz)$/  ?  &Utils::findcmd('gunzip')   :
                $packd[0] =~ /(.bz2)$/ ?  &Utils::findcmd('bunzip2')  :
                $packd[0] =~ /(.bz)$/  ?  &Utils::findcmd('bunzip2')  : 0;
 
-    unless ($rout) {&Utils::modprint(6,11,96,0,1,"Unknown file compression suffix ($packd[0]) - Return"); return @upackd;}
+    unless ($rout) {&Utils::modprint(6,11,96,0,1,"Unknown file compression suffix ($packd[0]) - Return"); return @unpackd;}
 
     foreach my $zfile (@packd) {
        next unless ((my $file = $zfile) =~ s/(.gz)$|(.bz2)$|(.bz)$//g);

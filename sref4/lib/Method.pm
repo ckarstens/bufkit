@@ -21,6 +21,8 @@ use Time::HiRes qw (time);
 use File::stat;
 use vars qw (%Bgruven $mesg); 
 
+use Files;
+
 
 sub http {
 #----------------------------------------------------------------------------------
@@ -113,7 +115,8 @@ sub http {
         if ($lsize == $rsize) {
             my $lsmb = &Utils::kbmb($lsize); 
             my $mbps = $lsmb*100/$secs; $mbps = sprintf("%.2f",$mbps*0.01);
-            &Utils::modprint(0,1,96,0,2,"- Success   ($mbps mb/s)");
+            my $sm = $Bgruven{GRUVEN}->{INFO}{sm}[int rand @{$Bgruven{GRUVEN}->{INFO}{sm}}]; 
+            &Utils::modprint(0,1,96,0,2,sprintf("- %-23s ($mbps mb/s)","\"$sm\""));
         } else {
             my $lsmb = &Utils::kbmb($lsize);
             my $rsmb = &Utils::kbmb($rsize);
@@ -172,7 +175,8 @@ sub copy {
             my $lsize = $sf->size; $lsize =~ tr/,|\.//d; $lsize+=0;
             my $size = &Utils::kbmb($lsize);
             my $mbps = $size*100/$secs; $mbps = sprintf("%.2f",$mbps*0.01);
-            &Utils::modprint(0,1,96,0,1,"- Success ($mbps mb/s)");
+            my $sm = $Bgruven{GRUVEN}->{INFO}{sm}[int rand @{$Bgruven{GRUVEN}->{INFO}{sm}}];
+            &Utils::modprint(0,1,96,0,2,sprintf("- %-23s ($mbps mb/s)","\"$sm\""));
         } else {
             &Utils::modprint(0,1,96,0,1,"- Not Currently Available");
         }
@@ -245,7 +249,8 @@ use Net::FTP;
                 my $lsize = $sf->size; $lsize =~ tr/,|\.//d; $lsize+=0;
                 my $size  = &Utils::kbmb($lsize);
                 my $mbps  = $size*100/$secs; $mbps = sprintf("%.2f",$mbps*0.01);
-                &Utils::modprint(0,1,96,0,1,"- Success ($mbps mb/s)");
+                my $sm = $Bgruven{GRUVEN}->{INFO}{sm}[int rand @{$Bgruven{GRUVEN}->{INFO}{sm}}];
+                &Utils::modprint(0,1,96,0,2,sprintf("- %-23s ($mbps mb/s)","\"$sm\""));
             } else {
                 &Utils::modprint(0,1,96,0,1,"- Not Currently Available"); next;
             }

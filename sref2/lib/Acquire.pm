@@ -58,6 +58,8 @@ sub stations {
 
     &Utils::modprint(0,2,96,1,1,sprintf("%5s  Determining which BUFR files need to be acquired",shift @{$Bgruven{GRUVEN}->{INFO}{rn}}));
 
+    &Utils::modprint(1,11,114,1,1,"The \"--monolithic\" flag was passed. You're going for the whole kielbasa!") if $Bgruven{GRUVEN}->{OPTS}{mono};
+
     if (@{$Bgruven{PROCESS}->{STATIONS}{invld}}) {
         &Utils::modprint(6,9,104,1,0,sprintf("Hey, station %-5s is not in station list - $Bgruven{BINFO}->{DSET}{stntbl}",$_)) foreach @{$Bgruven{PROCESS}->{STATIONS}{invld}};
         &Utils::modprint(0,9,104,1,1,' ');
@@ -88,6 +90,13 @@ sub stations {
     #  a list that will be check against to determine whether ALL the files for a station
     #  and data set have been downloaded and processed previously. 
     #  
+
+    #  There is a problem when the --monolithic flag is passed in that when the BUFR file was 
+    #  downloaded previously, there is no way to know whether the stations requested represent
+    #  a new or old list. If old, then they may have been already processed into BUFKIT files
+    #  but that is an unknown at this point.  Regardless, the valid station loop below will
+    #  be executed for each station with the same locfil as the result.
+    #  
     my %n2p=();
     foreach my $stnm (sort { $a <=> $b } keys %{$Bgruven{PROCESS}->{STATIONS}{valid}}) {
         $n2p{$stnm}=0;
@@ -104,12 +113,17 @@ sub stations {
     #  downloaded and processed BUFR files for that station/data set will be scheduled
     #  for processing provided that any missing BUFR files are acquired.
     #
+
+    #  When processing a monolithic file it must be assumed that all the stations are new
+    #  and will handle whether to do any actual processing in the subroutines to follow.
+    #
     foreach my $mod (@{$Bgruven{BINFO}->{DSET}{members}{order}} ? @{$Bgruven{BINFO}->{DSET}{members}{order}} : @{$Bgruven{BINFO}->{DSET}{model}}) {
         foreach my $stnm (sort { $a <=> $b } keys %{$Bgruven{PROCESS}->{STATIONS}{valid}}) {
             my $locfil;
             for ($locfil = $Bgruven{BINFO}->{DSET}{locfil}) {s/STNM/$stnm/g; s/MOD|MEMBER/$mod/g; $_="$Bgruven{GRUVEN}->{DIRS}{bufdir}/$locfil";}
             &Utils::rm($locfil) if $Bgruven{GRUVEN}->{OPTS}{forced};
             $Bgruven{PROCESS}->{STATIONS}{acquire}{$mod}{$stnm} = $locfil unless -s $locfil;
+            $Bgruven{PROCESS}->{STATIONS}{process}{$mod}{$stnm} = $locfil if $Bgruven{GRUVEN}->{OPTS}{mono};
             $Bgruven{PROCESS}->{STATIONS}{process}{$mod}{$stnm} = $locfil if -s $locfil and ($Bgruven{GRUVEN}->{OPTS}{forcep} or $n2p{$stnm});
         }
     }
@@ -185,7 +199,7 @@ use Switch 'Perl6';      #  < Perl V5.10
 
             %{$Bgruven{PROCESS}->{STATIONS}{acquire}} = %missing;
             
-            unless (%missing) {&Utils::modprint(0,9,96,1,2,"It's a great day! All requested BUFR files have been downloaded"); return 1;}
+            unless (%missing) {&Utils::modprint(0,9,96,1,2,"All requested BUFR files have arrived safely. Let's do it again!"); return 1;}
         }
 
     }
@@ -205,8 +219,7 @@ use Switch 'Perl6';      #  < Perl V5.10
 #   foreach my $mod (sort keys %{$Bgruven{PROCESS}->{STATIONS}{process}}) {
 #       foreach my $stn (&Utils::rmdups(@missmbrs)) {delete $Bgruven{PROCESS}->{STATIONS}{process}{$mod}{$stn} if exists $Bgruven{PROCESS}->{STATIONS}{process}{$mod}{$stn};}
 #   }
-
-    &Utils::modprint(0,9,96,1,2,"Missed few BUFR files this time. Next time I'll do a better job!");
+    &Utils::modprint(0,9,96,1,2,"Missed a few BUFR files this time. I'll do a better job next time!");
 
 return 1;
 }

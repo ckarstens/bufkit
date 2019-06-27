@@ -102,6 +102,22 @@ sub bufr2gem {
     my %bufrs = %{$Bgruven{PROCESS}->{STATIONS}{process}}; return (\@gemfls, \@ascfls) unless %bufrs;
 
 
+    #  If the --monolithic flag was passed, then this is where the logic becomes difficult because the 
+    #  GEMPAK files do not need to be recreated if the BUFR file was downloaded and processed previously. 
+    #  All the BUFR information already exists in the GEMPAK file. However, the names of the GEMPAK files 
+    #  are needed for processing into BUFKIT and those are obtained below so we must to through part of 
+    #  the GEMPAK conversion. Also, the monolithic BUFR file needs only to be processed once and not 
+    #  multiple times as for the individual files.
+    #
+    if ($Bgruven{GRUVEN}->{OPTS}{mono}) { 
+       my %mono=();
+       foreach my $mod (keys %bufrs) {foreach my $stn (keys %{$bufrs{$mod}}) {$mono{$mod}{mono} = $bufrs{$mod}{$stn};}}
+       %bufrs = %mono;
+#      print "BUFRS: ",keys %bufrs,"\n";
+#      exit;
+    }
+    
+
     &Utils::modprint(0,2,96,1,1,sprintf("%5s  Creating GEMPAK sounding files from BUFR files",shift @{$Bgruven{GRUVEN}->{INFO}{rn}}));
 
 
@@ -118,7 +134,12 @@ sub bufr2gem {
     
     #  Did the use want ascii profiles genarted?
     #
-    my $ascii = $Bgruven{NOASCII} ? 0 : @{$Bgruven{BINFO}->{EXPORT}{ASCII}} ? 1 : 1;
+    my $ascii = $Bgruven{NOASCII} ? 0 : @{$Bgruven{BINFO}->{EXPORT}{ASCII}} ? 1 : 1; 
+
+
+    # Turn off Ascii file creation with monolithic BUFR files
+    #
+    $ascii = 0 if $Bgruven{GRUVEN}->{OPTS}{mono};
     
 
     #  Get the list of placeholders for the filenames
@@ -168,31 +189,52 @@ sub bufr2gem {
         my $gemsnd    = 'YYYYMMDDCC_MOD_bufr.snd';      #  Define the GEMPAK sounding filename
 
 
-        #  Get the model family from the model name as this will be used
-        #  to identify the packing files to use.
-        #
-        my ($mf, $me) = split /_/, $mod, 2;
-
-        if ($pf ne $mf) {
-            my $str = join ' ' => @mbrs; @mbrs=(); &Utils::modprint(0,1,144,0,0,"Completed ($str)") if $pf;
-            &Utils::modprint(1,11,144,1,0,sprintf("Creating GEMPAK files for the %-5s %s",$mf,$ens ? 'ensemble members - ' : 'data set - '));
-        }
-        $pf = $mf;
-
         #  Populate the date, time, and model placeholders in LOCFIL
         #
         for ($gemsfc, $gemsnd, $gemaux) {$_ = &Utils::fillit($_,@phs); $_ = "$Bgruven{GRUVEN}->{DIRS}{gemdir}/$_";}
 
+
+        #  If processing a monolithic BUFR file then check whether the GEMPAK already exists, which 
+        #  indicates that the file was processed previously and thus does not need to be processed again. 
+        #  The exception is when the --forcep flag is passed.
+        #
+        if ($Bgruven{GRUVEN}->{OPTS}{mono}) {
+            for ($gemsfc, $gemsnd, $gemaux) {push @gemfls => $_ if -s $_;}
+
+            $Bgruven{GRUVEN}->{OPTS}{forcep} = 1 if $Bgruven{GRUVEN}->{OPTS}{forced};
+
+            if (@gemfls == 3 and ! $Bgruven{GRUVEN}->{OPTS}{forcep}) {
+                &Utils::modprint(1,11,144,1,1,sprintf("It appears the BUFR file has already been processed. Very well then, moving on."));
+                return (\@gemfls, \@ascfls);
+            } else {
+                for ($gemsfc, $gemsnd, $gemaux) {&Utils::rm($_);}
+                @gemfls=();
+            }
+        }
+
+                
+        #  Get the model family from the model name as this will be used to identify the packing files to use.
+        #  This could be a problem should the underscore not be included in the name.
+        #
+        my ($mf, $me) = split /_/, $mod, 2;  $me = $mf unless $me;
+
+        if ($pf ne $mf) {
+            my $str = join ' ' => @mbrs; @mbrs=(); &Utils::modprint(0,1,144,0,0,"Completed ($str)") if $pf;
+            &Utils::modprint(1,11,144,1,0,sprintf("Creating GEMPAK files for the %-8s %s",$mf,$ens ? 'ensemble members - ' : 'data set - '));
+        }
+        $pf = $mf;
+
+
         if ($Bgruven{GRUVEN}->{OPTS}{debug}) {
-      #     &Utils::modprint(1,5,144,2,1,"GEMPAK Sounding File   : $gemsnd");
-      #     &Utils::modprint(1,5,144,2,1,"GEMPAK Surface  File   : $gemsfc");
-      #     &Utils::modprint(1,5,144,2,1,"GEMPAK Aux Surface File: $gemaux") if $Bgruven{BINFO}->{GEMPAK}{packaux};
+#           &Utils::modprint(1,5,144,1,0,"GEMPAK Sounding File   : $gemsnd");
+#           &Utils::modprint(1,5,144,1,0,"GEMPAK Surface  File   : $gemsfc");
+#           &Utils::modprint(1,5,144,1,1,"GEMPAK Aux Surface File: $gemaux") if $Bgruven{BINFO}->{GEMPAK}{packaux};
         }
 
 
         while (my ($stnm,$bufr) = each %{$bufrs{$mod}}) {
 
-            my $stid = lc substr $Bgruven{PROCESS}->{STATIONS}{table}{numtoid}{$stnm},1,3;
+            my $stid = $ascii ? lc substr $Bgruven{PROCESS}->{STATIONS}{table}{numtoid}{$stnm},1,3 : 'none' ;
  
             my $log = "$Bgruven{GRUVEN}->{DIRS}{logs}/gempak_namsnd.log"; &Utils::rm($log);
             &Utils::rm($_) for ("prof.$stid", 'namsnd.in', 'gemglb.nts', 'last.nts');
@@ -200,10 +242,28 @@ sub bufr2gem {
         
             #  Write the necessary information to the namsnd.in file
             #
-            unless (open (GEMFILE,">namsnd.in")) {&Utils::modprint(6,5,96,1,1,"You're not bufrgruven in bufr2gem - Unable to open namsnd.in for writing!"); return (\@gemfls, \@ascfls);}
+            unless (open (GEMFILE,">namsnd.in")) {&Utils::modprint(6,5,96,1,1,"You're not BUFRgruven in bufr2gem - Unable to open namsnd.in for writing!"); return (\@gemfls, \@ascfls);}
 
             (my $snpack = $Bgruven{BINFO}->{GEMPAK}{snpack}) =~ s/SREF/$mf/g;
             (my $sfpack = $Bgruven{BINFO}->{GEMPAK}{sfpack}) =~ s/SREF/$mf/g;
+
+            unless (-e "$ENV{GEMTBL}/pack/$snpack" and -e "$ENV{GEMTBL}/pack/$sfpack") {
+                $mesg = "You will have to locate the whereabouts of the necessary GEMPAK packing files for this data set, because I simply ".
+                        "can not continue without them.  In case you are wondering they look like:\n\n".
+                        
+                        "    $ENV{GEMTBL}/pack/$snpack\n".
+                        "And\n".         
+                        "    $ENV{GEMTBL}/pack/$sfpack\n".
+                        "And\n".
+                        "    $ENV{GEMTBL}/pack/${sfpack}_aux\n\n".
+
+                        "And don't run me again until your little problem is addressed!";
+
+                &Utils::modprint(6,11,114,2,2,"Missing GEMPAK packing files",$mesg);
+
+                @gemfls=(); @ascfls=();
+                return (\@gemfls, \@ascfls);
+            }
 
             print GEMFILE "SNOUTF = $gemsnd\n",
                           "SNPRMF = $ENV{GEMTBL}/pack/$snpack\n",
@@ -276,7 +336,6 @@ sub bufr2gem {
     my $str = join ' ' => @mbrs;
     &Utils::modprint(0,1,144,0,0,sprintf("%s", $ens ? "Completed ($str)" : "Completed"));
     &Utils::modprint(0,9,96,2,2,"Processing of BUFR files to GEMPAK completed");
-
 
 return (\@gemfls, \@ascfls);
 }
@@ -386,8 +445,8 @@ sub gem2bfkt {
         my @stnms   = keys %{$Bgruven{PROCESS}->{STATIONS}{process}{$mod}};
         $nstns   = @stnms;  #  Override configuration file value
 
-            my $bfkf  = $bufkit;  
-            my $bfkfp = $bufkitp;
+        my $bfkf  = $bufkit;  
+        my $bfkfp = $bufkitp;
 
         #  Populate the date, time, and model placeholders in LOCFIL
         #

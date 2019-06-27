@@ -233,10 +233,9 @@ sub findcmd {
 #----------------------------------------------------------------------------------
 #
     my $rutil = shift;
-
     my $util = `whereis $rutil`; my @utils = split / / => $util;
 
-    return $utils[1] if $utils[1] and -X $utils[1];
+    return $utils[1] if $utils[1] and -X chomp($utils[1]);
 
     $rutil = -e "/usr/bin/$rutil" ? "/usr/bin/$rutil" : -e "/bin/$rutil" ? "/bin/$rutil" : 0 unless -X $rutil;
 

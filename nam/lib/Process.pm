@@ -139,13 +139,13 @@ sub bufr2gem {
   
     my $exe = "$ENV{GEMEXE}/namsnd";
     # Now check for missing system libraries.
-    #
-    my @libs = &Utils::cklib($exe);
-    if (@libs) {
-        &Utils::modprint(6,11,144,1,1,"Missing System Libraries","You are missing necessary system libraries required for BUFR file processing:");
-        &Utils::modprint(1,26,144,1,0,$_) foreach @libs;
-        return (\@gemfls, \@ascfls)
-    }
+    # daryl,woof
+    #my @libs = &Utils::cklib($exe);
+    #if (@libs) {
+    #    &Utils::modprint(6,11,144,1,1,"Missing System Libraries","You are missing necessary system libraries required for BUFR file processing:");
+    #    &Utils::modprint(1,26,144,1,0,$_) foreach @libs;
+    #    return (\@gemfls, \@ascfls)
+    #}
 
 
     #  Create a work directory for creating all the GEMPAK files
@@ -351,13 +351,13 @@ sub gem2bfkt {
     #  Go through the GEMPAK routines used during this process and make sure the
     #  necessary libraries are on the system.
     #
-    my @libs=();
-    foreach my $bin ('snlist','sfcfil','sfedit','sflist') {@libs = (@libs, &Utils::cklib("$gembin/$bin"));}
-    if (@libs) {
-        &Utils::modprint(6,9,144,1,1,"Missing System Libraries","You are missing necessary system libraries required for bufkit file processing:");
-        &Utils::modprint(1,26,144,1,0,$_) foreach @libs;
-        return \@bufkits;
-    }
+    #my @libs=();
+    #foreach my $bin ('snlist','sfcfil','sfedit','sflist') {@libs = (@libs, &Utils::cklib("$gembin/$bin"));}
+    #if (@libs) {
+    #    &Utils::modprint(6,9,144,1,1,"Missing System Libraries","You are missing necessary system libraries required for bufkit file processing:");
+    #    &Utils::modprint(1,26,144,1,0,$_) foreach @libs;
+    #    return \@bufkits;
+    #}
 
 
     #  Create the working directory

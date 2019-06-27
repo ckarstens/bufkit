@@ -59,7 +59,9 @@ while ( $myStation ne "exit" ) {
 #  $myFile = "z://data/"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "./"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "//lan/bufkit_data/"."$myModel"."_"."$myStation".".buf";
+#  $myFile = "/local/ckarsten/bufkit/modsnd/metdat/nam/"."$myModel"."_"."$myStation".".buf";
   $myFile = "/local/ckarsten/bufkit/gfs/metdat/bufkit_temp/"."$myModel"."_"."$myStation".".buf";
+#  $myFile = "/local/ckarsten/bufkit/gfs/cobb/data/"."$myModel"."_"."$myStation".".buf";
   open(BUFIN,$myFile) or goto GETSTATION ; 
     if     ($myModel eq "eta" or $myModel eq "etam" or $myModel eq "etaw" or $myModel eq "nam" or $myModel eq "nmm" or $myModel eq "arw" or $myModel eq "ruc") { ReadEtaBufkit() }
      elsif ($myModel eq "gfs3" )                     { ReadGFSBufkit() }

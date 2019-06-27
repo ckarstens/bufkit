@@ -21,10 +21,11 @@
 #                                                                     #
 #  Log:                                                               #
 #                                                                     #
-#  R.Rozumalski : August 2011  - "B Gruven" Release                   #
-#                 October 2011 - Updated NAM tables & Switch patch    #
-#                 November 2011- Added NAM 4km nest data              #
-#                                Thanks to Scott Stephens             #
+#  R.Rozumalski : August 2011  -   "B Gruven" Release                 #
+#                 October 2011 -   Updated NAM tables & Switch patch  #
+#                 November 2011-   Added NAM 4km nest data            #
+#                                  Thanks to Scott Stephens           #
+#                 September 2012 - SREF Update                        #
 #                                                                     #
 #######################################################################
 #
@@ -51,7 +52,7 @@ use Moveit;
     $ENV{BUFRERR}  = 0;
     $ENV{BGRUVEN}  = $Bgruven{HOME};
     $Bgruven{EXE}  = &Utils::popit($0);
-    $Bgruven{VER}  = "12.1.1 - B Gruven in the New Year Release";
+    $Bgruven{VER}  = "12.8.1 - B Gruven in School Release";
 
     #  Override interrupt handler - Use the local one since some of the local
     #  environment variables are needed for clean-up after the interrupt.
