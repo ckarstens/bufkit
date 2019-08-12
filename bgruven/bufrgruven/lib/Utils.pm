@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Utils;
@@ -284,6 +284,7 @@ sub findcmd {
 return $rutil;
 }
 
+
 sub kbmb {
 #----------------------------------------------------------------------------------
 #    Returns the size of a file in mb
@@ -404,7 +405,13 @@ sub prnt_brec {
             }
         }
        
-        if (/http/i) {
+        if (/https/i) {
+            while (my ($key, $value) = each %{$brec->htpservers}) {
+                &modprint(0,6,144,0,1,sprintf("HTTPS SERVER     : %-6s %s",$key,$value));
+            }
+        }
+
+        if (/http$/i) {
             while (my ($key, $value) = each %{$brec->htpservers}) {
                 &modprint(0,6,144,0,1,sprintf("HTTP SERVER      : %-6s %s",$key,$value));
             }

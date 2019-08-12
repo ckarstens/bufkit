@@ -1,5 +1,76 @@
 #---------------------------------------------------------------------------------------------
 #
+  12 June 2019 - The FV3 Update release
+
+  *  Added fix for VVEL introduced with the FV3GFS going operational on 12 June 2019
+
+     No change is needed for users processing "GFS" data. Update allows for processing of
+	 pre-FV3GFS version of the GFS BUFR files, which include OMEG, without any intervention 
+	 by the user.
+
+	 Just Bgruven!
+
+#---------------------------------------------------------------------------------------------
+#
+  10 December 2018 - The HTTPS-VVEL-HRWAK Release - Final Take
+
+   *  Implemented workaround for certificate requirement on NCEP servers. This requirement 
+      may be in error and to be corrected soon, but a fix for the issue was added anyway.
+
+#---------------------------------------------------------------------------------------------
+#
+
+   8 December 2018 - The HTTPS-VVEL-HRWAK Release - Take Deux
+
+   *  Recompiled namsnd on a Centos 6 system to be compatible with systems running
+      GNU C Library release version 2.12 or later.
+  
+      The previous version of namsnd is included under gempak/bin/namsnd.rh5. If all
+      else fails and updating your OS is not an option, you can rename namsnd.rh5 to
+      namsnd, but you not have the OMEG values in the FV3 files (all 0's).
+      
+
+#---------------------------------------------------------------------------------------------
+#
+   7 December 2018 - The HTTPS-VVEL-HRWAK Release
+
+   *  Added support for HTTPS downloads of BUFR files from the suite of NCEP servers
+
+   *  Removed support for HTTP downloads of BUFR files from the suite of NCEP servers
+
+   *  Modified and recompiled BUFR unpacking routines to support the vertical 
+      velocity fields (VVEL) from the FV3 BUFR files. All other BUFR datasets contain
+      OMEG, but this was not good enough for the FV3, nooo!  Now VVEL is converted
+      to OMEG for viewing in BUFKIT.
+
+      Note:  The VVEL->OMEG magic is not available when running a i686 system (32-bit)
+
+   *  Changed the name of the "fv3gfs(x)" dataset to fv3(x) because nobody will get 
+      confused except those who fail to read this guidance.
+
+   *  Added support for the hires runs of the Alaska ARW & NMM, which required me to 
+      place files sent to me by Jay Smith (Thanks Jay!) in the conf/ directory.
+
+   *  Fixed a bug in the system curl call.
+
+   *  Added routines to convert the curl/wget return code from a integer value to a
+      description that you still will not understand.
+
+   Special Note:  The GFS & FV3 BUFR files are hourly through hour 121, then 3-hourly
+                  through hour 181.  The default is to unpack the first 121 hours
+                  for BUFKIT. I believe that BUFKIT can now handle the irregular 
+                  temporal frequency of the GFS & FV3 files (Thanks Ed!), so if you
+                  want the whole kielbasa, change:
+
+                    TIMSTN  = 121/2000   (Current default)
+                  To
+                    TIMSTN  = 141/2000   (Whole kielbasa)
+
+                  In conf/fv3_bufrinfo.conf and gfs_bufrinfo.conf
+
+
+#---------------------------------------------------------------------------------------------
+#
   25 July 2018 - Still "Your HRRR Cup Runneth Over" Release
 
    *  Fixed the path on a remote server for the HRRR BUFR files

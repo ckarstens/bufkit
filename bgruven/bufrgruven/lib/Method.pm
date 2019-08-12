@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Method;
@@ -93,20 +93,25 @@ sub http {
         my $secs = time();
         my $log  = "$Bgruven{GRUVEN}->{DIRS}{logs}/download_http.log.$$";
 
+
         system($rhttp{wget} ? "$rhttp{wget} -a $log -L -nv --connect-timeout=30 --read-timeout=1200 -t 3 -O $lfile http://$host$rfile" :
-                              "curl -C -s -f --connect-timeout 30 --max-time 1200  http://$host$rfile -o $lfile >& $log"); my $status = $?;
-        
-        &Love::int_handle if $status == 2;
+                              "$rhttp{curl} -s -f --connect-timeout 30 --max-time 1200  http://$host$rfile -o $lfile >& $log");
+
+        my $status = $? >> 8; &Love::int_handle if $status == 2;
 
         $secs = time() - $secs; $secs = 0.5 unless $secs;
 
         if ($status or ! -e $lfile) {
+            my $reason    = $rhttp{wget} ? &WgetExitCodes($status) : &CurlExitCodes($status);
+            $status       = "$status, $reason" if $reason;
             $ENV{VERBOSE} = 1;
-            &Utils::modprint(0,1,96,0,2,"- Failed for some unknown reason ($status)","Problem with remote host or local file system?");
+            &Utils::modprint(0,1,96,0,2,"- Failed ($status)");
+            &Utils::modprint(0,16,256,0,2,'Problem with remote host or local file system?') unless $reason;
             system "cat $log >> $Bgruven{GRUVEN}->{DIRS}{logs}/failed_download_http.log";
             &Utils::rm($lfile); next;
         }
         &Utils::rm($log);
+
 
         #  The file exists so interrogate it
         #
@@ -135,6 +140,123 @@ sub http {
     
 return @afiles;
 }
+
+
+sub https {
+#----------------------------------------------------------------------------------
+#  This routine download the requested files to the local system via https.
+#  If necessary, the files will be unpacked and a list of downloaded files
+#  is returned that can be compared to that requested. In the event of a
+#  problem an empty list will be returned.
+#----------------------------------------------------------------------------------
+#
+%Bgruven = %Acquire::Bgruven;
+
+    my @afiles=();
+
+    my ($host, %files) = @_;
+
+    my $ver = $ENV{VERBOSE};
+
+    #  Locate the curl and wget commands
+    #
+    my %rhttp = ();
+    my @routs = qw(curl wget);
+    foreach my $rout (@routs) {$rhttp{$rout} = &Utils::findcmd($rout);}
+
+    unless ($rhttp{curl} or $rhttp{wget}) {
+        $mesg = "Could not find either \"curl\" or \"wget\" routines on your system, which are required to ".
+                "download files via https. Since these routines are available with most Linux distributions ".
+                "it is likely that were left out during the OS install."; $ENV{VERBOSE} = 1;
+        &Utils::modprint(3,11,96,2,1,$mesg);
+        $ENV{VERBOSE} = $ver;
+        return;
+    }
+
+    &Utils::modprint(0,11,96,1,2,"Initiating HTTPS connection to $host");
+
+
+    for my $lfile (sort keys %files) {
+
+        my $rfile = $files{$lfile};
+        my $ufile = $lfile;  # Unpacked filename in case file is compressed on remote server
+        my $rsize = 0;
+
+        #  Before continuing, we need to address the condition where the files on the remote
+        #  system and packed, as indicated by a ".bz2", ".gz", or ".bz" extention. If the
+        #  user wants them unpacked on the local side then the LOCFIL entry will have the
+        #  suffix removed; however, the suffix must be added temporarily to the local
+        #  file before the unpacking can occur.
+        #
+        if ($rfile =~ /(.gz)$|(.bz2)$|(.bz)$/) {
+            $lfile = "$lfile\.gz"  if $rfile =~ /(.gz)$/;
+            $lfile = "$lfile\.bz"  if $rfile =~ /(.bz)$/;
+            $lfile = "$lfile\.bz2" if $rfile =~ /(.bz2)$/;
+        }
+
+        &Utils::modprint(5,13,256,0,0,sprintf ("Checking if available %s ",$rfile));
+
+        #  Try next file if not available
+        #
+        unless ($rsize = &available('https',$host,$rfile)) {&Utils::modprint(0,1,96,0,1,"- Not currently available"); next;}
+
+        #  Continue if available
+        #
+        &Utils::modprint(0,1,96,0,1,sprintf("- Available (%s mb)",&Utils::kbmb($rsize)));
+
+        &Utils::modprint(5,13,256,0,0,sprintf ("Attempting to acquire %s ",$rfile));
+
+        my $secs = time();
+        my $log  = "$Bgruven{GRUVEN}->{DIRS}{logs}/download_https.log.$$";
+
+        system($rhttp{wget} ? "$rhttp{wget} -a $log --no-check-certificate -L -nv --connect-timeout=30 --read-timeout=1200 -t 3 -O $lfile https://$host$rfile" :
+                              "$rhttp{curl} -s -f -k --connect-timeout 30 --max-time 1200  https://$host$rfile -o $lfile >& $log");
+
+        my $status = $? >> 8; &Love::int_handle if $status == 2;
+
+        $secs = time() - $secs; $secs = 0.5 unless $secs;
+
+        if ($status or ! -e $lfile) {
+            my $reason    = $rhttp{wget} ? &WgetExitCodes($status) : &CurlExitCodes($status);
+            $status       = "$status, $reason" if $reason;
+            $ENV{VERBOSE} = 1;
+            &Utils::modprint(0,1,96,0,2,"- Failed ($status)");
+            &Utils::modprint(0,16,256,0,2,'Problem with remote host or local file system?') unless $reason;
+            system "cat $log >> $Bgruven{GRUVEN}->{DIRS}{logs}/failed_download_https.log";
+            &Utils::rm($lfile); next;
+        }
+        &Utils::rm($log);
+
+
+        #  The file exists so interrogate it
+        #
+        my $sf = stat($lfile);
+        my $lsize = $sf->size; $lsize =~ tr/,|\.//d; $lsize+=0;
+
+        unless ($lsize) { 
+            &Utils::modprint(0,1,96,0,2,"- Zero Byte File", "File size on local system is zero bytes. Problem with remote host or local file system?");
+            &Utils::rm($lfile); next;
+        }
+
+        if ($lsize == $rsize) {
+            my $lsmb = &Utils::kbmb($lsize);
+            my $mbps = $lsmb*100/$secs; $mbps = sprintf("%.2f",$mbps*0.01);
+            my $sm = $Bgruven{GRUVEN}->{INFO}{sm}[int rand @{$Bgruven{GRUVEN}->{INFO}{sm}}];
+            &Utils::modprint(0,1,96,0,2,sprintf("- %-23s ($mbps mb/s)","\"$sm\""));
+        } else {
+            my $lsmb = &Utils::kbmb($lsize);
+            my $rsmb = &Utils::kbmb($rsize);
+            &Utils::modprint(0,1,96,0,2,"- Size mismatch - $rsmb mb (remote) Vs. $lsmb mb (local)");
+            &Utils::rm($lfile); next;
+        }
+
+        ($lfile ne $ufile) ? push @afiles => &Files::unpack($lfile) : push @afiles => $ufile;
+    }
+
+return @afiles;
+}
+
+
 
 
 sub copy {
@@ -313,8 +435,11 @@ sub available {
         #
         my $copts = "--connect-timeout $tv -sI";
 
-
-        system($rhttp{wget} ? "$rhttp{wget} -o $log $wopts  http://$host$file" : "$rhttp{curl} -o $log $copts  http://$host$file");
+        if ($meth =~ /https/i) {
+            system($rhttp{wget} ? "$rhttp{wget} -o $log --no-check-certificate $wopts  https://$host$file" : "$rhttp{curl} -o $log -k $copts https://$host$file");
+        } else {
+            system($rhttp{wget} ? "$rhttp{wget} -o $log $wopts  http://$host$file" : "$rhttp{curl} -o $log $copts  http://$host$file");
+        }
 
         if (-s $log) {open OF => $log; while (<OF>) {@size = split ' ', $_ if s/Content-Length:|Length://i;} close OF;}
 
@@ -635,4 +760,112 @@ use if defined eval{require Time::HiRes;} >0,  "Time::HiRes" => qw(time);
 
 return;
 }
+
+
+sub WgetExitCodes {
+#=================================================================================
+#  Initialize an array of Standard wget exit codes. This routine is only
+#  for information purposes and should not be called unless wget returns
+#  a non-zero value, so ignore the $_ == 0 condition.
+#=================================================================================
+#
+    my $mesg = 'Unknown Cause';
+
+    for (shift) {
+
+       $mesg = ''                    if $_ == 0;
+       $mesg = 'General Error'       if $_ == 1;
+       $mesg = 'Parse error'         if $_ == 2;
+       $mesg = 'File I/O Error'      if $_ == 3;
+       $mesg = 'Network Failure'     if $_ == 4;
+       $mesg = 'SSL verification failure' if $_ == 5;
+       $mesg = 'Username/password authentication failure' if $_ == 6;
+       $mesg = 'Protocol Errors'     if $_ == 7;
+       $mesg = 'Server-issued Error' if $_ == 8;
+
+    }
+
+return $mesg;
+}  #  WgetExitCodes
+
+
+sub CurlExitCodes {
+#=================================================================================
+# Initialize an array of Standard Curl exit codes. This routine is only
+# for information purposes and should not be called unless Curl returns
+# a non-zero value, so ignore the $_ == 0 condition.
+#=================================================================================
+#
+    my $mesg = 'Unknown Error';
+
+    for (shift) {
+
+        if (/^0$/)  {$mesg =  '';}
+        if (/^1$/)  {$mesg =  'Unsupported protocol';}
+        if (/^2$/)  {$mesg =  'Failed to initialize';}                                                              
+        if (/^3$/)  {$mesg =  'URL format problem. The syntax was not correct';}                                    
+        if (/^4$/)  {$mesg =  'URL user format error';}                                                             
+        if (/^5$/)  {$mesg =  'Could not resolve proxy';}                                                           
+        if (/^6$/)  {$mesg =  'Could not resolve host';}                                                            
+        if (/^7$/)  {$mesg =  'Failed to connect to host';}                                                         
+        if (/^8$/)  {$mesg =  'FTP weird server reply';}                                                            
+        if (/^9$/)  {$mesg =  'FTP access denied';}                                                                 
+        if (/^10$/) {$mesg =  'FTP user/password incorrect';}                                                       
+        if (/^11$/) {$mesg =  'FTP weird PASS reply';}                                                              
+        if (/^12$/) {$mesg =  'FTP weird USER reply';}                                                              
+        if (/^13$/) {$mesg =  'FTP weird PASV reply';}                                                              
+        if (/^14$/) {$mesg =  'FTP weird line 227 format';}                                                         
+        if (/^15$/) {$mesg =  'FTP can not get host IP';}                                                           
+        if (/^16$/) {$mesg =  'FTP can not reconnect';}                                                             
+        if (/^17$/) {$mesg =  'FTP could not set binary';}                                                          
+        if (/^18$/) {$mesg =  'Only a part of the file was transfered';}                                            
+        if (/^19$/) {$mesg =  'FTP could not download/access the given file';}                                      
+        if (/^20$/) {$mesg =  'FTP write error';}                                                                   
+        if (/^21$/) {$mesg =  'FTP quote error';}                                                                   
+        if (/^22$/) {$mesg =  'Requested file was not found';}                                                      
+        if (/^23$/) {$mesg =  'Local write error';}                                                                 
+        if (/^24$/) {$mesg =  'User name badly specified';}                                                         
+        if (/^25$/) {$mesg =  'FTP could not STOR file';}                                                           
+        if (/^26$/) {$mesg =  'Read error';}                                                                        
+        if (/^27$/) {$mesg =  'Out of memory';}                                                                     
+        if (/^28$/) {$mesg =  'Operation timeout';}                                                                 
+        if (/^29$/) {$mesg =  'FTP could not set ASCII';}                                                           
+        if (/^30$/) {$mesg =  'FTP PORT failed';}                                                                   
+        if (/^31$/) {$mesg =  'FTP could not use REST';}                                                            
+        if (/^32$/) {$mesg =  'FTP could not use SIZE';}                                                            
+        if (/^33$/) {$mesg =  'HTTP range error';}
+        if (/^34$/) {$mesg =  'HTTP post error';}
+        if (/^35$/) {$mesg =  'SSL handshaking failed';}
+        if (/^36$/) {$mesg =  'FTP bad download resume';}
+        if (/^37$/) {$mesg =  'FILE could not read file. Permissions?';}
+        if (/^38$/) {$mesg =  'LDAP bind operation failed';}
+        if (/^39$/) {$mesg =  'LDAP search failed';}
+        if (/^40$/) {$mesg =  'The LDAP library was not found';}
+        if (/^41$/) {$mesg =  'A required LDAP function was not found';}
+        if (/^42$/) {$mesg =  'An application told curl to abort the operation';}
+        if (/^43$/) {$mesg =  'A function was called with a bad parameter';}
+        if (/^44$/) {$mesg =  'A function was called in a bad order';}
+        if (/^45$/) {$mesg =  'A specified outgoing interface could not be used';}
+        if (/^46$/) {$mesg =  'Bad password entered';}
+        if (/^47$/) {$mesg =  'Too many redirects';}
+        if (/^48$/) {$mesg =  'Unknown TELNET option specified';}
+        if (/^49$/) {$mesg =  'Malformed telnet option';}
+        if (/^52$/) {$mesg =  'The server did not reply anything';}
+        if (/^53$/) {$mesg =  'SSL crypto engine not found';}
+        if (/^54$/) {$mesg =  'Cannot set SSL crypto engine as default';}
+        if (/^55$/) {$mesg =  'Failed sending network data';}
+        if (/^56$/) {$mesg =  'Failure in receiving network data';}
+        if (/^57$/) {$mesg =  'Share is in use (internal error)';}
+        if (/^58$/) {$mesg =  'Problem with the local certificate';}
+        if (/^59$/) {$mesg =  'could not use specified SSL cipher';}
+        if (/^60$/) {$mesg =  'Problem with the CA cert (permission?)';}
+        if (/^61$/) {$mesg =  'Unrecognized transfer encoding';}
+        if (/^62$/) {$mesg =  'Invalid LDAP URL';}
+        if (/^63$/) {$mesg =  'Maximum file size exceeded';}
+    }
+
+
+return $mesg;
+} #  CurlExitCodes
+
 

@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Time;
