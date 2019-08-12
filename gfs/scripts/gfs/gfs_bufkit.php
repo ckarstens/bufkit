@@ -12,7 +12,7 @@ putenv("TZ=UTC");
 
 if(isset($argv)){
 	for($c=1;$c<count($argv);$c++){
-        	$it = split("=",$argv[$c]);
+        	$it = explode("=",$argv[$c]);
         	$_GET[$it[0]] = $it[1];
      	}
 }
@@ -74,7 +74,7 @@ $numbers = array();
 $link = "/local/ckarsten/bufkit/gfs/stations/gfs3_bufrstations.txt";
 $data = file($link);
 foreach($data as $line){
-	$d = explode(" ", trim(ereg_replace( ' +', ' ', $line)));
+	$d = explode(" ", trim(preg_replace( '/ +/', ' ', $line)));
 	$numbers[] = $d[0];
 	$sites[] = $d[3];
 }
@@ -95,14 +95,16 @@ for($i=2;$i<=$n;$i++){
 	$site = $s[1];
 	$index = array_search($site,$numbers);
 	echo "Processing: ".$site.", ".strtolower($sites[$index])."\n";
-	system("perl /local/ckarsten/bufkit/".$model."/bufr_gruven.pl --nfs --dset ".$model2." --date ".$stime." --cycle ".$shour." --noascii --stations ".$site." --nozipit");
+	system("perl /local/ckarsten/bufkit/".$model."/bufr_gruven.pl --nfs --dset ".$model." --date ".$stime." --cycle ".$shour." --noascii --stations ".$site." --nozipit");
 	$filename = "/local/ckarsten/bufkit/".$model."/metdat/bufkit/gfs3_".strtolower($sites[$index]).".buf";
 	if(file_exists($filename)){
 		//system("python /local/ckarsten/bufkit/gfs/scripts/gfs/qpf_fixer.py ".$filename);
 		$cmd = "/local/ldm/bin/pqinsert -p 'bufkit ac ".$iem_date." bufkit/".$model1."/".$model2."_".strtolower($sites[$index]).".buf bufkit/".$shour."/".$model."/".$model2."_".strtolower($sites[$index]).".buf bogus' ".$filename."";
 		echo "".$cmd."\n";
 		system($cmd);
-        }
+	} else {
+		echo "File: $filename does not exist";
+	}
 	
 	// the following block of code is needed, otherwise data processing will terminate after about 60 or 70 files are processed.
 	// I believe there is memory leakage occuring.
