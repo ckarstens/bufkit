@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Acquire;
@@ -183,9 +183,10 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
             #  Attempt to aquire the BUFR files
             #
             if (%bufrs) {
-                &Method::http($host,%bufrs) if $meth =~ /http/i;
-                &Method::copy($host,%bufrs) if $meth =~ /nfs/i;
-                &Method::ftp($host,%bufrs)  if $meth =~ /ftp/i;
+                &Method::https($host,%bufrs) if $meth =~ /https$/i;
+                &Method::http($host,%bufrs)  if $meth =~ /http$/i;
+                &Method::copy($host,%bufrs)  if $meth =~ /nfs/i;
+                &Method::ftp($host,%bufrs)   if $meth =~ /ftp/i;
             }
 
 

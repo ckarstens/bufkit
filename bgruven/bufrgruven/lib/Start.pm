@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Start;
@@ -194,10 +194,10 @@ use Getopt::Long qw(:config pass_through);
 
     #  Need to keep track of the requested methods of file acquisition
     #
-    my @methods = qw(http ftp nfs);
+    my @methods = qw(https http ftp nfs);
     foreach my $m (@methods) {push @{$gopts{methods}} => $m if grep /$m/i, @ARGV;}
     @{$gopts{methods}} = &Utils::rmdups(@{$gopts{methods}});
-    @{$gopts{methods}} = qw(http ftp) unless @{$gopts{methods}};
+    @{$gopts{methods}} = qw(https http ftp) unless @{$gopts{methods}};
 
 
     #  Address the options passed
@@ -220,6 +220,7 @@ use Getopt::Long qw(:config pass_through);
                  "ftp:s"          => \$option{FTP},
                  "nfs:s"          => \$option{NFS},
                  "http:s"         => \$option{HTTP},
+                 "https:s"        => \$option{HTTPS},
 
                  "noexport"       => \$option{NOEXPORT},
                  "noprocess"      => \$option{NOPROCESS},
@@ -551,13 +552,22 @@ use Data::Dumper; $Data::Dumper::Sortkeys = 1;
     #
     my @phs = ("$proc{DATE}{yyyymmdd}", "$proc{DATE}{acycle}", "$Bgruven{BINFO}->{DSET}{dset}", @{$Bgruven{BINFO}->{DSET}{model}} > 1 ? 'MOD' : "$Bgruven{BINFO}->{DSET}{model}[0]");
 
+    #  This is a hack, and I don't like hacks!  Unfortunately, there is no easy alternative to account for 
+    #  the GFS (V14) -> FV3GFS change on 12 June 2019. This is necessary due to the use of VVEL rather than
+    #  OMEG in the BUFR files, which requires different gempak packing tables.
+    #
+    if ($Bgruven{BINFO}->{DSET}{dset} eq 'gfs' and $sdate < 2019061212) {
+        $Bgruven{BINFO}->{GEMPAK}{sfpack} = 'sf_gfs1.prm';
+        $Bgruven{BINFO}->{GEMPAK}{snpack} = 'sn_gfs1.prm';
+    }
+
 
     #  WHAT IS HAPPENING HERE?
     #
     #  The methods contained in the @{$Bgruven{GRUVEN}->{OPTS}{methods}} list control which methods of
     #  acquisition are to be used to download the BUFR files.  If no method is explicitly specified on
     #  the command line then the list defaults the configuration settings defined on the options
-    #  subroutine, probably ftp and http. 
+    #  subroutine, probably https, http and ftp. 
     #
     #  If a user does specify a method on the command line then that method is used to populate
     #  the @{$Bgruven{GRUVEN}->{OPTS}{methods}} list. Additionally, the options/arguments are
@@ -659,7 +669,7 @@ sub read_bconf {
     %{$biconf{GEMPAK}{$_}}  = ()  foreach qw (sfpack snpack packaux timstn); #  The  GEMPAK hash
 
     @{$biconf{EXPORT}{$_}}  = () foreach qw (BUFR GEMPAK BUFKIT ASCII BUFKITP);      #  The EXPORT  hash
-    %{$biconf{SOURCES}{$_}} = () foreach qw (FTP HTTP NFS);
+    %{$biconf{SOURCES}{$_}} = () foreach qw (FTP HTTP HTTPS NFS);
 
     @{$biconf{DSET}{cycles}}=();
     %{$biconf{DSET}{members}}=();
@@ -706,6 +716,20 @@ sub read_bconf {
             }
             next;
         }
+
+
+        if (s/SERVER-HTTPS//g) {
+            s/,+|;+| +//g;
+            @list = split (/:/,$_,2);
+            if ($list[0] and $list[1]) {
+                push @{$methods{HTTPS}{$list[0]}} => $list[1];
+            } else {
+                my $info = $list[0] ? $list[0] : $list[1];
+                &Utils::modprint(6,7,104,1,1,sprintf("Mis-configured SERVER-HTTPS entry (Line with %s)",$list[0] ? $list[0] : $list[1]));
+            }
+            next;
+        }
+
 
         if (s/SERVER-HTTP//g) {
             s/,+|;+| +//g;

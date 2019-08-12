@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Moveit;
@@ -79,7 +79,7 @@ sub export {
         unless ($host or $meth eq 'copy') {&Utils::modprint(6,9,96,1,1,"Method $meth for $type files needs a remote host"); next;}
 
         for ($meth) {
-            if (/http/i)  {&Utils::modprint(6,9,96,1,1,"HTTP is not a supported method of exporting files");next;}
+            if (/http/i)  {&Utils::modprint(6,9,96,1,1,"HTTP(S) is not a supported method of exporting files");next;}
             if (/scp/i)   {&Method::put_scp($host,$rdir,$type);next;}
             if (/sftp/i)  {&Method::put_sftp($host,$rdir,$type);next;}
             if (/ftp/i)   {&Method::put_ftp($host,$rdir,$type);next;}

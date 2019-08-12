@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  18.30.3
-#      CREATED:  25 July 2018
+#      VERSION:  19.24.4
+#      CREATED:  13 June 2019
 #===============================================================================
 #
 package Love;
@@ -35,6 +35,7 @@ sub defopts {
                 '--metdat'      => { arg => 'directory'   , desc => 'Override metdat directory location with <directory>'},
                 '--ftp'         => { arg => '[server]'    , desc => 'Acquire the desired bufr files via ftp [from server]'},
                 '--http'        => { arg => '[server]'    , desc => 'Acquire the desired bufr files via http [from server]'},
+                '--https'       => { arg => '[server]'    , desc => 'Acquire the desired bufr files via https [from server]'},
                 '--nfs'         => { arg => '[server]'    , desc => 'Acquire the desired bufr files from a local system (cp or scp)'},
                 '--noprocess'   => { arg => ''            , desc => 'Do not process the downloaded bufr files'},
                 '--noexport'    => { arg => ''            , desc => 'Do not export any processed files. Overrides all _bufrinfo.conf settings'},
@@ -55,6 +56,7 @@ sub defopts {
                );
 return %opts;
 }
+
 
 sub stnlist {
 #----------------------------------------------------------------------------------
@@ -261,29 +263,29 @@ sub guide {
             "is to use the list of non-nfs sources from the DSET_bufrinfo.conf file. However, should you feel ".
             "the urge to limit the search or specify a new source of BUFR booty then you have the power.\n\n".
 
-            "Passing the --ftp, --http, and/or --nfs flags will cause bufr_gruven.pl to search for BUFR files ".
-            "from a ftp, http, or nfs (local) source respectively. Passing --ftp, --http, and/or --nfs without ".
-            "arguments will result in bufr_gruven.pl using those FTP, HTTP, and/or NFS sources listed in the ".
+            "Passing the --ftp, --http, --https, and/or --nfs flags will cause bufr_gruven.pl to search for BUFR files ".
+            "from a ftp, http, https or nfs (local) source respectively. Passing --ftp, --http, --https, and/or --nfs without ".
+            "arguments will result in bufr_gruven.pl using those FTP, HTTP, HTTPS and/or NFS sources listed in the ".
             "DSET_bufrinfo.conf file. So passing only \"--nfs\" will result in bufr_gruven.pl excluding any ".
-            "FTP or HTTP sources from the search.  Passing both --ftp and --http is the same as not passing ".
+            "other sources from the search.  Passing both --ftp, --http, --https is the same as not passing ".
             "any acquisition methods since that is the default.  If your source is local then you ".
-            "must include the \"--nfs\" flag; otherwise only HTTP and FTP will be used.";
+            "must include the \"--nfs\" flag; otherwise only HTTP, HTTPS, and FTP will be used.";
 
     &Utils::modprint(0,12,94,1,1,"Description:");
     &Utils::modprint(0,14,94,1,1,$mesg);
-    &Utils::modprint(0,14,94,1,1,"FTP or HTTP");
+    &Utils::modprint(0,14,94,1,1,"HTTP, HTTPS, or FTP");
 
-    $mesg = "Arguments to --ftp and --http may either be a SERVER ID that is used to identify a remote system ".
+    $mesg = "Arguments to --http, --https, and --ftp may either be a SERVER ID that is used to identify a remote system ".
             "or a string that specifies the IP/hostname of a server followed by the path to the file and a ".
             "naming convention. See a DSET_bufrinfo.conf file for appropriate naming conventions. The SERVER ".
             "ID must have a corresponding entry in the DSET_bufrinfo.conf and also be defined in the ".
             "bufrgruven.conf file. E.g.:\n\n".
 
-            "    % bufr_gruven.pl --dset nam --http STRC\n\n".
+            "    % bufr_gruven.pl --dset nam --https EMS1\n\n".
 
-            "Where STRC has an entry in the nam_bufrinfo.conf file as:\n\n".
+            "Where EMS1 has an entry in the nam_bufrinfo.conf file as:\n\n".
 
-            "    SERVER-HTTP = STRC:/data/YYYYMMDD/nam/bufr.STNM.YYYYMMDDCC\n\n".
+            "    SERVER-HTTPS = EMS1:/data/YYYYMMDD/nam/bufr.STNM.YYYYMMDDCC\n\n".
 
             "And STRC is defined in the conf/bufrgruven.conf file as:\n\n".
 
@@ -294,7 +296,7 @@ sub guide {
 
     &Utils::modprint(0,14,94,1,1,$mesg);
 
-    $mesg = "    % bufr_gruven.pl --dset nam --ftp strc.comet.ucar.edu:/data/YYYYMMDD/bufr.STNM.YYYYMMDDCC\n".
+    $mesg = "    % bufr_gruven.pl --dset nam --ftp ems3.comet.ucar.edu:/data/YYYYMMDD/bufr.STNM.YYYYMMDDCC\n".
             "Or\n".
             "    % bufr_gruven.pl --dset nam --ftp 128.117.110.214:/data/YYYYMMDD/bufr.STNM.YYYYMMDDCC";
 
