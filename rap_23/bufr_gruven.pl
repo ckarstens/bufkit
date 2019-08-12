@@ -1,32 +1,26 @@
 #!/usr/bin/perl
-#
-#######################################################################
-#                                                                     #
-#  The bufr_gruven.pl routine downloads and processes BUFR sounding   #
-#  files from both operational and non-operational model runs.        #
-#                                                                     #
-#  The user can request the processed file format be compatible with  #
-#  NAWIPS, NSHARP, BUFKIT, or a more general ASCII format.            #
-#                                                                     #
-#  Complete instructions for running bufr_gruven.pl are available     #
-#  on the SOO/STRC web site:                                          #
-#                                                                     #
-#     http://strc.comet.ucar.edu/bufrgruven                           #
-#                                                                     #
-#  And for the most basic of guidance:                                #
-#                                                                     #
-#     % bufr_gruven.pl --help                                         #
-#  And                                                                #
-#     % bufr_gruven.pl --guide                                        #
-#                                                                     #
-#  Log:                                                               #
-#                                                                     #
-#  R.Rozumalski : August 2011  - "B Gruven" Release                   #
-#                 October 2011 - Updated NAM tables & Switch patch    #
-#                 November 2011- Added NAM 4km nest data              #
-#                                Thanks to Scott Stephens             #
-#                                                                     #
-#######################################################################
+#======================================================================
+#                                                                      
+#  The bufr_gruven.pl routine downloads and processes BUFR sounding    
+#  files from both operational and non-operational model runs.         
+#  The user can request the processed file format be compatible with   
+#  NAWIPS, NSHARP, BUFKIT, or a more general ASCII format.             
+#  Complete instructions for running bufr_gruven.pl are available      
+#  on the SOO/STRC web site:                                           
+#                                                                      
+#     http://strc.comet.ucar.edu/software/bgruven                      
+#                                                                      
+#  And for the most basic of guidance:                                 
+#                                                                      
+#     % bufr_gruven.pl --help                                          
+#  And                                                                 
+#     % bufr_gruven.pl --guide                                         
+#                                                                      
+#  Log:                                                                
+#                                                                      
+#  R.Rozumalski : August 2011    - Official "B Gruven" Release         
+#  R.Rozumalski : Today          - Many changes since August 2011      
+#======================================================================
 #
 require 5.8.0;
 use strict;
@@ -49,9 +43,10 @@ use Moveit;
     $Bgruven{HOME} = $RealBin;
     $ENV{VERBOSE}  = 1;
     $ENV{BUFRERR}  = 0;
+    $ENV{LC_ALL}   = 'C';
     $ENV{BGRUVEN}  = $Bgruven{HOME};
     $Bgruven{EXE}  = &Utils::popit($0);
-    $Bgruven{VER}  = "12.5.2 - B Gruven while going viral Release";
+    $Bgruven{VER}  = "19.24.4";
 
     #  Override interrupt handler - Use the local one since some of the local
     #  environment variables are needed for clean-up after the interrupt.
