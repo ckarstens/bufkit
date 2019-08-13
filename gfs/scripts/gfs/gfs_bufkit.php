@@ -74,7 +74,7 @@ $files = preg_grep('/^([^.])/', scandir($data_dir));
 
 // generate a dictionary of site IDs to station idenitifers
 $sites = array();
-$link = "gfs/stations/gfs3_bufrstations.txt";
+$link = "gfs/stations/gfs_bufrstations.txt";
 $data = file($link);
 foreach($data as $line){
 	$d = explode(" ", trim(preg_replace( '/ +/', ' ', $line)));
@@ -91,6 +91,7 @@ $j = 0;
 $count = sizeof($sites);
 reset($sites);
 while( list($site, $sid) = each($sites)){
+    // if ($sid != "ksdf") continue;
     $j++;
     $testfn = sprintf("%s/bufr3.%s.%s%s", $data_dir, $site, $stime, $shour);
     if (! file_exists($testfn)){
@@ -98,11 +99,12 @@ while( list($site, $sid) = each($sites)){
         continue;
     }
 	echo sprintf("%04d/%04d Processing: %s (%s)...", $j, $count, $site, $sid);
+    $output = Array();
     exec("perl ${model}/bufr_gruven.pl --nfs --dset ${model} ".
         "--date ${stime} --cycle ${shour} --noascii ".
         "--stations ${site} --nozipit", $output, $exit_status);
     echo sprintf("%s\n", ($exit_status == 0)? 'Done': 'Error');
-    $filename = "${model}/metdat/bufkit/${model2}_${sid}.buf";
+    $filename = "${model}/metdat/bufkit/${model}_${sid}.buf";
 	if(file_exists($filename)){
 		//system("python /local/ckarsten/bufkit/gfs/scripts/gfs/qpf_fixer.py ".$filename);
         // -i use the product ID as the MD5 hash
@@ -134,7 +136,7 @@ system("rm ${model}/scripts/${model}/data/*");
 // generate cobb data
 // note: make_cobb.php inserts data into ldm
 echo "Calling make_cobb.php\n";
-system("php ${model}/cobb/make_cobb.php iem_date=${iem_date} hour=${shour} model=${model2}");
+system("php ${model}/cobb/make_cobb.php iem_date=${iem_date} hour=${shour} model=${model}");
 
 system("rm ${model}/metdat/bufkit_temp/*.buf");
 system("rm ${model}/cobb/data/*.dat");
