@@ -60,7 +60,7 @@ while ( $myStation ne "exit" ) {
 #  $myFile = "./"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "//lan/bufkit_data/"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "/local/ckarsten/bufkit/modsnd/metdat/nam/"."$myModel"."_"."$myStation".".buf";
-  $myFile = "/local/ckarsten/bufkit/gfs/metdat/bufkit_temp/"."$myModel"."_"."$myStation".".buf";
+  $myFile = "gfs/metdat/bufkit_temp/"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "/local/ckarsten/bufkit/gfs/cobb/data/"."$myModel"."_"."$myStation".".buf";
   open(BUFIN,$myFile) or goto GETSTATION ; 
     if     ($myModel eq "eta" or $myModel eq "etam" or $myModel eq "etaw" or $myModel eq "nam" or $myModel eq "nmm" or $myModel eq "arw" or $myModel eq "ruc") { ReadEtaBufkit() }
@@ -182,19 +182,19 @@ while ( $myStation ne "exit" ) {
 
 format NORMAL_TOP =
 StnID: @<<<    Profile Thermal Adjust: @#.#       Cloud RH threshold: @##%
-       $myStation                      $thermalShift                   $RHThresh
+       $myStation,                      $thermalShift,                   $RHThresh
 
  Date/hour    FcstHR   Wind     SfcT  Liquid  SR   Snow    ICE    CumLiq  CumSnR  CumSnw   CumIce  Ptype  Profile
 ==================================================================================================================
 .
 format NORMAL = 
  @<<<<<<<<<<Z  @##    @<@<<KT @###F  @#.##"  @##:1 @##.#"  @#.##" @##.##"  @##:1   @##.#"   @#.##"  @<<<<   @<<<<
-$dateTime[$i] $fcstHR[$i] $sfcWindDir[$i] $sfcWindSpd[$i] $temp2meter[$i] $precip[$i] $snRatio[$i] $snowFall[$i] $iceFall[$i] $cumPrecip $cumSR $cumSnowFall $cumIce $Ptype[$i] $pClass[$i]
+$dateTime[$i], $fcstHR[$i], $sfcWindDir[$i], $sfcWindSpd[$i], $temp2meter[$i], $precip[$i], $snRatio[$i], $snowFall[$i], $iceFall[$i], $cumPrecip, $cumSR, $cumSnowFall, $cumIce, $Ptype[$i], $pClass[$i]
 .
 
 format DIAG_TOP =
   Station: @<<<  DiagTime: F+@||HR  Profile Thermal Adjust: @#.#  Cloud RH threshold: @##%
-           $myStation            $statime                    $thermalShift               $RHThresh
+           $myStation,            $statime,                    $thermalShift,               $RHThresh
 
                                                                                  Warm  Cold1 Cold2 
    Pres    T(C)| Tw  |  Td      LR |RHw|RHi|  Uvv      SRt| Wuvv|| SRw |  SR      >0C | <0C | <-6C   WgtSum
@@ -202,52 +202,52 @@ format DIAG_TOP =
 .
 format DIAG = 
 @####MB   @##.#|@##.#|@##.#  @###.#|@##|@##|@##.#     @#:1|@#.##||@#.##| @#.#    @##.#|@##.#|@##.#   @##.#
-$lyrPres[$i][$j] $lyrTemp[$i][$j] $lyrTmwc[$i][$j] $lyrDwpc[$i][$j] $lyrLapse[$i][$j] $lyrRH[$i][$j] $lyrRHice[$i][$j] $lyrOmega[$i][$j] $layerSR[$j] $percentArea[$i][$j] $percentSR[$i][$j] $cumPercentSR[$i][$j] $lyrPosEnergy[$i][$j] $lyrNegEnergy1[$i][$j] $lyrNegEnergy2[$i][$j] $wgtSum[$i][$j]
+$lyrPres[$i][$j], $lyrTemp[$i][$j], $lyrTmwc[$i][$j], $lyrDwpc[$i][$j], $lyrLapse[$i][$j], $lyrRH[$i][$j], $lyrRHice[$i][$j], $lyrOmega[$i][$j], $layerSR[$j], $percentArea[$i][$j], $percentSR[$i][$j], $cumPercentSR[$i][$j], $lyrPosEnergy[$i][$j], $lyrNegEnergy1[$i][$j], $lyrNegEnergy2[$i][$j], $wgtSum[$i][$j]
 .
 
 format VER4_TOP =
 StnID: @<<<    Profile Thermal Adjust: @#.#       Cloud RH threshold: @##%    Average Hourly Sounding: @<<<
-       $myStation                      $thermalShift                   $RHThresh         $avgHour
+       $myStation,                      $thermalShift,                   $RHThresh,         $avgHour
 
  Date/hour    FHr  Wind   SfcT  Ptype   SR |Snow||CumSR|TotS     IR| ICE |TotI     QPF | Tqpf  SndgType   S%| I%| R%
 =====================================================================================================================
 .
 format VER4 = 
 @<<<<<<<<<<Z @##  @<@<<KT @##F @<<<<< @##:1|@#.#||@##:1|@#.#  @##:1|@#.##|@.##   @#.###|@#.##    @<<<<<  @##|@##|@##
-$dateTime[$i] $fcstHR[$i] $sfcWindDir[$i] $sfcWindSpd[$i] $temp2meter[$i] $Ptype[$i] $snRatio[$i] $snowFall[$i] $cumSR $cumSnow $iceRatio[$i] $iceFall[$i] $cumIce  $precip[$i] $cumPrecip $pClass[$i] $SRpercent[$i]*100. $IRpercent[$i]*100. $RRpercent[$i]*100.
+$dateTime[$i], $fcstHR[$i], $sfcWindDir[$i], $sfcWindSpd[$i], $temp2meter[$i], $Ptype[$i], $snRatio[$i], $snowFall[$i], $cumSR, $cumSnow, $iceRatio[$i], $iceFall[$i], $cumIce,  $precip[$i], $cumPrecip, $pClass[$i], $SRpercent[$i]*100., $IRpercent[$i]*100., $RRpercent[$i]*100.
 .
 format VER50_TOP =
 StnID: @<<<    Profile Thermal Adjust: @#.#       Cloud RH threshold: @##%    Average Hourly Sounding: @<<<
-       $myStation                      $thermalShift                   $RHThresh         $avgHour
+       $myStation,                      $thermalShift,                   $RHThresh,         $avgHour
 
  Date/hour    FHr  Wind    SfcT   Ptype   SR |Snow||Sleet|| FZRA|| QPF    CumSR|TotSN||TotPL||TotZR|| TQPF   S%| I%| L% 
 ============================================================================================================================
 .
 format VER50 = 
 @<<<<<<<<<<Z @##  @<@<<KT @##.#F @<<<<< @##:1|@#.#||@#.##||@#.##||@#.###  @##:1| @#.#||@#.##||@#.##||@#.##  @##|@##|@## 
-$dateTime[$i] $fcstHR[$i] $sfcWindDir[$i] $sfcWindSpd[$i] $temp2meter[$i] $Ptype[$i] $snRatio[$i] $snowFall[$i] $sleetFall[$i] $iceFall[$i] $precip[$i] $cumSR $cumSnow $cumSleet $cumIce $cumPrecip $SRpercent[$i]*100. $IRpercent[$i]*100. $RRpercent[$i]*100. 
+$dateTime[$i], $fcstHR[$i], $sfcWindDir[$i], $sfcWindSpd[$i], $temp2meter[$i], $Ptype[$i], $snRatio[$i], $snowFall[$i], $sleetFall[$i], $iceFall[$i], $precip[$i], $cumSR, $cumSnow, $cumSleet, $cumIce, $cumPrecip, $SRpercent[$i]*100., $IRpercent[$i]*100., $RRpercent[$i]*100. 
 .
 format VER55_TOP =
 StnID: @<<<   Model: @<<<   Run: 20@<<<<<<<<<<    Cloud RH threshold: @##%    Sleet Ratio: 2:1   || CarSnowTool Ops 5.5
-       $myStation    $myModel      $dateTime[0]                       $RHThresh
+       $myStation,    $myModel,      $dateTime[0]  ,                     $RHThresh
 
  Date/hour    FHr  Wind    SfcT   Ptype   SRat|Snow||CumSR|TotSN    QPF ||TotQPF   Sleet||TotPL    FZRA||TotZR    S%| I%| L%
 ============================================================================================================================
 .
 format VER55 =
 @<<<<<<<<<<Z @##  @<@<<KT @##.#F @<<<<<  @##:1|@#.#||@##:1|@#.#   @#.###||@#.##    @#.##||@#.##   @#.##||@#.##   @##|@##|@##
-$dateTime[$i] $fcstHR[$i] $sfcWindDir[$i] $sfcWindSpd[$i] $temp2meter[$i] $Ptype[$i] $snRatio[$i] $snowFall[$i] $cumSR $cumSnow $precip[$i] $cumPrecip $sleetFall[$i] $cumSleet $iceFall[$i] $cumIce $SRpercent[$i]*100. $IRpercent[$i]*100. $RRpercent[$i]*100.
+$dateTime[$i], $fcstHR[$i], $sfcWindDir[$i], $sfcWindSpd[$i], $temp2meter[$i], $Ptype[$i], $snRatio[$i], $snowFall[$i], $cumSR, $cumSnow, $precip[$i], $cumPrecip, $sleetFall[$i], $cumSleet, $iceFall[$i], $cumIce, $SRpercent[$i]*100., $IRpercent[$i]*100., $RRpercent[$i]*100.
 .
 format VER55Web_TOP =
 StnID: @<<<   Model: @<<<   Run: 20@<<<<<<<<<<    Cloud RH threshold: @##%    Sleet Ratio: 2:1   || CarSnowTool Ops 5.5
-       $myStation    $myModel      $dateTime[0]                       $RHThresh
+       $myStation,    $myModel,      $dateTime[0],                       $RHThresh
 
  Date/hour    FHr  Wind    SfcT   Ptype   SRat|Snow||TotSN    QPF ||TotQPF   Sleet||TotPL    FZRA||TotZR    S%| I%| L%
 ========================================================================================================================
 .
 format VER55Web =
 @<<<<<<<<<<Z @##  @<@<<KT @##.#F @<<<<<  @##:1|@#.#||@#.#   @#.###||@#.##    @#.##||@#.##   @#.##||@#.##   @##|@##|@##
-$dateTime[$i] $fcstHR[$i] $sfcWindDir[$i] $sfcWindSpd[$i] $temp2meter[$i] $Ptype[$i] $snRatio[$i] $snowFall[$i] $cumSnow $precip[$i] $cumPrecip $sleetFall[$i] $cumSleet $iceFall[$i] $cumIce $SRpercent[$i]*100. $IRpercent[$i]*100. $RRpercent[$i]*100.
+$dateTime[$i], $fcstHR[$i], $sfcWindDir[$i], $sfcWindSpd[$i], $temp2meter[$i], $Ptype[$i], $snRatio[$i], $snowFall[$i], $cumSnow, $precip[$i], $cumPrecip, $sleetFall[$i], $cumSleet, $iceFall[$i], $cumIce, $SRpercent[$i]*100., $IRpercent[$i]*100., $RRpercent[$i]*100.
 .
 
 

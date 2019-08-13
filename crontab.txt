@@ -1,4 +1,5 @@
 CRON_TZ=UTC
+BASEDIR="projects/bufkit"
 #58 0 * * * python /local/ckarsten/bufkit/gen.py >& /local/ckarsten/bufkit/genOut.txt
 #15 7 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref03_out.txt
 #15 13 * * * php /local/ckarsten/bufkit/sref1/scripts/sref/sref_bufkit.php >& /local/ckarsten/bufkit/sref1/scripts/sref/cron_sref09_out.txt
@@ -12,10 +13,13 @@ CRON_TZ=UTC
 30 2 * * * php /local/ckarsten/bufkit/nam4km/scripts/nam4km/nam4km_bufkit.php >& /local/ckarsten/bufkit/nam4km/scripts/nam4km/cron_nam4km_00_out.txt
 30 8 * * * php /local/ckarsten/bufkit/nam4km/scripts/nam4km/nam4km_bufkit.php >& /local/ckarsten/bufkit/nam4km/scripts/nam4km/cron_nam4km_06_out.txt
 30 20 * * * php /local/ckarsten/bufkit/nam4km/scripts/nam4km/nam4km_bufkit.php >& /local/ckarsten/bufkit/nam4km/scripts/nam4km/cron_nam4km_18_out.txt
-0 4 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_00_out.txt
-0 16 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_12_out.txt
-0 10 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_06_out.txt
-0 22 * * * php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php >& /local/ckarsten/bufkit/gfs/scripts/gfs/cron_gfs_18_out.txt
+
+# GFS Processing, script assumes a -4 hour delta
+0 4 * * * php $BASEDIR/gfs/scripts/gfs/gfs_bufkit.php >& $BASEDIR/gfs/scripts/gfs/cron_gfs_00_out.txt
+0 10 * * * php $BASEDIR/gfs/scripts/gfs/gfs_bufkit.php >& $BASEDIR/gfs/scripts/gfs/cron_gfs_06_out.txt
+0 16 * * * php $BASEDIR/gfs/scripts/gfs/gfs_bufkit.php >& $BASEDIR/gfs/scripts/gfs/cron_gfs_12_out.txt
+0 22 * * * php $BASEDIR/gfs/scripts/gfs/gfs_bufkit.php >& $BASEDIR/gfs/scripts/gfs/cron_gfs_18_out.txt
+
 25 1 * * * php /local/ckarsten/bufkit/rap_00/scripts/rap/rap_bufkit.php >& /local/ckarsten/bufkit/rap_00/scripts/rap/cron_rap_00_out.txt
 15 2 * * * php /local/ckarsten/bufkit/rap_01/scripts/rap/rap_bufkit.php >& /local/ckarsten/bufkit/rap_01/scripts/rap/cron_rap_01_out.txt
 0 3 * * * php /local/ckarsten/bufkit/rap_02/scripts/rap/rap_bufkit.php >& /local/ckarsten/bufkit/rap_02/scripts/rap/cron_rap_02_out.txt

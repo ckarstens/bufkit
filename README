@@ -1,1 +1,3 @@
-hello
+
+RHEL8 packages that need installed
+  perl-Math-Complex perl-Time-HiRes

@@ -1,2 +1,6 @@
 *_out.txt
 *.log
+**/*.buf
+**/bufr3*
+**/*.sfc
+**/*.snd
