@@ -4,6 +4,7 @@ This is my life, controlling PHP and Perl scripts.
 """
 import argparse
 import os
+import datetime
 import sys
 import time
 import subprocess
@@ -142,8 +143,12 @@ def run_cobb(tmpdir, model, icao):
             fh.write(result)
 
 
-def insert_ldm_bufkit(tmpdir, model, valid, icao):
-    """Send this product away for LTS."""
+def insert_ldm_bufkit(tmpdir, model, valid, icao, backfill):
+    """Send this product away for LTS.
+
+    Args:
+      backfill (bool): If True, the LDM insert flags as archive only
+    """
     filename = "%s/bufkit/%s_%s.buf" % (tmpdir, model, icao)
     if not os.path.isfile(filename):
         return
@@ -153,12 +158,14 @@ def insert_ldm_bufkit(tmpdir, model, valid, icao):
     model2 = "gfs3" if model == 'gfs' else model
     # place a 'cache-buster' LDM product name on the end as we are inserting
     # with -i, so the product name is used to compute the MD5
+    flag = "ac" if not backfill else 'c'
+    archivefn = get_archive_bufkit_filename(model, valid, icao)
     cmd = (
-        "/home/meteor_ldm/bin/pqinsert -i -p 'bufkit ac %s "
-        "bufkit/%s/%s_%s.buf bufkit/%02i/%s/%s_%s.buf bogus%s' %s"
+        "/home/meteor_ldm/bin/pqinsert -i -p 'bufkit %s %s "
+        "bufkit/%s/%s_%s.buf bufkit/%s bogus%s' %s"
     ) % (
-        valid.strftime("%Y%m%d%H%M"), model1, model2, icao, valid.hour,
-        model, model2, icao, utc().strftime("%Y%m%d%H%M%S"), filename)
+        flag, valid.strftime("%Y%m%d%H%M"), model1, model2, icao,
+        archivefn, utc().strftime("%Y%m%d%H%M%S"), filename)
     proc = subprocess.Popen(
         cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = proc.communicate()
@@ -214,31 +221,12 @@ def rectify_cwd():
     os.chdir(mydir)
 
 
-def main():
-    """Our Main Method."""
-    parser = argparse.ArgumentParser(description='Generate BufKit+Cobb Data.')
-    parser.add_argument(
-        'model', help='model identifier to run this script for.')
-    parser.add_argument('year', type=int, help='UTC Year')
-    parser.add_argument('month', type=int, help='UTC Month')
-    parser.add_argument('day', type=int, help='UTC Day')
-    parser.add_argument('hour', type=int, help='UTC Hour')
-    parser.add_argument(
-        '--nocleanup', help='Leave temporary folder in-tact.',
-        action='store_true'
+def workflow(args, model, valid, backfill):
+    """Atomic workflow."""
+    LOG.info(
+        "Starting workflow model: %s valid: %s backfill: %s",
+        model, valid, backfill
     )
-    parser.add_argument(
-        "--tmpdir", default=TEMPBASE,
-        help="Base directory to store temporary files."
-    )
-
-    args = parser.parse_args()
-    model = args.model
-    valid = utc(args.year, args.month, args.day, args.hour)
-    LOG.info("Starting Up with args model: %s valid: %s", model, valid)
-
-    # 0 need to rectify cwd to be the base of the repo folder
-    rectify_cwd()
     # 1 Create metdat temp folder
     tmpdir = create_tempdirs(args.tmpdir, model, valid)
     # 2 Download files
@@ -254,16 +242,72 @@ def main():
     for sid, icao in progress:
         progress.set_description(icao)
         if run_bufrgruven(tmpdir, model, valid, sid, icao):
-            insert_ldm_bufkit(tmpdir, model, valid, icao)
+            insert_ldm_bufkit(tmpdir, model, valid, icao, backfill)
             if model not in ['rap']:
                 run_cobb(tmpdir, model, icao)
-                insert_ldm_cobb(tmpdir, model, valid, icao)
+                if not backfill:
+                    insert_ldm_cobb(tmpdir, model, valid, icao)
             # Once we get > 1000 files in bufkit folder, bufrgruven bombs
             delete_files(tmpdir, model, valid, sid, icao)
     # 5. cleanup
     if not args.nocleanup:
         LOG.info("Blowing out tempdir: %s", tmpdir)
         subprocess.call("rm -rf %s" % (tmpdir, ), shell=True)
+
+
+def get_archive_bufkit_filename(model, valid, icao):
+    """Our nomenclature."""
+    # 06/nam/namm_kdsm.buf
+    # 06/gfs/gfs3_kdsm.buf
+    # 12/nam/nam_kdsm.buf
+    # 12/nam4km/nam4km_kdsm.buf
+    model1 = model
+    if model == 'nam' and valid.hour in [6, 18]:
+        model1 = "namm"
+    elif model == 'gfs':
+        model1 = "gfs3"
+    return "%02i/%s/%s_%s.buf" % (valid.hour, model, model1, icao)
+
+
+def main():
+    """Our Main Method."""
+    parser = argparse.ArgumentParser(description='Generate BufKit+Cobb Data.')
+    parser.add_argument(
+        'model', help='model identifier to run this script for.')
+    parser.add_argument('year', type=int, help='UTC Year')
+    parser.add_argument('month', type=int, help='UTC Month')
+    parser.add_argument('day', type=int, help='UTC Day')
+    parser.add_argument('hour', type=int, help='UTC Hour')
+    parser.add_argument(
+        '--nocleanup', help='Leave temporary folder in-tact.',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--backfill', help='Mark as a backfilling operation.',
+        action='store_true'
+    )
+    parser.add_argument(
+        "--tmpdir", default=TEMPBASE,
+        help="Base directory to store temporary files."
+    )
+
+    args = parser.parse_args()
+    model = args.model
+    valid = utc(args.year, args.month, args.day, args.hour)
+
+    # 0 need to rectify cwd to be the base of the repo folder
+    rectify_cwd()
+    # Do work
+    workflow(args, model, valid, args.backfill)
+    # Check previous deltas to see if we need to reprocess
+    for delta in [6, 12, 18, 24]:
+        valid2 = valid - datetime.timedelta(hours=delta)
+        testfn = valid2.strftime(
+            "/isu/mtarchive/data/%Y/%m/%d/bufkit/"
+        ) + get_archive_bufkit_filename(model, valid2, 'kdsm')
+        if not os.path.isfile(testfn):
+            LOG.info("Rerunning %s due to missing %s", valid2, testfn)
+            workflow(args, model, valid2, False)
 
     LOG.info("Done.")
 
