@@ -40,6 +40,7 @@ if ($ARGV[0] ne "" ) {
    $mode = "AUTO" ; 
    chomp ($myStation = $ARGV[0]) ; 
    chomp ($myModel = $ARGV[1])   ;
+   chomp ($myDir = $ARGV[2]);
 #   STDOUT->format_name("NORMAL") ; STDOUT->format_top_name("NORMAL_TOP") ;
    STDOUT->format_name("VER50") ; STDOUT->format_top_name("VER50_TOP"); 
 #   STDOUT->format_name("VER51"); STDOUT->format_top_name("VER51_TOP");
@@ -60,10 +61,10 @@ while ( $myStation ne "exit" ) {
 #  $myFile = "./"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "//lan/bufkit_data/"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "/local/ckarsten/bufkit/modsnd/metdat/nam/"."$myModel"."_"."$myStation".".buf";
-  $myFile = "gfs/metdat/bufkit/"."$myModel"."_"."$myStation".".buf";
+  $myFile = $myDir ."/"."$myModel"."_"."$myStation".".buf";
 #  $myFile = "/local/ckarsten/bufkit/gfs/cobb/data/"."$myModel"."_"."$myStation".".buf";
   open(BUFIN,$myFile) or goto GETSTATION ; 
-    if     ($myModel eq "eta" or $myModel eq "etam" or $myModel eq "etaw" or $myModel eq "nam" or $myModel eq "nmm" or $myModel eq "arw" or $myModel eq "ruc") { ReadEtaBufkit() }
+    if     ($myModel eq "eta" or $myModel eq "etam" or $myModel eq "etaw" or $myModel eq "nam" or $myModel eq "nmm" or $myModel eq "arw" or $myModel eq "ruc" or $myModel eq "nam4km" or $myModel eq "hrrr") { ReadEtaBufkit() }
      elsif ($myModel eq "gfs" )                     { ReadGFSBufkit() }
   close (BUFIN) ;
 
