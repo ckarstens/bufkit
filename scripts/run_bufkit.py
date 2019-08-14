@@ -307,7 +307,7 @@ def main():
         ) + get_archive_bufkit_filename(model, valid2, 'kdsm')
         if not os.path.isfile(testfn):
             LOG.info("Rerunning %s due to missing %s", valid2, testfn)
-            workflow(args, model, valid2, False)
+            workflow(args, model, valid2, True)
 
     LOG.info("Done.")
 

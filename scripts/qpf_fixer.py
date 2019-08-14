@@ -1,28 +1,31 @@
-import os, sys
+"""Legacy fixer."""
+from __future__ import print_function
+import os
+import sys
 
 inputFile = sys.argv[1]
 outputFile = inputFile + '1'
 
-print 'Fixing QPF for ' + inputFile
+print('Fixing QPF for %s' % (inputFile, ))
 
-fh = open(inputFile,'r')
+fh = open(inputFile, 'r')
 lines = fh.readlines()
 fh.close()
 
 data = []
 get = False
 for line in lines:
-	s = line.rstrip().split(' ')
-	if get and len(s) == 8 and int(s[1][7:9]) % 3 != 0:
-		s[7] = '0.00'
-		data.append(' '.join(s))
-	else:
-		data.append(line.rstrip())
-	if 'P03M' in s:
-                get = True
+    s = line.rstrip().split(' ')
+    if get and len(s) == 8 and int(s[1][7:9]) % 3 != 0:
+        s[7] = '0.00'
+        data.append(' '.join(s))
+    else:
+        data.append(line.rstrip())
+    if 'P03M' in s:
+        get = True
 
 allData = '\n'.join(data)
-fh = open(outputFile,'w')
+fh = open(outputFile, 'w')
 fh.write(allData)
 fh.close()
 

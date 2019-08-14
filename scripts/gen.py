@@ -1,12 +1,12 @@
-import os, sys
+"""Helper script for reprocessing manually."""
 import datetime
+import subprocess
 
-now = datetime.datetime(2019,2,6,10,0,0)
+now = datetime.datetime(2019, 2, 6, 12)
 delta = datetime.timedelta(hours=6)
-end = datetime.datetime(2019,2,6,22,0,0)
+end = datetime.datetime(2019, 2, 7, 0)
 
 while now <= end:
-    cmd = 'php /local/ckarsten/bufkit/gfs/scripts/gfs/gfs_bufkit.php now="' + now.strftime('%Y-%m-%d %H:%M:%S') + '"'
-    print cmd
-    os.system(cmd)
+    cmd = now.strftime("python scripts/run_bufkit.py nam %Y %m %d %H")
+    subprocess.call(cmd, shell=True)
     now += delta
