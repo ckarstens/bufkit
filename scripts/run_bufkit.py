@@ -131,14 +131,15 @@ def run_cobb(tmpdir, model, icao):
     proc = subprocess.Popen(
         cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = proc.communicate()
-    if proc.returncode != 0:
+    result = out.decode('ascii')
+    if proc.returncode != 0 or len(result) < 1000:
         with open("%s/logs/cobb_%s.log" % (tmpdir, icao), 'w') as fh:
             fh.write("Cmd: %s\nStandard Out:\n%sStandard Err:\n%s" % (
                 cmd, out.decode("ascii", "ignore"),
                 err.decode('ascii', 'ignore')))
     else:
         with open("%s/cobb/%s_%s.dat" % (tmpdir, model, icao), 'w') as fh:
-            fh.write(out.decode('ascii'))
+            fh.write(result)
 
 
 def insert_ldm_bufkit(tmpdir, model, valid, icao):
