@@ -33,9 +33,9 @@ else{
         $model1 = "nam";
     }
 }
-$dir = "${model2}/cobb";
-$out_dir = "${model2}/cobb/data";
-$data_dir = "${model2}/metdat/bufkit_temp/";
+$dir = "cobb";
+$out_dir = "${dir}/data";
+$data_dir = "${model}/metdat/bufkit/";
 
 system("rm ${data_dir}20*");
 $files = preg_grep('/^([^.])/', scandir($data_dir));
@@ -46,7 +46,13 @@ while( list($bogus, $fn) = each($files)){
 	$site = $s2[1];
 	echo "${site}\n";
 	$filename = "${out_dir}/${model}_${site}.dat";
-	system("perl ${dir}/cobb.pl ${site} ${model} > ${filename}");
+    $cmd = "perl ${dir}/cobb.pl ${site} ${model} > ${filename}";
+    
+    $output = Array();
+    exec($cmd, $output, $return_status);
+    if ($return_status != 0){
+        echo sprintf("cmd: %s\n resulted in: %s\n", $cmd, implode("\n", $output));
+    }
 	if(file_exists($filename) && filesize($filename) > 1){
         system("/home/meteor_ldm/bin/pqinsert -i -p 'bufkit c ${iem_date} ". 
             "cobb/${hour}/${model2}/${model}_${site}.dat ". 
