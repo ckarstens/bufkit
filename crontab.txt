@@ -1,18 +1,18 @@
 CRON_TZ=UTC
-BCMD="python projects/bufkit/scripts/run_bufkit.py"
+BCMD="/opt/miniconda3/envs/prod/bin/python projects/bufkit/scripts/run_bufkit.py"
 SHELL=/bin/bash
 
 # NAM Bufkit Jobs
-30 2,8,14,20 * * * $BCMD nam $(date -u --date '2 hours ago' +'%Y %m %d %H') >& /tmp/nam_$(date -u --date '2 hours ago' +'%H').log
+30 2,8,14,20 * * * $BCMD nam $(date -u --date '2 hours ago' +'\%Y \%m \%d \%H') >& /tmp/nam_$(date -u --date '2 hours ago' +'\%H').log
 
 # HRRR Bufkit Jobs
-0 * * * * $BCMD hrrr $(date -u --date '2 hours ago' +'%Y %m %d %H') >& /tmp/hrrr_$(date -u --date '2 hours ago' +'%H').log
+0 * * * * $BCMD hrrr $(date -u --date '2 hours ago' +'\%Y \%m \%d \%H') >& /tmp/hrrr_$(date -u --date '2 hours ago' +'\%H').log
 
 # NAM Nest
-40 2,8,14,20 * * * $BCMD nam4km $(date -u --date '2 hours ago' +'%Y %m %d %H') >& /tmp/nam4km_$(date -u --date '2 hours ago' +'%H').log
+40 2,8,14,20 * * * $BCMD nam4km $(date -u --date '2 hours ago' +'\%Y \%m \%d \%H') >& /tmp/nam4km_$(date -u --date '2 hours ago' +'\%H').log
 
 # GFS Processing
-5 5,10,16,22 * * * $BCMD gfs $(date -u --date '4 hours ago' +'%Y %m %d %H') >& /tmp/gfs_$(date -u --date '4 hours ago' +'%H').log
+5 5,10,16,22 * * * $BCMD gfs $(date -u --date '4 hours ago' +'\%Y \%m \%d \%H') >& /tmp/gfs_$(date -u --date '4 hours ago' +'\%H').log
 
 # RAP
-25 * * * * $BCMD rap $(date -u --date '1 hours ago' +'%Y %m %d %H') >& /tmp/rap_$(date -u --date '4 hours ago' +'%H').log
+25 * * * * $BCMD rap $(date -u --date '1 hours ago' +'\%Y \%m \%d \%H') >& /tmp/rap_$(date -u --date '4 hours ago' +'\%H').log
