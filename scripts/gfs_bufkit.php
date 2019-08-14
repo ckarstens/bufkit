@@ -60,7 +60,7 @@ while (! file_exists($fname)){
     $j--;
 }
 system("tar -C ${metdat}/extracted -xzf ${fname}");
-# system("rm ${fname}");
+system("rm ${fname}");
 
 // generate list of files available
 $files = preg_grep('/^([^.])/', scandir("${metdat}/extracted"));
@@ -126,7 +126,7 @@ system("rm ${metdat}/extracted/*");
 echo "Calling make_cobb.php\n";
 system("php cobb/make_cobb.php iem_date=${iem_date} hour=${shour} model=${model}");
 
-#system("rm ${metdat}/bufkit/*.buf");
-#system("rm cobb/data/*.dat");
+system("rm ${metdat}/bufkit/*.buf");
+system("rm cobb/data/*.dat");
 
 ?>
