@@ -155,7 +155,7 @@ def insert_ldm_bufkit(tmpdir, model, valid, icao, backfill):
     model1 = "%s%s" % (
         model,
         "m" if valid.hour in [6, 18] and model in ['gfs', 'nam'] else '')
-    model2 = "gfs3" if model == 'gfs' else model
+    model2 = "gfs3" if model == 'gfs' else model1
     # place a 'cache-buster' LDM product name on the end as we are inserting
     # with -i, so the product name is used to compute the MD5
     flag = "ac" if not backfill else 'c'
