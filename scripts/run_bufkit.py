@@ -182,11 +182,12 @@ def insert_ldm_cobb(tmpdir, model, valid, icao):
         return
     # place a 'cache-buster' LDM product name on the end as we are inserting
     # with -i, so the product name is used to compute the MD5
+    model2 = "gfs3" if model == 'gfs' else model
     cmd = (
         "/home/meteor_ldm/bin/pqinsert -i -p 'bufkit c %s "
         "cobb/%02i/%s/%s_%s.dat cobb/%02i/%s/%s_%s.dat bogus%s' %s"
     ) % (
-        valid.strftime("%Y%m%d%H%M"), valid.hour, model, model, icao,
+        valid.strftime("%Y%m%d%H%M"), valid.hour, model, model2, icao,
         valid.hour, model, model, icao, utc().strftime("%Y%m%d%H%M%S"),
         filename)
     proc = subprocess.Popen(
