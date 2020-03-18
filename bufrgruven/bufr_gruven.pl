@@ -46,7 +46,7 @@ use Moveit;
     $ENV{LC_ALL}   = 'C';
     $ENV{BGRUVEN}  = $Bgruven{HOME};
     $Bgruven{EXE}  = &Utils::popit($0);
-    $Bgruven{VER}  = "19.24.4";
+    $Bgruven{VER}  = "20.09.2";
 
     #  Override interrupt handler - Use the local one since some of the local
     #  environment variables are needed for clean-up after the interrupt.

@@ -81,7 +81,7 @@
 000235   41.630   -80.210  KGKL  11  0 MEADVILLE                        PA      427   USR RQST 2-11
 000236   38.690   -80.650  K48I  11  0 SUTTON                           WV      255   USR RQST 2-11
 000237   34.570  -117.670  KGXA  11  0 GRAY BUTTE FIELD                 CA      923   USR RQST 10-11
-000238   34.370  -117.360  EMF   11  0 EL MIRAGE FIELD                  CA      873   USR RQST 10-11
+000238   34.630  -117.610  EMF   11  0 EL MIRAGE FIELD                  CA      873   USR RQST 10-11
 000239   45.970   -86.170  KISQ  11  0 MANISTIQUE                       MI      209   USR RQST 10-11
 000240   46.420   -86.650  P53   11  0 MUNISING                         MI      187   USR RQST 10-11
 000241   39.160   -89.670  K3LF  11  0 LITCHFIELD                       IL      210   USR RQST 11-11
@@ -157,7 +157,7 @@
 000354   36.650  -118.480  TBM   11  0 TABLE MOUNTAIN                   CA        0   USR RQST 1-13
 000355   42.470   -73.290  KPSF  11  0 PITTSFIELD                       MA      364   USR RQST 5-12
 000356   39.210   -82.230  KUNI  11  0 ATHENS/ALBANY                    OH      232   USR RQST 5-12
-000357   40.480  -111.430  K36U  11  0 HEBER VALLEY MUN APT             UT      171   USR RQST 5-12
+000357   40.480  -111.430  KHCR  11  0 HEBER VALLEY MUN APT             UT      171   USR RQST 5-12
 000358   33.020  -114.240  B40   11  0 YUMA                             AZ      303   DHS/AWC 8-13
 000359   31.490  -110.300  B41   11  0 FT HUACHUCA                      AZ     1482   DHS/AWC 8-13
 000360   32.020  -107.870  B42   11  0 DEMING                           NM     1293   DHS/AWC 8-13
@@ -215,6 +215,25 @@
 000508   36.770   -77.790  KLVL  12  0 LAWRENCEVILLE                    VA       81   USR RQST 2-18
 000509   43.780   -68.860  MSM1  20  0 MATINICUS ROCK                   --        0   USR RQST 2-18
 000510   38.400   -80.000  SNWS  12  0 SNOWSHOE                         WV     1478   USR RQST 2-18
+000511   35.100  -117.560  KEYX  12  0 BORON (NEXRAD)                   CA      846   USR RQST 11-19
+000512   43.370  -103.390  KHSR  12  0 HOT SPRINGS APT                  SD      960   USR RQST 11-19
+000513   44.410  -103.480  FTMS  12  0 FORT MEADE                       SD     1008   USR RQST 11-19 
+000514   42.210   -88.320  3CK   12  0 LAKE IN THE HILLS APT            IL      270   USR RQST 11-19
+000515   40.460   -88.100  PAXT  12  0 PAXTON                           IL      243   USR RQST 11-19
+000516   32.780   -79.920  CHTS  12  0 COOPER RIVER CHS                 SC        3   USR RQST 11-19
+000517   32.660   -79.930  FBIS  12  0 FOLLY ISLAND                     SC        5   USR RQST 11-19
+000518   32.030   -80.890  FPKG  12  0 FORT PULASKI                     GA       10   USR RQST 11-19
+000519   47.970  -117.430  KDEW  12  0 DEER PARK AIRPORT                WA      674   USR RQST 11-19
+000520   36.220   -81.100  KUKF  12  0 WILKES COUNTY AIRPORT            NC      397   USR RQST 11-19
+000521   42.470   -82.760  LSC   12  0 LAKE ST CLAIR                    MI      175   USR RQST 11-19
+000522   43.800   -83.720  SBL   12  0 INNER SAGINAW BAY                MI      180   USR RQST 11-19
+000523   44.020   -82.790  KP58  12  0 PORT HOPE                        MI      185   USR RQST 11-19
+000524   41.690   -87.150  BRHR  12  0 BURNS HARBOR                     IN      176   USR RQST 11-19
+000525   41.610   -88.100  KLOT  12  0 LEWIS UNIV APT                   IL      207   USR RQST 11-19
+000526   36.460   -80.550  KMWK  12  0 MT AIRY SURRY CO APT             NC      387   USR RQST 11-19
+000527   37.200  -112.990  ZION  12  0 ZION NTL PARK                    UT     1197   USR RQST 11-19
+000528   38.290  -111.260  CPRF  12  0 CAPITOL REEF NTL PARK            UT     1672   USR RQST 11-19
+000529   38.740  -112.100  KRIF  12  0 RICHFIELD MUNI                   UT     1615   USR RQST 11-19
 000601   37.200  -118.800  C01   12  0 NEAR YOSEMITE                    CA      293   GCIP 5-98
 000602   47.610  -103.260  C02   12  0 WOLFORD                          ND      762   GCIP 5-94
 000603   37.800   -97.010  C03   12  0 TOWANDA                          KS      390   GCIP 5-94
@@ -526,7 +545,10 @@
 041002   32.300   -75.200  B#2   20  0 BUOY  S HATTERAS                 --        0   3-93
 041004   32.500   -79.070  B#T   20  0 BUOY  E SAVANNAH                 --        0   OPC 11-03
 041006   29.300   -77.400  B#3   20  0 BUOY  E DAYTONA                  --        0   3-93
+041008   31.400   -80.870  B#10  20  0 BUOY  SE SAVANNAH   ATL          --        0   USR RQST 11-19
 041010   28.900   -78.500  B#4   20  0 BUOY  CANAVERAL EAST             --        0   NASA-JSC 3-93
+041029   32.800   -79.620  B#11  20  0 BUOY  CAPERS NEARSHORE   ATLA    --        0   USR RQST 11-19
+041033   32.280   -80.410  FRP2  20  0 BUOY  FRIPP NEARSHORE ATL        --        0   USR RQST 11-19
 042001   25.900   -89.700  B#5   22  0 BUOY  MID GULF OF MEX            --        0   FOUS(G2GFD) 3-93
 042002   25.900   -93.600  B#6   22  0 BUOY  W GULF OF MEX              --        0   FOUS(G2GFE) 3-93
 042003   25.900   -85.900  B#7   22  0 BUOY  E GULF OF MEX              --        0   NASA-JSCFOUS(B)
@@ -556,6 +578,7 @@
 045132   42.470   -81.220  LE2   20  0 BUOY  PORT STANLEY               --      174   6-02
 045139   43.400   -79.450  LO2   20  0 BUOY  WEST LAKE ONTARIO          --       75   6-02
 045142   42.740   -79.350  LE3   20  0 BUOY  PORT COLBORNE              --      174   6-02
+045174   42.140   -87.660  LM3   20  0 BUOY  WILMETTE BUOY LK MICH      --      176   USR RQST 11-19
 046002   42.500  -130.500  B#D   20  0 BUOY  OREGON                     --        0   3-93
 046005   46.100  -131.000  B#F   20  0 BUOY  WASHINGTON                 --        0   3-93
 046006   40.900  -137.500  B#G   20  0 BUOY  SE PAPA                    --        0   3-93
@@ -1337,6 +1360,7 @@
 727677   47.650  -101.430  N60   11  0 GARRISON                         ND      587   USR RQST 6-16
 727680   48.220  -106.620  KGGW  12  0 GLASGOW INTL ARPT                MT      700   UA NA110 FOUS TAF 2-99
 727684   47.330  -106.930  JDN   10  0 JORDAN                           MT      811   TAF 7-01
+727686   48.100  -105.580  KOLF  10  0 WOLF_POINT_INTL_(ASOS)           MT      605   URS RQST 11-19
 727687   47.700  -104.200  KSDY  10  0 SIDNEYRICHLAND                   MT      605   TAF 2-99
 727720   46.600  -112.000  KHLN  10  0 HELENA REGIONAL                  MT     1188   WRGN 8-97 TAF 2-99
 727730   46.920  -114.080  KMSO  10  0 MISSOULA/BELL FIELD              MT      972   TAF 2-99
@@ -1408,6 +1432,7 @@
 745510   39.580   -94.190  P#I   12  0 LTHM7 LATHROP                    MO      297   PROF
 745560   39.660   -90.480  P#J   12  0 WNCI2 WINCHESTER                 IL      170   PROF
 745600   40.150   -89.330  ILX   12  0 LINCOLN                          IL      176   GCIP 9-95
+745966   39.020   -74.920  KWWD  12  0 WILDWOOD                         NJ        7   USR RQST 11-19
 746120   35.680  -117.680  NID   10  0 CHINA LAKE (NAF)                 CA      696   FORMER UA 3-93
 746290   32.410  -106.350  P#L   12  0 WSMN5 WHITE SANDS MR             NM     1224   PROF
 746300   36.840  -107.910  P#M   12  0 AZCN5 AZTEC                      NM     1902   PROF
