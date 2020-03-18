@@ -107,6 +107,7 @@
 000236   38.690   -80.650  K48I  11  0 SUTTON                           WV      255   USR RQST 2-11
 000237   34.570  -117.670  KGXA  11  0 GRAY BUTTE FIELD                 CA      923   USR RQST 10-11
 000238   34.370  -117.360  EMF   11  0 EL MIRAGE FIELD                  CA      873   USR RQST 10-11
+000238   34.630  -117.610  EMF   11  0 EL MIRAGE FIELD                  CA      873   USR RQST 10-11
 000239   45.970   -86.170  KISQ  11  0 MANISTIQUE                       MI      209   USR RQST 10-11
 000240   46.420   -86.650  P53   11  0 MUNISING                         MI      187   USR RQST 10-11
 000241   39.160   -89.670  K3LF  11  0 LITCHFIELD                       IL      210   USR RQST 11-11
@@ -199,6 +200,7 @@
 000355   42.470   -73.290  KPSF  11  0 PITTSFIELD                       MA      364   USR RQST 5-12
 000356   39.210   -82.230  KUNI  11  0 ATHENS/ALBANY                    OH      232   USR RQST 5-12
 000357   40.480  -111.430  K36U  11  0 HEBER VALLEY MUN APT             UT      171   USR RQST 5-12
+000357   40.480  -111.430  KHCR  11  0 HEBER VALLEY MUN APT             UT      171   USR RQST 5-12
 000358   33.020  -114.240  B40   11  0 YUMA                             AZ      303   DHS/AWC 8-13
 000359   31.490  -110.300  B41   11  0 FT HUACHUCA                      AZ     1482   DHS/AWC 8-13
 000360   32.020  -107.870  B42   11  0 DEMING                           NM     1293   DHS/AWC 8-13
@@ -257,6 +259,25 @@
 000508   36.770   -77.790  KLVL  12  0 LAWRENCEVILLE                    VA       81   USR RQST 2-18
 000509   43.780   -68.860  MSM1  20  0 MATINICUS ROCK                   --        0   USR RQST 2-18
 000510   38.400   -80.000  SNWS  12  0 SNOWSHOE                         WV     1478   USR RQST 2-18
+000511   35.100  -117.560  KEYX  12  0 BORON (NEXRAD)                   CA      846   USR RQST 11-19
+000512   43.370  -103.390  KHSR  12  0 HOT SPRINGS APT                  SD      960   USR RQST 11-19
+000513   44.410  -103.480  FTMS  12  0 FORT MEADE                       SD     1008   USR RQST 11-19 
+000514   42.210   -88.320  3CK   12  0 LAKE IN THE HILLS APT            IL      270   USR RQST 11-19
+000515   40.460   -88.100  PAXT  12  0 PAXTON                           IL      243   USR RQST 11-19
+000516   32.780   -79.920  CHTS  12  0 COOPER RIVER CHS                 SC        3   USR RQST 11-19
+000517   32.660   -79.930  FBIS  12  0 FOLLY ISLAND                     SC        5   USR RQST 11-19
+000518   32.030   -80.890  FPKG  12  0 FORT PULASKI                     GA       10   USR RQST 11-19
+000519   47.970  -117.430  KDEW  12  0 DEER PARK AIRPORT                WA      674   USR RQST 11-19
+000520   36.220   -81.100  KUKF  12  0 WILKES COUNTY AIRPORT            NC      397   USR RQST 11-19
+000521   42.470   -82.760  LSC   12  0 LAKE ST CLAIR                    MI      175   USR RQST 11-19
+000522   43.800   -83.720  SBL   12  0 INNER SAGINAW BAY                MI      180   USR RQST 11-19
+000523   44.020   -82.790  KP58  12  0 PORT HOPE                        MI      185   USR RQST 11-19
+000524   41.690   -87.150  BRHR  12  0 BURNS HARBOR                     IN      176   USR RQST 11-19
+000525   41.610   -88.100  KLOT  12  0 LEWIS UNIV APT                   IL      207   USR RQST 11-19
+000526   36.460   -80.550  KMWK  12  0 MT AIRY SURRY CO APT             NC      387   USR RQST 11-19
+000527   37.200  -112.990  ZION  12  0 ZION NTL PARK                    UT     1197   USR RQST 11-19
+000528   38.290  -111.260  CPRF  12  0 CAPITOL REEF NTL PARK            UT     1672   USR RQST 11-19
+000529   38.740  -112.100  KRIF  12  0 RICHFIELD MUNI                   UT     1615   USR RQST 11-19
 000601   37.200  -118.800  C01   12  0 NEAR YOSEMITE                    CA      293   GCIP 5-98
 000602   47.610  -103.260  C02   12  0 WOLFORD                          ND      762   GCIP 5-94
 000603   37.800   -97.010  C03   12  0 TOWANDA                          KS      390   GCIP 5-94
@@ -634,6 +655,7 @@
 003772   51.290    -0.270  EGL   00  0 DON/HEATHROW                     UK       24   
 003957   52.250    -6.330  XBWI  00  0 SLARE IRELAND                    --       25   
 004018   63.970   -22.600  XEPE  00  0 LAVIK ICELAND                    --       37   
+006011   62.020     6.760  TOR   00  0 TOHORSHVAN, DENMARK               --      54   USR RQST 4-19
 006181   55.770    12.530  XNCW  00  0 ENHAVN DENMARK                   --       40   
 006200   52.030     4.350  XTFH  00  0 NBURG HOLLAND -2                 --        0   
 006451   50.900     4.470  XQVG  00  0 SSELS AEROPO                     RT       39   
@@ -643,6 +665,7 @@
 008160   41.670    -1.020  ZZA   00  0 AGOZA SPAIN                      --      257   NASA-JSC 3-93
 008397   37.170    -5.620  EMO   00  0 ON                               --       88   
 008594   16.750   -22.950  VAC   00  0 LCAR CABRAL(SA L)                --       54   
+011520   67.270    14.370  ENBO  00  0 BODO, NORWAY                     --        0   
 021982   70.970  -178.530  U#2   10  0 OSTROV VRANGELYA                 RU        3   UA ALA23 3-93
 025173   68.920  -179.480  UHMI  10  0 MYS SCHMIDT                      --        7   UA 2-95
 025399   66.170  -169.830  U#C   10  0 MYS WELLEN                       --        7   UA 2-95
@@ -650,13 +673,20 @@
 025563   64.730   177.500  UHAZ  10  0 ANADYR  RUSSIA                   RU        5   UA ALA23 3-93
 025677   63.050   179.320  U#6   10  0 UGOLNAJA  RUSSIA                 RU       85   UA ALA23 3-93
 028952   53.210    63.550  UAUU  00  0 TANAI                            KZ      182   NASA ISS 10-13
+030260   58.210     6.385  EGPO  00  0 STORNOWAY                        UK       15   
+034920   52.630     1.321  EGSH  00  0 NORWICH_WEA_CNTRE                UK       18   
 035363   50.220    66.830  ARK1  00  0 ALYK                             KZ      343   NASA ISS 10-13
 035394   49.800    73.150  UAKK  00  0 AGANDA                           KZ      553   NASA ISS 10-13
+038090   50.080    -5.250  EGDR  00  0 CULDROSE NAVY                    UK       82
+039170   54.650    -6.220  EGAA  00  0 BELFAST/ALDERGROVE               UK       81
 041001   34.900   -73.000  B#1   20  0 BUOY  E HATTERAS                 --        0   3-93
 041002   32.300   -75.200  B#2   20  0 BUOY  S HATTERAS                 --        0   3-93
 041004   32.500   -79.070  B#T   20  0 BUOY  E SAVANNAH                 --        0   OPC 11-03
 041006   29.300   -77.400  B#3   20  0 BUOY  E DAYTONA                  --        0   3-93
+041008   31.400   -80.870  B#10  20  0 BUOY  SE SAVANNAH   ATL          --        0   USR RQST 11-19
 041010   28.900   -78.500  B#4   20  0 BUOY  CANAVERAL EAST             --        0   NASA-JSC 3-93
+041029   32.800   -79.620  B#11  20  0 BUOY  CAPERS NEARSHORE   ATLA    --        0   USR RQST 11-19
+041033   32.280   -80.410  FRP2  20  0 BUOY  FRIPP NEARSHORE ATL        --        0   USR RQST 11-19
 042001   25.900   -89.700  B#5   22  0 BUOY  MID GULF OF MEX            --        0   FOUS(G2GFD) 3-93
 042002   25.900   -93.600  B#6   22  0 BUOY  W GULF OF MEX              --        0   FOUS(G2GFE) 3-93
 042003   25.900   -85.900  B#7   22  0 BUOY  E GULF OF MEX              --        0   NASA-JSCFOUS(B)
@@ -686,6 +716,7 @@
 045132   42.470   -81.220  LE2   20  0 BUOY  PORT STANLEY               --      174   6-02
 045139   43.400   -79.450  LO2   20  0 BUOY  WEST LAKE ONTARIO          --       75   6-02
 045142   42.740   -79.350  LE3   20  0 BUOY  PORT COLBORNE              --      174   6-02
+045174   42.140   -87.660  LM3   20  0 BUOY  WILMETTE BUOY LK MICH      --      176   USR RQST 11-19
 046001   56.300  -148.200  B#C   20  0 BUOY  GULF OF AK                 --        0   3-93
 046002   42.500  -130.500  B#D   20  0 BUOY  OREGON                     --        0   3-93
 046003   51.900  -155.900  B#E   20  0 BUOY  S ALEUTIANS                --        0   3-93
@@ -702,8 +733,11 @@
 051002   17.200  -157.800  B#N   20  0 BUOY  S OAHU                     --        0   4-93
 051003   19.300  -160.800  B#O   20  0 BUOY  S KAUAI                    --        0   4-93
 051004   17.400  -152.500  B#P   20  0 BUOY  SE HAWAII                  --        0   FOUS 4-93
+060800   55.630    12.670  EKEB  00  0 ESBJERG DENMARK                  --       10   
 062400   52.310     4.760  EHAM  00  0 TERDAM AIRPORT NETHERLAN -2 Kli  DS        0   
+062400   52.310     4.760  EHAM  00  0 TERDAM AIRPORT NETHERLANDS       --        0   
 062900   52.280     6.890  EHTW  00  0 CHEDE APT TWENTE NETHERLA        ND       35   LOWINSKI/UBIMET 05-11
+062900   52.280     6.890  EHTW  00  0 CHEDE APT TWENTE NETHERLANDS     --       35   LOWINSKI/UBIMET 05-11
 070341   59.770  -151.170  HOM   12  0 HMRA2 HOMER                      AK      296   PROF
 070930   48.980     6.250  LFJL  00  0 Z-NANCY-LORRAINE APT FRAN        CE      265   LOWINSKI/UBIMET 05-11
 072253   29.700   -98.010  SAT   12  0 AUSTIN/SAN ANTONIO               TX      219   WSR88D FOUS
@@ -742,24 +776,41 @@
 102240   53.050     8.790  EDDW  00  0 MEN AIRPORT GERMA                NY        4   LOWINSKI/UBIMET 05-11
 103840   52.470    13.400  XTXQ  00  0 LIN/TEMPELH                      OF       50   
 105130   50.870     7.150  DDK   00  0 N/BO                             NN       91   
+106370   50.050     8.580  XJEI  00  0 FRANKFURT_MAIN_ARPT              DE      112   
 106370   50.050     8.580  XJEI  00  0 NKFURT/MA                        IN      112   
+107380   48.680     9.220  EDDS  00  0 STUTTGART/ECHTERDI               DE      419
 108660   48.350    11.780  EDDM  00  0 CHEN/MUNICH ARPT GERMA           NY      453   KLIPFEL/DELTA 04-11
 110100   48.230    14.190  LOWL  00  0 Z/BLUE DANUBE ARPT AUSTR         IA      298   LOWINSKI/UBIMET 05-11
 110360   48.120    16.570  LOWW  10  0 VIEN                             NA      183   BAKER/UPS 11-08
+110360   48.120    16.570  LOWW  10  0 VIENNA/SCHWECHAT                 OS      183   BAKER/UPS 11-08
 115180   50.100    14.260  LKPR  00  0 HA/RUZYNE AIRPORT CZECH R        EP      380   LOWINSKI/UBIMET 05-11
+121500   54.380    18.470  XTRG  00  0 GDANSK/REBIECHOWO                PL      149   
 121500   54.380    18.470  XTRG  00  0 N                                SK      149   
 123750   52.170    20.970  EPWA  10  0 WARSAW/OKEC                      IE      107   BAKER/UPS 11-08
 124240   51.100    16.890  EPWR  00  0 ERNICUS ARPT WROCLOW POLA        ND      123   LOWINSKI/UBIMET 05-11
+124240   51.100    16.890  EPWR  00  0 WROCLAW/STRACHOWICE              PL      123   LOWINSKI/UBIMET 05-11
 128430   47.430    19.180  XGLD  00  0 APEST/LORI                       NC      140   
 132750   44.780    20.530  XGLV  00  0 GRA                              DE      243   
+133001   42.698    23.322  SOF   00  0 SOFIA, BULGARIA                  --      550   
+133001   42.698    23.322  SOF   00  0 SOFIA, BULGARIA                  BU      550   
+133002   42.505    27.463  BOJ   00  0 BURGAS, BULGARIA                 --       30  
+133002   42.505    27.463  BOJ   00  0 BURGAS, BULGARIA                 BU       30  
+133003   43.214    27.915  VAR   00  0 VARNA, BULGARIA                  --       54   
+133003   43.214    27.915  VAR   00  0 VARNA, BULGARIA                  BU       54   
+133004   42.135    24.745  PDV   00  0 PLOVDIV, BULGARIA                --      164
+133004   42.135    24.745  PDV   00  0 PLOVDIV, BULGARIA                BU      164
 154210   44.570    26.090  LROP  00  0 COANDA ARPT ROMAN                IA       96   LOWINSKI/UBIMET 05-11
+154210   44.570    26.090  LROP  00  0 COANDA ARPT ROMANIA              RO       96   LOWINSKI/UBIMET 05-11
+161050   45.500    12.330  LIPZ  10  0 VENICE/MARCO POLO INT            IY        2   BAKER/UPS 11-08
 161050   45.500    12.330  LIPZ  10  0 VENICE/MARCO POLO INT 'L         --        2   BAKER/UPS 11-08
 162390   41.800    12.600  LIRA  10  0 ROME/CIAMPI                      NO      130   BAKER/UPS 11-08
 162420   41.800    12.230  LIRF  00  0 A FIUMICINO ITA                  LY        2   KLIPFEL/DELTA 04-11
 167460   35.530    24.150  GSA   00  0 CRETE                            DA        0   
 170620   40.970    29.080  XVWN  00  0 ANBUL/GOZTE                      PE       40   
+171280   40.130    33.000  TAC   00  0 ANKARA/ESENBOGA                  TU      949   
 171280   40.130    33.000  TAC   00  0 ARA/ESENBO                       GA      949   
 172800   37.750    40.200  TCC   00  0 ARKAB                            IR      667   
+172800   37.750    40.200  TCC   00  0 DIYARBAKIR CIV/AFB               TU      667   
 176060   35.150    33.280  XROO  00  0 IA                               --      224   
 255940   64.430  -173.230  UHMD  10  0 PROVIDENJA BAY                   HA        3   UA ALA23 3-93
 260630   59.580    30.180  XWOR  00  0 INGR                             AD        4   
@@ -805,6 +856,8 @@
 486010    5.300   100.270  WMKP  10  0 PENANG INT'L                     PT        3   BAKER/UPS 11-08
 486470    2.750   101.720  WMKK  10  0 KUALA LUMPUR INT'L               PT       21   BAKER/UPS 11-08
 486870    1.380   103.720  XCCE  00  0 GAPORE/TENG                      AH       15   
+488100   22.803   104.978  HANG  00  0 HA GIANG, VIETNAM                VN      117   ROZ ASSIGNED STID
+488100   22.803   104.978  HANG  00  0 HA GIANG, VIETNAM                VN     1946   ROZ ASSIGNED STID
 488200   21.020   105.800  XMXC  00  0 OI/GIAL                          AM        9   
 489000   10.820   106.670  XAUT  00  0 GON (HO CHI MINH VILL E)         --        6   
 503530   51.720   126.650  XHEW  00  0 A CHINA                          --      178   
@@ -812,6 +865,7 @@
 548570   36.070   120.330  ZSQD  10  0 QINGDAO LIUTING INT'L            PT       77   BAKER/UPS 11-08
 562940   30.670   104.020  XLIC  00  0 NGDU CHINA                       --      508   
 570360   34.300   108.930  XYBH  00  0 N CHINA                          --      398   
+570831   34.520   113.830  ZHCC  00  0 ZHENGZHOU XINZHENG APT CHINA     --      400   
 583670   31.170   121.430  XBNI  00  0 NGHAI CHINA                      --        5   
 600300   27.930   -15.380  CLP   00  0 PALMAS/GAN                       DO       25   
 601550   33.570    -7.670  XSCW  00  0 ABLANCA MOROCCO                  --       61   
@@ -1673,6 +1727,7 @@
 727677   47.650  -101.430  N60   11  0 GARRISON                         ND      587   USR RQST 6-16
 727680   48.220  -106.620  KGGW  12  0 GLASGOW INTL ARPT                MT      700   UA NA110 FOUS TAF 2-99
 727684   47.330  -106.930  JDN   10  0 JORDAN                           MT      811   TAF 7-01
+727686   48.100  -105.580  KOLF  10  0 WOLF_POINT_INTL_(ASOS)           MT      605   URS RQST 11-19
 727687   47.700  -104.200  KSDY  10  0 SIDNEYRICHLAND                   MT      605   TAF 2-99
 727720   46.600  -112.000  KHLN  10  0 HELENA REGIONAL                  MT     1188   WRGN 8-97 TAF 2-99
 727730   46.920  -114.080  KMSO  10  0 MISSOULA/BELL FIELD              MT      972   TAF 2-99
@@ -1747,6 +1802,7 @@
 745510   39.580   -94.190  P#I   12  0 LTHM7 LATHROP                    MO      297   PROF
 745560   39.660   -90.480  P#J   12  0 WNCI2 WINCHESTER                 IL      170   PROF
 745600   40.150   -89.330  ILX   12  0 LINCOLN                          IL      176   GCIP 9-95
+745966   39.020   -74.920  KWWD  12  0 WILDWOOD                         NJ        7   USR RQST 11-19
 746120   35.680  -117.680  NID   10  0 CHINA LAKE (NAF)                 CA      696   FORMER UA 3-93
 746290   32.410  -106.350  P#L   12  0 WSMN5 WHITE SANDS MR             NM     1224   PROF
 746300   36.840  -107.910  P#M   12  0 AZCN5 AZTEC                      NM     1902   PROF
@@ -2050,6 +2106,7 @@
 999360   64.600  -147.000  PAEI  00  0 LSON ALASKA (4NASA)              --      167   
 999370   34.800  -120.600  KVBG  00  0 DENBERG (4NASA)                  CA      112   
 999380   34.600  -118.100  KPMD  00  0 MDALE (4NASA)                    CA      775   
+999390   40.190  -113.470  DGWY  11  0 DUGWAY PROVING GROUND            UT     1296  
 999400   34.950    69.270  OAIX  00  0 RAM (USAF reques t)              --      149   LENHART 8-06
 999440   52.830    -1.320  EGNX  10  0 EAST MIDLAN                      DS       95   BAKER/UPS 11-08
 999530    9.010     7.260  DNAA  00  0 MDI AZIKIWE ARPT NIGER           IA      342   KLIPFEL/DELTA 04-11
@@ -2064,9 +2121,5 @@
 999909   17.850   -66.520  PSE   00  0 PONCE,PUERTO RICO                PR        0   TAF PR 2-99
 999911   18.170   -67.150  MAZ   00  0 MAYAGUEZ,PUERTO RICO             PR        0   TAF PR 2-99
 999912   35.250   -93.090  RUE   10  0 RUSSELLVILLE MCPL                AR      120   WEISS 2-99
-133001 00.00N  00.00W SOF SOFIA, BULGARIA
-133002 00.00N  00.00W BOJ BURGAS, BULGARIA
-133003 00.00N  00.00W VAR VARNA, BULGARIA
-133004 00.00N  00.00W PDV PLOVDIV, BULGARIA
-488100 00.00N  00.00W 488100 HA GIANG, VIETNAM
-
+999913  -15.510   128.150  WYN   00  0 WYNDHAM AERODROME AUSTRAILIA     --        0   USR RQST 1-19
+999914   57.480    -7.360  EGPL  00  0 BENBECULA, SCOTLAND              UK        6   USR RQST 1-19

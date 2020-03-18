@@ -1,3 +1,15 @@
+
+  24 February 2020 - The New Station Lists+  Release
+
+  *  Updated station lists for the gfs, hiresw, hrrr, nam, namnest, and rap BUFR datasets.
+
+  *  Added the sref mean as a separate BUFR dataset, "--dset srefmean". The SREF mean is
+     also (still) included as part of the SREF dataset, --dset sref.
+
+  *  Finally corrected the STID for Dillon airport, MT (KLDN -> KDLN) in each station file.
+     Thanks to Brett McDonald for annually bringing this issue to my attention.
+     
+
 #---------------------------------------------------------------------------------------------
 #
   12 June 2019 - The FV3 Update release

@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  19.24.4
-#      CREATED:  13 June 2019
+#      VERSION:  20.09.2
+#      CREATED:  25 February 2020
 #===============================================================================
 #
 package Method;
