@@ -1,4 +1,27 @@
 
+  30 December 2020 - The "This goes to 21!" Release
+
+  *  Recompiled the routines used to create BUFKIT files with an updated version of
+     the NCEP BUFR libraries. The old libs assumed a year ending in "21" or later 
+     should be set to "1921" (or later), which seemed like a good idea when the
+	 code was previously updated to avoid the Y2K crisis.
+
+  *  Updated the ruc and hrrr bufrinfo.conf files to handle the increased forecast
+     lengths (cycle dependent):
+
+	 RAP:  Now a maximum of 52 forecast hours (03, 09, 15, and 21 UTC)
+	 HRRR: Now a maximum of 49 forecast hours (00, 06, 12, and 18 UTC)
+
+  *  Cleaned up the bufrinfo.conf files of redundant SERVER entries
+
+  Many thanks to Bruce Hebbard of NCEP/NCO/SDB for letting me know which source files
+  needed to be changed to correct the 2021 issue. 
+
+
+
+
+#---------------------------------------------------------------------------------------------
+#
   24 February 2020 - The New Station Lists+  Release
 
   *  Updated station lists for the gfs, hiresw, hrrr, nam, namnest, and rap BUFR datasets.
