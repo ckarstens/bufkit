@@ -37,12 +37,13 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
     # gfs/prod/gfs.20190814/06/gfs.t06z.bufrsnd.tar.gz
     # nam/prod/nam.20190814/nam.t00z.tm00.bufrsnd.tar.gz
     model1 = model if model != "nam4km" else "nam"
-    url = "%s/%s/prod/%s.%s/%s%s%s.t%02iz.%sbufrsnd%s.tar.gz" % (
+    url = "%s/%s/prod/%s.%s/%s%s%s%s.t%02iz.%sbufrsnd%s.tar.gz" % (
         BASEURL,
         model1,
         model1,
         valid.strftime("%Y%m%d"),
         "%02i/" % (valid.hour,) if model == "gfs" else "",
+        "atmos/" if model1 == "gfs" else "",
         "conus/" if model == "hrrr" else "",
         model1,
         valid.hour,
