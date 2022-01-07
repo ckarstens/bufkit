@@ -14,7 +14,10 @@ from tqdm import tqdm
 from pyiem.util import logger, utc, exponential_backoff
 
 LOG = logger()
-BASEURL = "https://ftpprd.ncep.noaa.gov/data/nccf/com"
+SERVICES = [
+    "https://nomads.ncep.noaa.gov/pub/data/nccf/com",
+    "https://ftpprd.ncep.noaa.gov/data/nccf/com",
+]
 TEMPBASE = "/tmp"
 
 
@@ -37,30 +40,35 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
     # gfs/prod/gfs.20190814/06/gfs.t06z.bufrsnd.tar.gz
     # nam/prod/nam.20190814/nam.t00z.tm00.bufrsnd.tar.gz
     model1 = model if model != "nam4km" else "nam"
-    url = "%s/%s/prod/%s.%s/%s%s%s%s.t%02iz.%sbufrsnd%s.tar.gz" % (
-        BASEURL,
-        model1,
-        model1,
-        valid.strftime("%Y%m%d"),
-        "%02i/" % (valid.hour,) if model == "gfs" else "",
-        "atmos/" if model1 == "gfs" else "",
-        "conus/" if model == "hrrr" else "",
-        model1,
-        valid.hour,
-        "tm00." if model1 == "nam" else "",
-        extra,
-    )
     localfn = "%s/bufrsnd%s.tar.gz" % (tmpdir, extra)
     attempt = 1
     while not os.path.isfile(localfn) and attempt < 60:
+        # Flip/flop between the two services
+        url = "%s/%s/prod/%s.%s/%s%s%s%s.t%02iz.%sbufrsnd%s.tar.gz" % (
+            SERVICES[attempt % 2],
+            model1,
+            model1,
+            valid.strftime("%Y%m%d"),
+            "%02i/" % (valid.hour,) if model == "gfs" else "",
+            "atmos/" if model1 == "gfs" else "",
+            "conus/" if model == "hrrr" else "",
+            model1,
+            valid.hour,
+            "tm00." if model1 == "nam" else "",
+            extra,
+        )
         LOG.info("attempt %s at fetching %s", attempt, url)
-        req = exponential_backoff(requests.get, url, timeout=60, stream=True)
+        # Fast fail on first attempt
+        tmt = 5 if attempt < 3 else 60
+        req = exponential_backoff(requests.get, url, timeout=tmt, stream=True)
         if req is None or req.status_code != 200:
             LOG.info(
                 "download failed, sleeping 120s, response_code: %s",
                 None if req is None else req.status_code,
             )
-            time.sleep(120)
+            # Fast iterate on the first attempt
+            if attempt > 1:
+                time.sleep(120)
         elif req and req.status_code == 200:
             with open(localfn, "wb") as fh:
                 for chunk in req.iter_content(chunk_size=1024):
