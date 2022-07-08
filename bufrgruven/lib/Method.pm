@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  20.53.3
-#      CREATED:  30 December 2020
+#      VERSION:  21.19.4
+#      CREATED:  13 May 2021
 #===============================================================================
 #
 package Method;
@@ -95,7 +95,7 @@ sub http {
 
 
         system($rhttp{wget} ? "$rhttp{wget} -a $log -L -nv --connect-timeout=30 --read-timeout=1200 -t 3 -O $lfile http://$host$rfile" :
-                              "$rhttp{curl} -s -f --connect-timeout 30 --max-time 1200  http://$host$rfile -o $lfile >& $log");
+                              "$rhttp{curl} -s -f -L --connect-timeout 30 --max-time 1200  http://$host$rfile -o $lfile >& $log");
 
         my $status = $? >> 8; &Love::int_handle if $status == 2;
 
@@ -210,7 +210,7 @@ sub https {
         my $log  = "$Bgruven{GRUVEN}->{DIRS}{logs}/download_https.log.$$";
 
         system($rhttp{wget} ? "$rhttp{wget} -a $log --no-check-certificate -L -nv --connect-timeout=30 --read-timeout=1200 -t 3 -O $lfile https://$host$rfile" :
-                              "$rhttp{curl} -s -f -k --connect-timeout 30 --max-time 1200  https://$host$rfile -o $lfile >& $log");
+                              "$rhttp{curl} -s -f -L -k --connect-timeout 30 --max-time 1200  https://$host$rfile -o $lfile >& $log");
 
         my $status = $? >> 8; &Love::int_handle if $status == 2;
 
@@ -436,9 +436,9 @@ sub available {
         my $copts = "--connect-timeout $tv -sI";
 
         if ($meth =~ /https/i) {
-            system($rhttp{wget} ? "$rhttp{wget} -o $log --no-check-certificate $wopts  https://$host$file" : "$rhttp{curl} -o $log -k $copts https://$host$file");
+            system($rhttp{wget} ? "$rhttp{wget} -o $log --no-check-certificate $wopts  https://$host$file" : "$rhttp{curl} -L -o $log -k $copts https://$host$file");
         } else {
-            system($rhttp{wget} ? "$rhttp{wget} -o $log $wopts  http://$host$file" : "$rhttp{curl} -o $log $copts  http://$host$file");
+            system($rhttp{wget} ? "$rhttp{wget} -o $log $wopts  http://$host$file" : "$rhttp{curl} -L -o $log $copts  http://$host$file");
         }
 
         if (-s $log) {open OF => $log; while (<OF>) {@size = split ' ', $_ if s/Content-Length:|Length://i;} close OF;}

@@ -1,3 +1,28 @@
+  12 May 2021 - The "Out with the NMM-B, in with FV3" Release
+
+    * Added support for the hi-res window run of the FV3 (hrwfv3), which is replacing the 
+	  NMM-B as of ... yesterday.   
+
+    *  Decreased the DELAY parameter for the hi-res window ARW (hrwarw) BUFR files from 5 to 3 hours
+
+    *  Decreased the DELAY parameter for the SREF and SREFMEAN BUFR files from 4 to 3 hours
+
+	*  Removed the configuration files for the parallel runs from the conf/ directory.
+	   The files are still available, just contact me.
+
+
+  23 March 2021 - The "Change in Protocol" Release
+
+    *  Change from HTTP to HTTPS as the protocol used when accessing the EMS family of
+	   servers.  Previous Bgruven installations are probably failing as I write.
+
+    *  Updated the GFS bufrinfo files to reflect the change in path on the NCEP 
+	   servers.  
+
+    *  Turned ON SREFMEAN bufr files for all NCEP servers, i.e., "--dset srefmean" 
+
+#---------------------------------------------------------------------------------------------
+#
 
   30 December 2020 - The "This goes to 21!" Release
 

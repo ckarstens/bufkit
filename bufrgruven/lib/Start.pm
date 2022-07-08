@@ -8,8 +8,8 @@
 #
 #
 #       AUTHOR:  Robert Rozumalski - NWS
-#      VERSION:  20.53.3
-#      CREATED:  30 December 2020
+#      VERSION:  21.19.4
+#      CREATED:  13 May 2021
 #===============================================================================
 #
 package Start;
@@ -132,9 +132,13 @@ sub initialize {
     #  Determine what model bufr data sets are supported by extracting the names
     #  names from the _bufrinfo.conf files in the conf directory.
     #
+    @{$bgruven{DSETS}} = ();
+
     opendir(DIR,$bgruven{DIRS}{conf});
     my $key = "_bufrinfo.conf";
     foreach (readdir(DIR)) {next unless s/$key$//g;push @{$bgruven{DSETS}} => $_;} close DIR;
+
+    unless (@{$bgruven{DSETS}}) {$mesg = "Unable to locate any BUFR configuration files under conf/"; return;}
 
 
     #  Define the directory where all the data processing will initially take place. Note
