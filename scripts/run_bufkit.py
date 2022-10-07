@@ -23,11 +23,11 @@ TEMPBASE = "/tmp"
 
 def create_tempdirs(mybase, model, valid):
     """Generate our needed temp folders for running."""
-    basedir = "%s/bufkit_%s_%s" % (mybase, model, valid.strftime("%Y%m%d%H"))
+    basedir = f"{mybase}/bufkit_{model}_{valid:%Y%m%d%H}"
     if not os.path.isdir(basedir):
         os.makedirs(basedir)
-    for subdir in ["ascii", "bufkit", "bufr", "cobb", "extracted", "gempak", "logs"]:
-        newdir = "%s/%s" % (basedir, subdir)
+    for subdir in "ascii bufkit bufr cobb extracted gempak logs".split():
+        newdir = os.path.join(basedir, subdir)
         if not os.path.isdir(newdir):
             os.makedirs(newdir)
     LOG.debug("Using %s has a temporary folder.", basedir)
@@ -40,22 +40,16 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
     # gfs/prod/gfs.20190814/06/gfs.t06z.bufrsnd.tar.gz
     # nam/prod/nam.20190814/nam.t00z.tm00.bufrsnd.tar.gz
     model1 = model if model != "nam4km" else "nam"
-    localfn = "%s/bufrsnd%s.tar.gz" % (tmpdir, extra)
+    localfn = f"{tmpdir}/bufrsnd{extra}.tar.gz"
     attempt = 1
     while not os.path.isfile(localfn) and attempt < 60:
         # Flip/flop between the two services
-        url = "%s/%s/prod/%s.%s/%s%s%s%s.t%02iz.%sbufrsnd%s.tar.gz" % (
-            SERVICES[attempt % 2],
-            model1,
-            model1,
-            valid.strftime("%Y%m%d"),
-            "%02i/" % (valid.hour,) if model == "gfs" else "",
-            "atmos/" if model1 == "gfs" else "",
-            "conus/" if model == "hrrr" else "",
-            model1,
-            valid.hour,
-            "tm00." if model1 == "nam" else "",
-            extra,
+        p1 = f"{valid:%H}/" if model == "gfs" else ""
+        url = (
+            f"{SERVICES[attempt % 2]}/{model1}/prod/{model1}.{valid:%Y%m%d}/"
+            f"{p1}{'atmos/' if model1 == 'gfs' else ''}"
+            f"{'conus/' if model == 'hrrr' else ''}{model1}.t{valid:%H}z."
+            f"{'tm00.' if model1 == 'nam' else ''}bufrsnd{extra}.tar.gz"
         )
         LOG.info("attempt %s at fetching %s", attempt, url)
         # Fast fail on first attempt
@@ -77,14 +71,14 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
         attempt += 1
 
     LOG.info("Extracting %s", localfn)
-    subprocess.call("tar -C %s/extracted -xzf %s" % (tmpdir, localfn), shell=True)
+    subprocess.call(f"tar -C {tmpdir}/extracted -xzf {localfn}", shell=True)
 
 
 def load_stations(model):
     """Load up our station metadata and return xref."""
-    fn = "bufrgruven/stations/%s_bufrstations.txt" % (model,)
+    fn = f"bufrgruven/stations/{model}_bufrstations.txt"
     stations = {}
-    with open(fn) as fh:
+    with open(fn, encoding="ascii") as fh:
         for line in fh:
             tokens = line.split()
             if len(tokens) < 4:
@@ -96,40 +90,37 @@ def load_stations(model):
 
 def run_bufrgruven(tmpdir, model, valid, sid, icao):
     """Run bufrgruven.pl please."""
-    bufrfn = "%s/extracted/bufr.%s.%s" % (tmpdir, sid, valid.strftime("%Y%m%d%H"))
+    bufrfn = f"{tmpdir}/extracted/bufr.{sid}.{valid:%Y%m%d%H}"
     if not os.path.isfile(bufrfn):
         LOG.info("%s not found for bufrgruven", bufrfn)
         return False
     # remove an already existing bufr file, if it is there
-    fn = "%s/bufr/%s.%s.%s" % (tmpdir, model, sid, valid.strftime("%Y%m%d%H"))
+    fn = f"{tmpdir}/bufr/{model}.{sid}.{valid:%Y%m%d%H}"
     if os.path.isfile(fn):
         os.unlink(fn)
     cmd = (
-        "perl bufrgruven/bufr_gruven.pl --dset %s "
-        "--nfs %s/extracted/bufr.STNM.YYYYMMDDCC "
-        "--date %s --cycle %02i --noascii "
-        "--metdat %s "
-        "--stations %s --nozipit"
-    ) % (model, tmpdir, valid.strftime("%Y%m%d"), valid.hour, tmpdir, icao)
-    proc = subprocess.Popen(
-        cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
+        f"perl bufrgruven/bufr_gruven.pl --dset {model} "
+        f"--nfs {tmpdir}/extracted/bufr.STNM.YYYYMMDDCC "
+        f"--date {valid:%Y%m%d} --cycle {valid:%H} --noascii "
+        f"--metdat {tmpdir} "
+        f"--stations {icao} --nozipit"
     )
-    out, err = proc.communicate()
-    if proc.returncode != 0:
-        with open("%s/logs/%s.log" % (tmpdir, icao), "w") as fh:
-            fh.write(
-                "Cmd: %s\nStandard Out:\n%sStandard Err:\n%s"
-                % (cmd, out.decode("ascii", "ignore"), err.decode("ascii", "ignore"))
-            )
-        return False
+    with subprocess.Popen(
+        cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
+    ) as proc:
+        out, err = proc.communicate()
+        if proc.returncode != 0:
+            logfn = f"{tmpdir}/logs/{icao}.log"
+            with open(logfn, "w", encoding="ascii") as fh:
+                fh.write(
+                    f"Cmd: {cmd}\n"
+                    f"Standard Out:\n{out.decode('ascii', 'ignore')}"
+                    f"Standard Err:\n{err.decode('ascii', 'ignore')}"
+                )
+            return False
     # Remove GEMPAK Files as they seem to cause troubles if left laying around
     for suffix in ["sfc", "snd", "sfc_aux"]:
-        fn = "%s/gempak/%s_%s_bufr.%s" % (
-            tmpdir,
-            valid.strftime("%Y%m%d%H"),
-            model,
-            suffix,
-        )
+        fn = f"{tmpdir}/gempak/{valid:%Y%m%d%H}_{model}_bufr.{suffix}"
         if os.path.isfile(fn):
             os.unlink(fn)
     return True
@@ -137,23 +128,26 @@ def run_bufrgruven(tmpdir, model, valid, sid, icao):
 
 def run_cobb(tmpdir, model, icao):
     """Run cobb.pl please."""
-    bufrfn = "%s/bufkit/%s_%s.buf" % (tmpdir, model, icao)
+    bufrfn = f"{tmpdir}/bufkit/{model}_{icao}.buf"
     if not os.path.isfile(bufrfn):
         return
-    cmd = ("perl cobb/cobb.pl %s %s %s/bufkit") % (icao, model, tmpdir)
+    cmd = f"perl cobb/cobb.pl {icao} {model} {tmpdir}/bufkit"
     proc = subprocess.Popen(
         cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
     )
     out, err = proc.communicate()
     result = out.decode("ascii")
     if proc.returncode != 0 or len(result) < 1000:
-        with open("%s/logs/cobb_%s.log" % (tmpdir, icao), "w") as fh:
+        logfn = f"{tmpdir}/logs/cobb_{icao}.log"
+        with open(logfn, "w", encoding="ascii") as fh:
             fh.write(
-                "Cmd: %s\nStandard Out:\n%sStandard Err:\n%s"
-                % (cmd, out.decode("ascii", "ignore"), err.decode("ascii", "ignore"))
+                f"Cmd: {cmd}\n"
+                f"Standard Out:\n{out.decode('ascii', 'ignore')}"
+                f"Standard Err:\n{err.decode('ascii', 'ignore')}"
             )
     else:
-        with open("%s/cobb/%s_%s.dat" % (tmpdir, model, icao), "w") as fh:
+        cfn = f"{tmpdir}/cobb/{model}_{icao}.dat"
+        with open(cfn, "w", encoding="ascii") as fh:
             fh.write(result)
 
 
@@ -163,88 +157,70 @@ def insert_ldm_bufkit(tmpdir, model, valid, icao, backfill):
     Args:
       backfill (bool): If True, the LDM insert flags as archive only
     """
-    filename = "%s/bufkit/%s_%s.buf" % (tmpdir, model, icao)
+    filename = f"{tmpdir}/bufkit/{model}_{icao}.buf"
     if not os.path.isfile(filename):
         return
-    model1 = "%s%s" % (
-        model,
-        "m" if valid.hour in [6, 18] and model in ["gfs", "nam"] else "",
-    )
+    p1 = "m" if valid.hour in [6, 18] and model in ["gfs", "nam"] else ""
+    model1 = f"{model}{p1}"
     model2 = "gfs3" if model == "gfs" else model1
     # place a 'cache-buster' LDM product name on the end as we are inserting
     # with -i, so the product name is used to compute the MD5
     flag = "ac" if not backfill else "a"
     archivefn = get_archive_bufkit_filename(model, valid, icao)
     cmd = (
-        "/home/meteor_ldm/bin/pqinsert -i -p 'bufkit %s %s "
-        "bufkit/%s/%s_%s.buf bufkit/%s bogus%s' %s"
-    ) % (
-        flag,
-        valid.strftime("%Y%m%d%H%M"),
-        model1,
-        model2,
-        icao,
-        archivefn,
-        utc().strftime("%Y%m%d%H%M%S"),
-        filename,
+        f"pqinsert -i -p 'bufkit {flag} {valid:%Y%m%d%H%M} "
+        f"bufkit/{model1}/{model2}_{icao}.buf bufkit/{archivefn} "
+        f"bogus{utc():%Y%m%d%H%M%S}' {filename}"
     )
-    proc = subprocess.Popen(
+    with subprocess.Popen(
         cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
-    )
-    out, err = proc.communicate()
-    if proc.returncode != 0:
-        with open("%s/logs/ldmbufkit_%s.log" % (tmpdir, icao), "w") as fh:
-            fh.write(
-                "Standard Out:\n%sStandard Err:\n%s"
-                % (out.decode("ascii", "ignore"), err.decode("ascii", "ignore"))
-            )
+    ) as proc:
+        out, err = proc.communicate()
+        if proc.returncode != 0:
+            logfn = f"{tmpdir}/logs/ldmbufkit_{icao}.log"
+            with open(logfn, "w", encoding="ascii") as fh:
+                fh.write(
+                    f"Standard Out:\n{out.decode('ascii', 'ignore')}"
+                    f"Standard Err:\n{err.decode('ascii', 'ignore')}"
+                )
 
 
 def insert_ldm_cobb(tmpdir, model, valid, icao):
     """Send this product away for LTS."""
-    filename = "%s/cobb/%s_%s.dat" % (tmpdir, model, icao)
+    filename = f"{tmpdir}/cobb/{model}_{icao}.dat"
     if not os.path.isfile(filename):
         return
     # place a 'cache-buster' LDM product name on the end as we are inserting
     # with -i, so the product name is used to compute the MD5
     model2 = "gfs3" if model == "gfs" else model
     cmd = (
-        "/home/meteor_ldm/bin/pqinsert -i -p 'bufkit c %s "
-        "cobb/%02i/%s/%s_%s.dat cobb/%02i/%s/%s_%s.dat bogus%s' %s"
-    ) % (
-        valid.strftime("%Y%m%d%H%M"),
-        valid.hour,
-        model,
-        model2,
-        icao,
-        valid.hour,
-        model,
-        model,
-        icao,
-        utc().strftime("%Y%m%d%H%M%S"),
-        filename,
+        f"pqinsert -i -p 'bufkit c {valid:%Y%m%d%H%M} "
+        f"cobb/{valid:%H}/{model}/{model2}_{icao}.dat "
+        f"cobb/{valid:%H}/{model}/{model}_{icao}.dat "
+        f"bogus{utc():%Y%m%d%H%M%S}' {filename}"
     )
     proc = subprocess.Popen(
         cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
     )
     out, err = proc.communicate()
     if proc.returncode != 0:
-        with open("%s/logs/ldmcobb_%s.log" % (tmpdir, icao), "w") as fh:
+        logfn = f"{tmpdir}/logs/ldmcobb_{icao}.log"
+        with open(logfn, "w", encoding="ascii") as fh:
             fh.write(
-                "Standard Out:\n%sStandard Err:\n%s"
-                % (out.decode("ascii", "ignore"), err.decode("ascii", "ignore"))
+                f"Standard Out:\n{out.decode('ascii', 'ignore')}"
+                f"Standard Err:\n{err.decode('ascii', 'ignore')}"
             )
 
 
 def delete_files(tmpdir, model, valid, sid, icao):
     """Need to cleanup after ourselves due to bufrgruven issues."""
-    fn = "%s/bufkit/%s_%s.buf" % (tmpdir, model, icao)
+    fn = f"{tmpdir}/bufkit/{model}_{icao}.buf"
     if os.path.isfile(fn):
         os.unlink(fn)
-    fn = "%s/bufkit/%s.%s_%s.buf" % (tmpdir, valid.strftime("%Y%m%d%H"), model, icao)
+    fn = f"{tmpdir}/bufkit/{valid:%Y%m%d%H}.{model}_{icao}.buf"
     if os.path.isfile(fn):
         os.unlink(fn)
-    fn = "%s/bufr/%s.%s.%s" % (tmpdir, model, sid, valid.strftime("%Y%m%d%H"))
+    fn = f"{tmpdir}/bufr/{model}.{sid}.{valid:%Y%m%d%H}"
     if os.path.isfile(fn):
         os.unlink(fn)
 
@@ -259,7 +235,10 @@ def rectify_cwd():
 def workflow(args, model, valid, backfill):
     """Atomic workflow."""
     LOG.info(
-        "Starting workflow model: %s valid: %s backfill: %s", model, valid, backfill
+        "Starting workflow model: %s valid: %s backfill: %s",
+        model,
+        valid,
+        backfill,
     )
     # 1 Create metdat temp folder
     tmpdir = create_tempdirs(args.tmpdir, model, valid)
@@ -286,7 +265,7 @@ def workflow(args, model, valid, backfill):
     # 5. cleanup
     if not args.nocleanup:
         LOG.info("Blowing out tempdir: %s", tmpdir)
-        subprocess.call("rm -rf %s" % (tmpdir,), shell=True)
+        subprocess.call(f"rm -rf {tmpdir}", shell=True)
 
 
 def get_archive_bufkit_filename(model, valid, icao):
@@ -300,25 +279,33 @@ def get_archive_bufkit_filename(model, valid, icao):
         model1 = "namm"
     elif model == "gfs":
         model1 = "gfs3"
-    return "%02i/%s/%s_%s.buf" % (valid.hour, model, model1, icao)
+    return f"{valid:%H}/{model}/{model1}_{icao}.buf"
 
 
 def main():
     """Our Main Method."""
     parser = argparse.ArgumentParser(description="Generate BufKit+Cobb Data.")
-    parser.add_argument("model", help="model identifier to run this script for.")
+    parser.add_argument(
+        "model", help="model identifier to run this script for."
+    )
     parser.add_argument("year", type=int, help="UTC Year")
     parser.add_argument("month", type=int, help="UTC Month")
     parser.add_argument("day", type=int, help="UTC Day")
     parser.add_argument("hour", type=int, help="UTC Hour")
     parser.add_argument(
-        "--nocleanup", help="Leave temporary folder in-tact.", action="store_true"
+        "--nocleanup",
+        help="Leave temporary folder in-tact.",
+        action="store_true",
     )
     parser.add_argument(
-        "--backfill", help="Mark as a backfilling operation.", action="store_true"
+        "--backfill",
+        help="Mark as a backfilling operation.",
+        action="store_true",
     )
     parser.add_argument(
-        "--tmpdir", default=TEMPBASE, help="Base directory to store temporary files."
+        "--tmpdir",
+        default=TEMPBASE,
+        help="Base directory to store temporary files.",
     )
 
     args = parser.parse_args()
