@@ -1,5 +1,3 @@
-import os, sys
-
 files = [
     "bgruven/bufrgruven/stations/gfs3_bufrstations.txt",
     "bgruven/bufrgruven/stations/nam_bufrstations.txt",
@@ -16,7 +14,6 @@ for f in files:
     fh.close()
 
     for line in lines:
-        # 000001   69.580  -140.180  YAJ   11  0 KOMAKUK                          YT       19     0 MAGS 9-95
         s = line.split()
         sNum = s[0]
         lat = s[1]
@@ -24,9 +21,8 @@ for f in files:
         site = s[3].lower()
         d[model][site] = {"sNum": sNum, "lat": lat, "lon": lon}
 
-# echo "".$lat[$i].",".$lon[$i].",".$sites[$i].",".$ewrf_sites[$i].",".$gfs.",".$nam.",".$ruc.",".$sref."\n";
 
-l = []
+ll = []
 sites = []
 ewrf = "---"
 sref = "---"
@@ -51,7 +47,7 @@ for site in d["gfs3"]:
         + rap
         + ",---"
     )
-    l.append(s)
+    ll.append(s)
     sites.append(site)
 
 for site in d["nam"]:
@@ -72,7 +68,7 @@ for site in d["nam"]:
         + rap
         + ",---"
     )
-    l.append(s)
+    ll.append(s)
     sites.append(site)
 
 for site in d["rap"]:
@@ -88,9 +84,8 @@ for site in d["rap"]:
         + site
         + ",---"
     )
-    l.append(s)
+    ll.append(s)
     sites.append(site)
 
-fh = open("global_stations_new.txt", "w")
-fh.write("\n".join(l))
-fh.close()
+with open("global_stations_new.txt", "w") as fh:
+    fh.write("\n".join(ll))
