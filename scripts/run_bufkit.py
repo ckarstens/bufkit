@@ -3,15 +3,15 @@
 This is my life, controlling PHP and Perl scripts.
 """
 import argparse
-import os
 import datetime
+import os
+import subprocess
 import sys
 import time
-import subprocess
 
 import requests
+from pyiem.util import exponential_backoff, logger, utc
 from tqdm import tqdm
-from pyiem.util import logger, utc, exponential_backoff
 
 LOG = logger()
 SERVICES = [
