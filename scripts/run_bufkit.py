@@ -2,6 +2,7 @@
 
 This is my life, controlling PHP and Perl scripts.
 """
+
 import argparse
 import datetime
 import os
@@ -285,9 +286,7 @@ def get_archive_bufkit_filename(model, valid, icao):
 def main():
     """Our Main Method."""
     parser = argparse.ArgumentParser(description="Generate BufKit+Cobb Data.")
-    parser.add_argument(
-        "model", help="model identifier to run this script for."
-    )
+    parser.add_argument("model", help="model identifier to run this script for.")
     parser.add_argument("year", type=int, help="UTC Year")
     parser.add_argument("month", type=int, help="UTC Month")
     parser.add_argument("day", type=int, help="UTC Day")
