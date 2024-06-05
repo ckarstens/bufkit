@@ -1,6 +1,9 @@
 [tool.black]
 line-length = 79
 
-[tool.ruff]
-select = ["E", "F", "I"]
-
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+]
