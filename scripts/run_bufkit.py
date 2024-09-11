@@ -43,14 +43,21 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
     model1 = model if model != "nam4km" else "nam"
     localfn = f"{tmpdir}/bufrsnd{extra}.tar.gz"
     attempt = 1
+    dextra = "conus/" if model == "hrrr" else ""
+    crazy = ""
+    if extra == "hrrrak":
+        model1 = "hrrr"
+        dextra = "alaska/"
+        crazy = ".ak"
+        extra = ""
     while not os.path.isfile(localfn) and attempt < 60:
         # Flip/flop between the two services
         p1 = f"{valid:%H}/" if model == "gfs" else ""
         url = (
             f"{SERVICES[attempt % 2]}/{model1}/prod/{model1}.{valid:%Y%m%d}/"
             f"{p1}{'atmos/' if model1 == 'gfs' else ''}"
-            f"{'conus/' if model == 'hrrr' else ''}{model1}.t{valid:%H}z."
-            f"{'tm00.' if model1 == 'nam' else ''}bufrsnd{extra}.tar.gz"
+            f"{dextra}{model1}.t{valid:%H}z."
+            f"{'tm00.' if model1 == 'nam' else ''}bufrsnd{extra}.tar{crazy}.gz"
         )
         LOG.info("attempt %s at fetching %s", attempt, url)
         # Fast fail on first attempt
@@ -75,21 +82,30 @@ def download_bufrsnd(tmpdir, model, valid, extra=""):
     subprocess.call(f"tar -C {tmpdir}/extracted -xzf {localfn}", shell=True)
 
 
-def load_stations(model):
+def load_stations(model: str):
     """Load up our station metadata and return xref."""
-    fn = f"bufrgruven/stations/{model}_bufrstations.txt"
     stations = {}
-    with open(fn, encoding="ascii") as fh:
-        for line in fh:
-            tokens = line.split()
-            if len(tokens) < 4:
-                continue
-            stations[tokens[0]] = tokens[3].lower()
+    models = [model]
+    if model == "nam4km":
+        models.insert(0, "aknest")
+    elif model == "hrrr":
+        models.insert(0, "hrrrak")
+    for _model in models:
+        fn = f"bufrgruven/stations/{_model}_bufrstations.txt"
+        with open(fn, encoding="ascii") as fh:
+            for line in fh:
+                tokens = line.split()
+                if len(tokens) < 4:
+                    continue
+                stations[tokens[0]] = {
+                    "icao": tokens[3].lower(),
+                    "model": _model,
+                }
 
     return stations
 
 
-def run_bufrgruven(tmpdir, model, valid, sid, icao):
+def run_bufrgruven(tmpdir, model, valid, sid, icao, modelsrc):
     """Run bufrgruven.pl please."""
     bufrfn = f"{tmpdir}/extracted/bufr.{sid}.{valid:%Y%m%d%H}"
     if not os.path.isfile(bufrfn):
@@ -100,7 +116,7 @@ def run_bufrgruven(tmpdir, model, valid, sid, icao):
     if os.path.isfile(fn):
         os.unlink(fn)
     cmd = (
-        f"perl bufrgruven/bufr_gruven.pl --dset {model} "
+        f"perl bufrgruven/bufr_gruven.pl --dset {modelsrc} "
         f"--nfs {tmpdir}/extracted/bufr.STNM.YYYYMMDDCC "
         f"--date {valid:%Y%m%d} --cycle {valid:%H} --noascii "
         f"--metdat {tmpdir} "
@@ -160,6 +176,7 @@ def insert_ldm_bufkit(tmpdir, model, valid, icao, backfill):
     """
     filename = f"{tmpdir}/bufkit/{model}_{icao}.buf"
     if not os.path.isfile(filename):
+        LOG.info("Filename %s missing, returning", filename)
         return
     p1 = "m" if valid.hour in [6, 18] and model in ["gfs", "nam"] else ""
     model1 = f"{model}{p1}"
@@ -247,15 +264,20 @@ def workflow(args, model, valid, backfill):
     if model == "nam4km":
         download_bufrsnd(tmpdir, model, valid, "_conusnest")
         download_bufrsnd(tmpdir, model, valid, "_alaskanest")
+    elif model == "hrrr":
+        download_bufrsnd(tmpdir, model, valid)
+        download_bufrsnd(tmpdir, model, valid, "hrrrak")
     else:
         download_bufrsnd(tmpdir, model, valid)
     # 3 Load station dictionary
     stations = load_stations(model)
     # 4 Run bufrgruven and cobb
     progress = tqdm(stations.items(), disable=not sys.stdout.isatty())
-    for sid, icao in progress:
-        progress.set_description(icao)
-        if run_bufrgruven(tmpdir, model, valid, sid, icao):
+    for sid, meta in progress:
+        icao = meta["icao"]
+        modelsrc = meta["model"]
+        progress.set_description(f"{icao}[{modelsrc}]")
+        if run_bufrgruven(tmpdir, model, valid, sid, icao, modelsrc):
             insert_ldm_bufkit(tmpdir, model, valid, icao, backfill)
             if model not in ["rap"]:
                 run_cobb(tmpdir, model, icao)
