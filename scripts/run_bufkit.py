@@ -266,7 +266,8 @@ def workflow(args, model, valid, backfill):
         download_bufrsnd(tmpdir, model, valid, "_alaskanest")
     elif model == "hrrr":
         download_bufrsnd(tmpdir, model, valid)
-        download_bufrsnd(tmpdir, model, valid, "hrrrak")
+        if valid.hour % 3 == 0:  # Only run every 3 hours
+            download_bufrsnd(tmpdir, model, valid, "hrrrak")
     else:
         download_bufrsnd(tmpdir, model, valid)
     # 3 Load station dictionary
